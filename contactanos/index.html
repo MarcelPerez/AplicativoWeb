@@ -1,15 +1,18 @@
 <!DOCTYPE html>
-<html class="no-js" lang="zxx">
+<html>
   <head>
+    <!-- Información meta sobre la pagina web: -->
     <meta charset="utf-8" />
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
-    <title>AIRE SEGURO</title>
-    <meta name="description" content="" />
+    <meta name="description" content="Calidad Aire en PUCMM campus Santiago" />
+    <meta name="author" content="Marcel Perez, Orlando Moronta" />
+    <meta
+      name="keywords"
+      content="Calidad del Aire, Air Quality PUCMM, Proyecto Final ITT"
+    />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-    <!-- <link rel="manifest" href="site.webmanifest"> -->
-    <link rel="shortcut icon" type="image/x-icon" href="img/favicon.png" />
-    <!-- Place favicon.ico in the root directory -->
+    <title>Inspección Calidad del Aire</title>
+    <link rel="icon" type="image/png" href="../img/Icon.png" />
 
     <!-- CSS here -->
     <link rel="stylesheet" href="../css/bootstrap.min.css" />
@@ -23,7 +26,6 @@
     <link rel="stylesheet" href="../css/animate.css" />
     <link rel="stylesheet" href="../css/slicknav.css" />
     <link rel="stylesheet" href="../css/style.css" />
-    <!-- <link rel="stylesheet" href="css/responsive.css"> -->
   </head>
 
   <body>
@@ -80,9 +82,7 @@
               <div class="col-xl-3 col-lg-3 d-none d-lg-block">
                 <div class="Appointment">
                   <div class="book_btn d-none d-lg-block">
-                    <a class="popup-with-form" href="#test-form"
-                      >Sistema de Administración</a
-                    >
+                    <a class="" href="../sistema/">Sistema de Administración</a>
                   </div>
                 </div>
               </div>
@@ -97,13 +97,15 @@
     <!-- header-end -->
 
     <!-- bradcam_area_start  -->
-    <div class="bradcam_area breadcam_bg_2 bradcam_overlay">
+    <div class="bradcam_area bannerContactUs bradcam_overlay">
       <div class="container">
         <div class="row">
           <div class="col-xl-12">
             <div class="bradcam_text">
-              <h3>contact</h3>
-              <p><a href="index.html">Home /</a> contact</p>
+              <h3>Envianos un mensaje</h3>
+              <p>
+                <b><a title="Inicio" href="../">Inicio /</a></b> Contactanos
+              </p>
             </div>
           </div>
         </div>
@@ -116,9 +118,9 @@
       <div class="container">
         <div class="row">
           <div class="col-12">
-            <h2 class="contact-title">Get in Touch</h2>
+            <h2 class="contact-title">Envianos un mensaje</h2>
           </div>
-          <div class="col-lg-8">
+          <div class="col-lg-12">
             <form
               class="form-contact contact_form"
               action="contact_process.php"
@@ -127,57 +129,57 @@
               novalidate="novalidate"
             >
               <div class="row">
-                <div class="col-12">
-                  <div class="form-group">
-                    <textarea
-                      class="form-control w-100"
-                      name="message"
-                      id="message"
-                      cols="30"
-                      rows="9"
-                      onfocus="this.placeholder = ''"
-                      onblur="this.placeholder = 'Enter Message'"
-                      placeholder=" Name"
-                    ></textarea>
-                  </div>
-                </div>
                 <div class="col-sm-6">
                   <div class="form-group">
                     <input
-                      class="form-control valid"
+                      class="form-control valid border border-dark"
                       name="name"
                       id="name"
                       type="text"
                       onfocus="this.placeholder = ''"
                       onblur="this.placeholder = 'Enter your name'"
-                      placeholder="Enter your name"
+                      placeholder="Ingresa tu Nombre completo"
                     />
                   </div>
                 </div>
                 <div class="col-sm-6">
                   <div class="form-group">
                     <input
-                      class="form-control valid"
+                      class="form-control valid border border-dark"
                       name="email"
                       id="email"
                       type="email"
                       onfocus="this.placeholder = ''"
                       onblur="this.placeholder = 'Enter email address'"
-                      placeholder="Email"
+                      placeholder="correo electronico"
                     />
                   </div>
                 </div>
                 <div class="col-12">
                   <div class="form-group">
                     <input
-                      class="form-control"
+                      class="form-control border border-dark"
                       name="subject"
                       id="subject"
                       type="text"
                       onfocus="this.placeholder = ''"
-                      onblur="this.placeholder = 'Enter Subject'"
-                      placeholder="Enter Subject"
+                      onblur="this.placeholder = 'Tema a tratar'"
+                      placeholder="Ingresa el tema a tratar"
                     />
+                  </div>
+                </div>
+                <div class="col-12">
+                  <div class="form-group">
+                    <textarea
+                      class="form-control w-100 border border-dark"
+                      name="message"
+                      id="message"
+                      cols="30"
+                      rows="9"
+                      onfocus="this.placeholder = ''"
+                      onblur="this.placeholder = 'Mensaje'"
+                      placeholder=" Ingresa tu mensaje"
+                    ></textarea>
                   </div>
                 </div>
               </div>
@@ -191,7 +193,7 @@
               </div>
             </form>
           </div>
-          <div class="col-lg-3 offset-lg-1">
+          <!-- <div class="col-lg-3 offset-lg-1">
             <div class="media contact-info">
               <span class="contact-info__icon"><i class="ti-home"></i></span>
               <div class="media-body">
@@ -213,7 +215,7 @@
                 <p>Send us your query anytime!</p>
               </div>
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
     </section>
@@ -221,71 +223,76 @@
 
     <!-- footer start -->
     <footer class="footer">
-        <div class="footer_top">
-          <div class="container">
-            <div class="row">
-              <div class="col-xl-4 col-md-6 col-lg-4">
-                <div class="footer_widget">
-                  <div class="footer_logo">
-                    <a href="../">
-                      <img src="../img/LogoBlanco.png" alt="" />
-                    </a>
-                  </div>
-                  <p>
-                    Proyecto final de grado para optar por el título de ingeniero
-                    telemático
-                  </p>
+      <div class="footer_top">
+        <div class="container">
+          <div class="row">
+            <div class="col-xl-4 col-md-6 col-lg-4">
+              <div class="footer_widget">
+                <div class="footer_logo">
+                  <a href="../">
+                    <img src="../img/LogoBlanco.png" alt="" />
+                  </a>
                 </div>
-              </div>
-              <div class="col-xl-2 offset-xl-1 col-md-6 col-lg-3">
-                <div class="footer_widget">
-                  <h3 class="footer_title">Opciones</h3>
-                  <ul>
-                    <li><a href="../opciones/estadisticas/">Estadísticas</a></li>
-                    <li><a href="../opciones/graficas/">Gráficos</a></li>
-                  </ul>
-                </div>
-              </div>
-              <div class="col-xl-2 col-md-6 col-lg-2">
-                <div class="footer_widget">
-                  <h3 class="footer_title">Informaciones</h3>
-                  <ul>
-                    <li><a href="../informaciones/proyecto/">Proyecto</a></li>
-                    <li><a href="../informaciones/responsables/">Responsables</a></li>
-                  </ul>
-                </div>
-              </div>
-              <div class="col-xl-3 col-md-6 col-lg-3">
-                <div class="footer_widget">
-                  <h3 class="footer_title">Sistemas</h3>
-  
-                  <a href="/sistema/"><p>Sistema de Administración</p></a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="copy-right_text">
-          <div class="container">
-            <div class="footer_border"></div>
-            <div class="row">
-              <div class="col-xl-12">
-                <p class="copy_right text-center">
-                  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                  Sistema de inspección de la calidad del aire en el campus de
-                  PUCMM - Santiago &copy;
-                  <script>
-                    document.write(new Date().getFullYear());
-                  </script>
-                  <br />All rights reserved |
-                  <a href="https://colorlib.com" target="_blank">Colorlib</a>
-                  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                <p>
+                  Proyecto final de grado para optar por el título de ingeniero
+                  telemático
                 </p>
               </div>
             </div>
+            <div class="col-xl-2 offset-xl-1 col-md-6 col-lg-3">
+              <div class="footer_widget">
+                <h3 class="footer_title">Opciones</h3>
+                <ul>
+                  <li><a href="../opciones/estadisticas/">Estadísticas</a></li>
+                  <li><a href="../opciones/graficas/">Gráficos</a></li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-xl-2 col-md-6 col-lg-2">
+              <div class="footer_widget">
+                <h3 class="footer_title">Informaciones</h3>
+                <ul>
+                  <li><a href="../informaciones/proyecto/">Proyecto</a></li>
+                  <li>
+                    <a href="../informaciones/responsables/">Responsables</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-xl-2 col-md-6 col-lg-2">
+              <div class="footer_widget">
+                <h3 class="footer_title">Administración</h3>
+                <ul>
+                  <li>
+                    <a href="../sistema/">Sistema</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
           </div>
         </div>
-      </footer>
+      </div>
+      <div class="copy-right_text">
+        <div class="container">
+          <div class="footer_border"></div>
+          <div class="row">
+            <div class="col-xl-12">
+              <p class="copy_right text-center">
+                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                Sistema de inspección de la calidad del aire en el campus de
+                PUCMM - Santiago &copy;
+                <script>
+                  document.write(new Date().getFullYear());
+                </script>
+                <br />All rights reserved |
+                <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
     <!-- footer end  -->
     <!-- link that opens popup -->
 

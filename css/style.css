@@ -2471,6 +2471,18 @@ h3 {
   background-image: url(../img/banner/bradcam3.png);
 }
 
+.bannerContactUs {
+  background-image: url(../img/banner/contactus.png);
+}
+
+.bannerInformation {
+  background-image: url(../img/banner/InformationIcon.png);
+}
+
+.bannerEstadisticas {
+  background-image: url(../img/banner/Estadisticas.png);
+}
+
 /* line 10, C:/Users/SPN Graphics/Desktop/CL September/210 Medical/HTML/scss/_bradcam.scss */
 .bradcam_area {
   padding: 170px;
