@@ -52,6 +52,16 @@
       href="https://cdn.jsdelivr.net/npm/jqvmap@1.5.1/dist/jqvmap.min.css"
       rel="stylesheet"
     />
+    <style>
+      th {
+        background-color: #f2f2f2;
+        color: #333;
+        font-weight: bold;
+        padding: 8px;
+        border: 2px solid #ccc;
+        text-align: left;
+      }
+    </style>
   </head>
 
   <body>
@@ -155,8 +165,7 @@
               >
               <ul class="sub-menu children dropdown-menu">
                 <li>
-                  <i class="menu-icon fa fa-eye"></i
-                  ><a href="">Ver Químicos</a>
+                  <i class="menu-icon fa fa-eye"></i><a href="">Ver Químicos</a>
                 </li>
                 <li>
                   <i class="menu-icon fa fa-cogs"></i
@@ -274,7 +283,24 @@
       <!-- /#header -->
       <!-- Content -->
       <div class="content">
-        <h4>VER QUIMICO</h4>
+        <div class="card">
+          <div class="card-header">
+            <strong class="card-title">Listado de Quimicos</strong>
+          </div>
+          <div class="card-body">
+            <table id="tablaEstaciones" class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>Nombre</th>
+                  <th>Descripción</th>
+                  <th>threasureHigh</th>
+                  <th>threasureLow</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
         <!-- .animated -->
       </div>
       <!-- /.content -->
@@ -299,6 +325,34 @@
     </div>
     <!-- /#right-panel -->
 
+    <script>
+      const tabla = document.getElementById("tablaEstaciones");
+      const tbody = tabla.getElementsByTagName("tbody")[0];
+
+      fetch("http://154.38.167.248:5024/api/Quimico")
+        .then((response) => response.json())
+        .then((quimico) => {
+          // Iterar sobre las estaciones y agregar una fila por cada una
+          quimico.forEach((quimico) => {
+            const fila = tbody.insertRow();
+
+            const nombre = fila.insertCell();
+            nombre.innerText = quimico.nombreQuimico;
+
+            const descripcion = fila.insertCell();
+            descripcion.innerText = quimico.descripcionQuimico;
+
+            const threasureHigh = fila.insertCell();
+            threasureHigh.innerText = quimico.threasureHigh;
+
+            const threasureLow = fila.insertCell();
+            threasureLow.innerText = quimico.threasureLow;
+          });
+        })
+        .catch((error) =>
+          console.error("Error al obtener las estaciones:", error)
+        );
+    </script>
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>

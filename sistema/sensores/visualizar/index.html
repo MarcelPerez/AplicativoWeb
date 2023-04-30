@@ -52,6 +52,16 @@
       href="https://cdn.jsdelivr.net/npm/jqvmap@1.5.1/dist/jqvmap.min.css"
       rel="stylesheet"
     />
+    <style>
+      th {
+        background-color: #f2f2f2;
+        color: #333;
+        font-weight: bold;
+        padding: 8px;
+        border: 2px solid #ccc;
+        text-align: left;
+      }
+    </style>
   </head>
 
   <body>
@@ -176,8 +186,7 @@
               >
               <ul class="sub-menu children dropdown-menu">
                 <li>
-                  <i class="menu-icon fa fa-eye"></i
-                  ><a href="">Ver Sensores</a>
+                  <i class="menu-icon fa fa-eye"></i><a href="">Ver Sensores</a>
                 </li>
                 <li>
                   <i class="menu-icon fa fa-cogs"></i
@@ -274,7 +283,23 @@
       <!-- /#header -->
       <!-- Content -->
       <div class="content">
-        <h4>VER SENSORES</h4>
+        <div class="card">
+          <div class="card-header">
+            <strong class="card-title">Listado de Sensores</strong>
+          </div>
+          <div class="card-body">
+            <table id="tablaSensores" class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>Nombre</th>
+                  <th>Descripción</th>
+                  <th>Precio Compra</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
         <!-- .animated -->
       </div>
       <!-- /.content -->
@@ -298,7 +323,31 @@
       <!-- /.site-footer -->
     </div>
     <!-- /#right-panel -->
+    <script>
+      const tabla = document.getElementById("tablaSensores");
+      const tbody = tabla.getElementsByTagName("tbody")[0];
 
+      fetch("http://154.38.167.248:5024/api/Sensor")
+        .then((response) => response.json())
+        .then((sensor) => {
+          // Iterar sobre las estaciones y agregar una fila por cada una
+          sensor.forEach((sensor) => {
+            const fila = tbody.insertRow();
+
+            const nombre = fila.insertCell();
+            nombre.innerText = sensor.nombreSensor;
+
+            const descripcion = fila.insertCell();
+            descripcion.innerText = sensor.descripcionSensor;
+
+            const precioCompra = fila.insertCell();
+            precioCompra.innerText = sensor.precioCompra;
+          });
+        })
+        .catch((error) =>
+          console.error("Error al obtener las estaciones:", error)
+        );
+    </script>
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>

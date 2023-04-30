@@ -52,6 +52,16 @@
       href="https://cdn.jsdelivr.net/npm/jqvmap@1.5.1/dist/jqvmap.min.css"
       rel="stylesheet"
     />
+    <style>
+      th {
+        background-color: #f2f2f2;
+        color: #333;
+        font-weight: bold;
+        padding: 8px;
+        border: 2px solid #ccc;
+        text-align: left;
+      }
+    </style>
   </head>
 
   <body>
@@ -112,9 +122,7 @@
                 </li>
                 <li>
                   <i class="menu-icon fa fa-cogs"></i
-                  ><a href="../modificar/"
-                    >Modificar Estaciones</a
-                  >
+                  ><a href="../modificar/">Modificar Estaciones</a>
                 </li>
               </ul>
             </li>
@@ -274,7 +282,27 @@
       <!-- /#header -->
       <!-- Content -->
       <div class="content">
-        <h4>VER ESTACION</h4>
+        <div class="card">
+          <div class="card-header">
+            <strong class="card-title">Listado de Estaciones</strong>
+          </div>
+          <div class="card-body">
+            <table id="tablaEstaciones" class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>Nombre</th>
+                  <th>Tipo</th>
+                  <th>Longitud</th>
+                  <th>Latitud</th>
+                  <th>Descripción</th>
+                  <th>Delay</th>
+                  <th>Estado</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
         <!-- .animated -->
       </div>
       <!-- /.content -->
@@ -298,6 +326,44 @@
       <!-- /.site-footer -->
     </div>
     <!-- /#right-panel -->
+
+    <script>
+      const tabla = document.getElementById("tablaEstaciones");
+      const tbody = tabla.getElementsByTagName("tbody")[0];
+
+      fetch("http://154.38.167.248:5024/api/Estacion")
+        .then((response) => response.json())
+        .then((estaciones) => {
+          // Iterar sobre las estaciones y agregar una fila por cada una
+          estaciones.forEach((estacion) => {
+            const fila = tbody.insertRow();
+
+            const nombre = fila.insertCell();
+            nombre.innerText = estacion.nombreEstacion;
+
+            const tipo = fila.insertCell();
+            tipo.innerText = estacion.tipoEstacion;
+
+            const longitud = fila.insertCell();
+            longitud.innerText = estacion.longitud;
+
+            const latitud = fila.insertCell();
+            latitud.innerText = estacion.latitud;
+
+            const descripcion = fila.insertCell();
+            descripcion.innerText = estacion.descripcionEstacion;
+
+            const delay = fila.insertCell();
+            delay.innerText = estacion.descripcionEstacion;
+
+            const estado = fila.insertCell();
+            estado.innerText = estacion.estado;
+          });
+        })
+        .catch((error) =>
+          console.error("Error al obtener las estaciones:", error)
+        );
+    </script>
 
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>

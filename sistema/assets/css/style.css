@@ -3232,6 +3232,7 @@ label {
 }
 
 input[type="text"],
+input[type="number"],
 select,
 textarea {
   width: 100%;
@@ -3302,7 +3303,34 @@ button[type="button"] {
 button[type="button"]:hover {
   background-color: #c82333;
 }
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
+  max-width: 500px;
+}
 
-.botones {
-  text-align: right;
+.button {
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  transition: background-color 0.3s ease-in-out;
+  width: 30%;
+}
+
+@media (max-width: 768px) {
+  .button-container {
+    flex-wrap: wrap;
+  }
+  
+  .button {
+    margin-bottom: 10px;
+    width: 100%;
+  }
 }
