@@ -3232,6 +3232,7 @@ label {
 }
 
 input[type="text"],
+input[type="password"],
 input[type="number"],
 select,
 textarea {
@@ -3328,7 +3329,7 @@ button[type="button"]:hover {
   .button-container {
     flex-wrap: wrap;
   }
-  
+
   .button {
     margin-bottom: 10px;
     width: 100%;

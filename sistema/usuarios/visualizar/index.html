@@ -61,7 +61,8 @@
         border: 2px solid #ccc;
         text-align: left;
       }
-      input[type="search"] {
+      input[type="search"],
+      select {
         width: 200px; /* Ancho del campo */
         padding: 8px 12px; /* Relleno interno */
         margin-bottom: 30px;
@@ -393,6 +394,7 @@
         filter = input.value.toUpperCase();
         table = document.getElementById("tablaUsuarios");
         tr = table.getElementsByTagName("tr");
+
         for (i = 0; i < tr.length; i++) {
           td = tr[i].getElementsByTagName("td");
           for (var j = 0; j < td.length; j++) {

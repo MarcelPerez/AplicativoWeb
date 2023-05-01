@@ -303,7 +303,6 @@
             </table>
           </div>
         </div>
-        <!-- .animated -->
       </div>
       <!-- /.content -->
       <div class="clearfix"></div>
@@ -357,8 +356,7 @@
             delay.innerText = estacion.descripcionEstacion;
 
             const estado = fila.insertCell();
-            estado.innerText = estacion.estado;
-          });
+            estado.innerText = estacion.estado; });
         })
         .catch((error) =>
           console.error("Error al obtener las estaciones:", error)
