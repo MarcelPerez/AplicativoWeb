@@ -274,7 +274,107 @@
       <!-- /#header -->
       <!-- Content -->
       <div class="content">
-        <h4>MODIFICAR QUIMICO</h4>
+        <div class="card" id="listado">
+          <div class="card-header">
+            <strong class="card-title">Listado de Químicos</strong>
+          </div>
+          <div class="card-body">
+            <table id="tablaQuimicos" class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>id</th>
+                  <th>Nombre</th>
+                  <th>Descripción</th>
+                  <th>threasureHigh</th>
+                  <th>threasureLow</th>
+                  <th>Sensor</th>
+                  <th>Modificar</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+        <div class="card" id="formulario" style="display: none">
+          <div class="card-header">
+            <strong class="card-title">Modificación de Químicos</strong>
+          </div>
+          <div class="card-body">
+            <!-- Credit Card -->
+            <h3 class="text-center">Químico</h3>
+
+            <form id="updateQuimicoForm" class="updateQuimicoForm">
+              <div class="form-group">
+                <label for="nombre">Nombre del Quimico</label>
+                <input type="text" id="nombre" name="nombre" required />
+              </div>
+
+              <div class="form-group">
+                <label for="descripcion">Descripción</label>
+                <textarea
+                  id="descripcion"
+                  name="descripcion"
+                  required
+                ></textarea>
+              </div>
+              <div class="row">
+                <div class="col-6">
+                  <label for="threasureHigh">Threasure High</label>
+                  <input
+                    type="text"
+                    id="threasureHigh"
+                    name="threasureHigh"
+                    required
+                  />
+                </div>
+                <div class="col-6">
+                  <label for="threasureLow">Threasure Low</label>
+                  <input
+                    type="text"
+                    id="threasureLow"
+                    name="threasureLow"
+                    required
+                  />
+                </div>
+              </div>
+              <div class="row" style="margin-top: 20px">
+                <div class="col-6">
+                  <label for="idSensor">Sensor</label>
+                  <select id="idSensor" name="idSensor" required></select>
+                </div>
+                <div class="col-6">
+                  <label for="idSensor">Actual Sensor</label>
+                  <input
+                    style="opacity: 70%"
+                    type="text"
+                    id="idSensorAnt"
+                    name="idSensorAnt"
+                    disabled
+                  />
+                </div>
+              </div>
+              <div class="form-group" style="margin-top: 20px">
+                <input
+                  style="width: 10%; opacity: 30%"
+                  type="text"
+                  id="IdQuimico"
+                  name="IdQuimico"
+                  required
+                />
+              </div>
+              <div class="button-container">
+                <button class="button" type="submit" id="guardar">
+                  <i class="fa fa-save"></i>&nbsp;
+                  <span id="payment-button-amount">Actualizar</span>
+                </button>
+                <button class="button" id="cancelar" type="button">
+                  <i class="fa fa-close"></i>&nbsp;
+                  <span id="payment-button-amount">Cancelar</span>
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
         <!-- .animated -->
       </div>
       <!-- /.content -->
@@ -300,6 +400,172 @@
     <!-- /#right-panel -->
 
     <!-- Scripts -->
+
+    <!-- SCRIPT LLENAR SELECT: -->
+    <script>
+      const select = document.getElementById("idSensor");
+
+      fetch("http://154.38.167.248:5024/api/Sensor")
+        .then((response) => response.json()) // Convertir respuesta a objeto JSON
+        .then((data) => {
+          // Procesar los datos y crear opciones para el elemento select
+          data.forEach((sensor) => {
+            const option = document.createElement("option");
+            option.value = sensor.idSensor;
+            option.text = `${sensor.idSensor} - ${sensor.nombreSensor}`;
+            select.appendChild(option);
+            // console.log(`${sensor.idSensor} - ${sensor.nombreSensor}`)
+          });
+        })
+        .catch((error) => console.error(error));
+    </script>
+
+    <script>
+      const cancelar = document.getElementById("cancelar");
+      cancelar.addEventListener("click", function () {
+        const confirmed = confirm("¿Estás seguro de que deseas cancelar?");
+        if (confirmed) {
+          // Aquí puedes realizar la acción de cancelación
+          alert("Se canceló, volviendo atras...");
+          listado = document.getElementById("listado");
+          formulario = document.getElementById("formulario");
+          listado.style.display = "block";
+          formulario.style.display = "none";
+          window.location = "";
+        } else {
+          console.log("Cancelación cancelada");
+        }
+      });
+    </script>
+
+    <script>
+      function modificarFormulario() {
+        listado = document.getElementById("listado");
+        formulario = document.getElementById("formulario");
+        listado.style.display = "none";
+        formulario.style.display = "block";
+
+        const fila = event.target.closest("tr");
+        const IdQuimico = fila.querySelector(".IdQuimico").textContent;
+        const nombre = fila.querySelector(".nombre").textContent;
+        const descripcion = fila.querySelector(".descripcion").textContent;
+        const threasureHigh = fila.querySelector(".threasureHigh").textContent;
+        const threasureLow = fila.querySelector(".threasureLow").textContent;
+        const idSensor = fila.querySelector(".idSensor").textContent;
+
+        document.getElementById("IdQuimico").value = IdQuimico;
+        document.getElementById("nombre").value = nombre;
+        document.getElementById("descripcion").value = descripcion;
+        document.getElementById("threasureHigh").value = threasureHigh;
+        document.getElementById("threasureLow").value = threasureLow;
+        document.getElementById("idSensorAnt").value = idSensor;
+        // console.log(idSensor);
+
+        // document.getElementById("estado").value = estado;
+      }
+    </script>
+
+    <script>
+      const tabla = document.getElementById("tablaQuimicos");
+      const tbody = tabla.getElementsByTagName("tbody")[0];
+
+      fetch("http://localhost:5024/api/Quimico")
+        .then((response) => response.json())
+        .then((quimicos) => {
+          // Iterar sobre las estaciones y agregar una fila por cada una
+          quimicos.forEach((quimico) => {
+            const fila = tbody.insertRow();
+
+            const id = fila.insertCell();
+            id.innerText = quimico.idQuimico;
+            // id.style.display = "none";
+            id.className = "IdQuimico";
+
+            const nombre = fila.insertCell();
+            nombre.innerText = quimico.nombreQuimico;
+            nombre.className = "nombre";
+
+            const descripcion = fila.insertCell();
+            descripcion.innerText = quimico.descripcionQuimico;
+            descripcion.className = "descripcion";
+
+            const threasureHigh = fila.insertCell();
+            threasureHigh.innerText = quimico.threasureHigh;
+            threasureHigh.className = "threasureHigh";
+
+            const threasureLow = fila.insertCell();
+            threasureLow.innerText = quimico.threasureLow;
+            threasureLow.className = "threasureLow";
+
+            const IdSensor = fila.insertCell();
+            IdSensor.innerText = quimico.sensor;
+            IdSensor.className = "idSensor";
+
+            const modificar = fila.insertCell();
+            modificar.innerHTML =
+              "<button class='btn-modificar' onclick='modificarFormulario()'>Modificar</button>";
+          });
+        })
+        .catch((error) =>
+          console.error("Error al obtener las estaciones:", error)
+        );
+    </script>
+
+    <script>
+      //LIMPIAR CAMPOS:
+
+      //GUARDAR
+      const form = document.querySelector(".updateQuimicoForm");
+      form.addEventListener("submit", (event) => {
+        event.preventDefault();
+        const formData = new FormData(form);
+        const data = new URLSearchParams(formData);
+        aux = document.getElementById("idSensor").value;
+        let i = 0;
+        let aux2 = false;
+        let num = "";
+        while (i < aux.length && !aux2) {
+          if (!isNaN(parseInt(aux[i]))) {
+            num += aux[i];
+          } else {
+            aux = true;
+          }
+          i++;
+        }
+        // console.log(num);
+        
+        sensor = parseInt(num);
+        const datos = {
+          idQuimico: parseInt(document.getElementById("IdQuimico").value),
+          nombreQuimico: document.getElementById("nombre").value,
+          descripcionQuimico: document.getElementById("descripcion").value,
+          idSensor: sensor,
+          threasureHigh: document.getElementById("threasureHigh").value,
+          threasureLow: document.getElementById("threasureLow").value,
+          sensor: ""
+        };
+        console.log(datos);
+        fetch("http://localhost:5024/api/Quimico", {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(datos),
+        })
+          .then((response) => {
+            if (!response.ok) {
+              console.log(response.error);
+              throw new Error("Hubo un problema al actualizar el químico.");
+            } else {
+              document.getElementById("updateQuimicoForm").reset();
+              alert("El Químico se actualizó correctamente.");
+
+              window.location = "";
+            }
+          })
+          .catch((error) => alert(error.message));
+      });
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
