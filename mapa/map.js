@@ -14,7 +14,7 @@ function init() {
 
   const satelital = new ol.layer.Tile({
     source: new ol.source.XYZ({
-      url: "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+      url: "https://{a-c}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png",
     }),
     visible: true,
     title: "Satelital",

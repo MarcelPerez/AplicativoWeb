@@ -10,19 +10,13 @@
   
   .titulo {
     width: 100%;
-    background: rgb(21, 142, 238);
-    background: linear-gradient(
-      90deg,
-      rgba(21, 142, 238, 1) 0%,
-      rgba(255, 255, 255, 1) 51%,
-      rgba(21, 142, 238, 1) 100%
-    );
+    box-shadow: 0 0px 2px rgba(0, 0, 0, 0.2); /* Cambia los valores según tus preferencias */
+ 
     min-height: 80px;
-    display: none;
   }
   
   .titulo h3 {
-    padding-top: 30px;
+    padding-top: 10px;
   }
   
   .grid-container {

@@ -52,6 +52,12 @@
       href="https://cdn.jsdelivr.net/npm/jqvmap@1.5.1/dist/jqvmap.min.css"
       rel="stylesheet"
     />
+
+    <link rel="stylesheet" href="./calidadaire/mapa/map.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/ol@v7.2.2/ol.css"
+    />
   </head>
 
   <body>
@@ -61,9 +67,7 @@
         <div id="main-menu" class="main-menu collapse navbar-collapse">
           <ul class="nav navbar-nav">
             <li class="active">
-              <a href=""
-                ><i class="menu-icon fa fa-laptop"></i>Tablero
-              </a>
+              <a href=""><i class="menu-icon fa fa-laptop"></i>Tablero </a>
             </li>
             <li class="menu-title">Opciones</li>
             <li class="menu-item-has-children dropdown">
@@ -212,12 +216,29 @@
                 </li>
               </ul>
             </li>
+            <li class="menu-item-has-children dropdown">
+              <a
+                href="#"
+                class="dropdown-toggle"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                <i class="menu-icon fa fa-cogs"></i>Mantenimiento</a
+              >
+              <ul class="sub-menu children dropdown-menu">
+                <li>
+                  <i class="menu-icon fa fa-user-plus"></i
+                  ><a href="usuarios/ingresar/">Agregar Usuario</a>
+                </li>
+              </ul>
+            </li>
           </ul>
         </div>
-        <!-- /.navbar-collapse -->
       </nav>
     </aside>
     <!-- /#left-panel -->
+
     <!-- Right Panel -->
     <div id="right-panel" class="right-panel">
       <!-- Header-->
@@ -275,8 +296,47 @@
         <!-- Animated -->
         <div class="animated fadeIn">
           <!-- Widgets  -->
+          <div class="content map-container">
+            <center><h3>ESTADO DEL AIRE EN PUCMM (SANTIAGO)</h3></center>
+
+            <div class="grid-container">
+              <div class="grid-1">
+                <div id="js-map" class="map"></div>
+              </div>
+            </div>
+
+            <div class="overlay-container">
+              <span class="overly-text" id="feature-name"></span><br />
+              <span class="overly-text" id="feature-masinfo"></span><br />
+            </div>
+
+            <!-- .animated -->
+          </div>
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+
           <div class="row">
-            <div class="col-lg-3 col-md-6">
+            <div class="col-lg-4 col-md-6">
               <div class="card">
                 <div class="card-body">
                   <div class="stat-widget-five">
@@ -286,7 +346,7 @@
                     <div class="stat-content">
                       <div class="text-left dib">
                         <div class="stat-text">
-                          <span class="count">23569</span>
+                          <span class="" id="numberEstaciones"></span>
                         </div>
                         <div class="stat-heading">Estaciones</div>
                       </div>
@@ -296,7 +356,7 @@
               </div>
             </div>
 
-            <div class="col-lg-3 col-md-6">
+            <div class="col-lg-4 col-md-6">
               <div class="card">
                 <div class="card-body">
                   <div class="stat-widget-five">
@@ -306,9 +366,9 @@
                     <div class="stat-content">
                       <div class="text-left dib">
                         <div class="stat-text">
-                          <span class="count">3435</span>
+                          <span class="" id="numberQuimicos"></span>
                         </div>
-                        <div class="stat-heading">Alertas</div>
+                        <div class="stat-heading">Quimicos</div>
                       </div>
                     </div>
                   </div>
@@ -316,7 +376,7 @@
               </div>
             </div>
 
-            <div class="col-lg-3 col-md-6">
+            <div class="col-lg-4 col-md-6">
               <div class="card">
                 <div class="card-body">
                   <div class="stat-widget-five">
@@ -326,29 +386,9 @@
                     <div class="stat-content">
                       <div class="text-left dib">
                         <div class="stat-text">
-                          <span class="count">349</span>
+                          <span class="" id="numberSensores"></span>
                         </div>
-                        <div class="stat-heading">Mediciones</div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-lg-3 col-md-6">
-              <div class="card">
-                <div class="card-body">
-                  <div class="stat-widget-five">
-                    <div class="stat-icon dib flat-color-1">
-                      <i class="pe-7s-users"></i>
-                    </div>
-                    <div class="stat-content">
-                      <div class="text-left dib">
-                        <div class="stat-text">
-                          <span class="count">2986</span>
-                        </div>
-                        <div class="stat-heading">Usuarios</div>
+                        <div class="stat-heading">Sensores</div>
                       </div>
                     </div>
                   </div>
@@ -358,92 +398,6 @@
           </div>
           <!-- /Widgets -->
           <div class="clearfix"></div>
-
-          <!-- Orders -->
-          <div class="orders">
-            <div class="row">
-              <div class="col-xl-12">
-                <div class="card">
-                  <div class="card-body">
-                    <h4 class="box-title">Estaciones</h4>
-                  </div>
-                  <div class="card-body--">
-                    <div class="table-stats order-table ov-h">
-                      <table class="table">
-                        <thead>
-                          <tr>
-                            <th>Id</th>
-                            <th>Nombre</th>
-                            <th>Mediciones</th>
-                            <th>Última Medición</th>
-                            <th>Estado</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <td>1</td>
-                            <td><span class="name">Estación Lab ITT</span></td>
-                            <td><span class="product">20</span></td>
-                            <td><span class="">20/03/2023</span></td>
-                            <td>
-                              <span class="badge badge-complete"
-                                >Trabajando</span
-                              >
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>2</td>
-                            <td><span class="name">Estación Dixon</span></td>
-                            <td><span class="product">12</span></td>
-                            <td><span class="">20/03/2023</span></td>
-                            <td>
-                              <span class="badge badge-complete"
-                                >Trabajando</span
-                              >
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>3</td>
-                            <td><span class="name">Estación Dixon</span></td>
-                            <td><span class="product">29</span></td>
-                            <td><span class="">20/03/2023</span></td>
-                            <td>
-                              <span class="badge badge-complete"
-                                >Trabajando</span
-                              >
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>4</td>
-                            <td><span class="name">Estación Silva</span></td>
-                            <td><span class="product">5</span></td>
-                            <td><span class="">20/03/2023</span></td>
-                            <td>
-                              <span class="badge badge-pending">DETENIDO</span>
-                            </td>
-                          </tr>
-                          <tr class="pb-0">
-                            <td>5</td>
-                            <td><span class="name">Estación Stephens</span></td>
-                            <td><span class="product">10</span></td>
-                            <td><span class="">20/03/2023</span></td>
-                            <td>
-                              <span class="badge badge-complete"
-                                >Trabajando</span
-                              >
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                    <!-- /.table-stats -->
-                  </div>
-                </div>
-                <!-- /.card -->
-              </div>
-            </div>
-          </div>
-          <!-- /.orders -->
         </div>
         <!-- .animated -->
       </div>
@@ -469,11 +423,52 @@
     </div>
     <!-- /#right-panel -->
 
+    <script>
+      fetch("http://154.38.167.248:5024/api/Estacion")
+        .then((response) => response.json())
+        .then((estaciones) => {
+          const campoNumeroEstaciones =
+            document.getElementById("numberEstaciones");
+          campoNumeroEstaciones.innerText = estaciones.length;
+        })
+        .catch((error) =>
+          console.error("Error al obtener las estaciones:", error)
+        );
+    </script>
+
+    <script>
+      fetch("http://154.38.167.248:5024/api/Quimico")
+        .then((response) => response.json())
+        .then((quimicos) => {
+          const campoNumeroQuimicos = document.getElementById("numberQuimicos");
+          campoNumeroQuimicos.innerText = quimicos.length;
+        })
+        .catch((error) =>
+          console.error("Error al obtener las estaciones:", error)
+        );
+    </script>
+
+    <script>
+      fetch("http://154.38.167.248:5024/api/Sensor")
+        .then((response) => response.json())
+        .then((sensor) => {
+          const campoNumeroSensores = document.getElementById("numberSensores");
+          campoNumeroSensores.innerText = sensor.length;
+        })
+        .catch((error) =>
+          console.error("Error al obtener las estaciones:", error)
+        );
+    </script>
+
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
     <script src="assets/js/main.js"></script>
+    <script src="./calidadaire/mapa/map.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/ol@v7.2.2/dist/ol.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@turf/turf@6.5.0/turf.min.js"></script>
+    <script src="assets/js/init/chartjs-init.js"></script>
   </body>
 </html>

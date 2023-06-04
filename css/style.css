@@ -862,6 +862,7 @@ h3 {
 .header-area .main-header-area {
   padding: 18px 0;
   background: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 /* line 31, C:/Users/SPN Graphics/Desktop/CL September/210 Medical/HTML/scss/_header.scss */
@@ -2711,7 +2712,6 @@ h3 {
 /* line 1, C:/Users/SPN Graphics/Desktop/CL September/210 Medical/HTML/scss/_department.scss */
 .our_department_area {
   background: #ffffff;
-  padding-top: 30px;
   padding-bottom: 90px;
 }
 
@@ -2856,13 +2856,17 @@ h3 {
 }
 
 /* line 58, C:/Users/SPN Graphics/Desktop/CL September/210 Medical/HTML/scss/_tesmonial.scss */
-.testmonial_bg_1 {
-  background-image: url(../img/testmonial/1.png);
+.testmonial_bg_2 {
+  background-image: url(../img/EstacionLabITT.jpeg);
+}
+
+.testmonial_bg_3 {
+  background-image: url(../img/EstacionBiblioteca.jpeg);
 }
 
 /* line 61, C:/Users/SPN Graphics/Desktop/CL September/210 Medical/HTML/scss/_tesmonial.scss */
-.testmonial_bg_2 {
-  background-image: url(../img/testmonial/2.png);
+.testmonial_bg_1 {
+  background-image: url(../img/EstacionCapilla.jpeg);
 }
 
 /* line 1, C:/Users/SPN Graphics/Desktop/CL September/210 Medical/HTML/scss/_service.scss */

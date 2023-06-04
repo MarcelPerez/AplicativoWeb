@@ -533,7 +533,7 @@
           i++;
         }
         // console.log(num);
-        
+
         sensor = parseInt(num);
         const datos = {
           idQuimico: parseInt(document.getElementById("IdQuimico").value),
@@ -542,7 +542,7 @@
           idSensor: sensor,
           threasureHigh: document.getElementById("threasureHigh").value,
           threasureLow: document.getElementById("threasureLow").value,
-          sensor: ""
+          sensor: "",
         };
         console.log(datos);
         fetch("http://localhost:5024/api/Quimico", {
