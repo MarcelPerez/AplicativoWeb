@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sistema Inspección Aire</title>
+    <link rel="stylesheet" href="login.css" />
+    <link rel="apple-touch-icon" href="./../sistema/images/Icon.png" />
+    <link rel="icon" type="image/png" href="./../sistema/images/Icon.png" />
+  </head>
+  <body>
+    <div class="login-container" id="login-container">
+      <h2>
+        Sistema Inspección de Aire<br />
+        <div class="clock">
+          <span id="hours"></span>:<span id="minutes"></span>:<span
+            id="seconds"
+          ></span>
+          <span id="meridiem"></span>
+        </div>
+      </h2>
+
+      <div class="form-group" id="login">
+        <input
+          id="username"
+          type="text"
+          class="form-control"
+          name="username"
+          placeholder="Usuario"
+        />
+        <input
+          id="password"
+          type="password"
+          class="form-control"
+          name="password"
+          placeholder="Contraseña"
+        />
+      </div>
+      <div class="botones">
+        <button id="btnIniciarSesion" class="boton" onclick="initial()">
+          Iniciar Sesión
+        </button>
+        <button id="btnRegistrarme" class="boton" onclick="registrarme()">
+          Registrarme
+        </button>
+        <button
+          id="btnOlvidePassword"
+          class="boton"
+          onclick="showForgetPasswordForm()"
+        >
+          Olvidé Contraseña
+        </button>
+        <button id="btnSalir" class="boton" onclick="salir()">
+          Salir del Sistema
+        </button>
+      </div>
+    </div>
+
+    <div class="container" id="containerRegistro">
+      <form class="registro-form">
+        <h2>Registro de Usuario</h2>
+
+        <label for="primer-nombre">Primer Nombre:</label>
+        <input type="text" id="primer-nombre" name="primer-nombre" />
+
+        <label for="segundo-nombre">Segundo Nombre:</label>
+        <input type="text" id="segundo-nombre" name="segundo-nombre" />
+
+        <label for="primer-apellido">Primer Apellido:</label>
+        <input type="text" id="primer-apellido" name="primer-apellido" />
+
+        <label for="segundo-apellido">Segundo Apellido:</label>
+        <input type="text" id="segundo-apellido" name="segundo-apellido" />
+
+        <label for="tipo-usuario">Tipo de Usuario:</label>
+        <select id="tipo-usuario" name="tipo-usuario">
+          <option value="" disabled selected>Seleccionar</option>
+          <option value="estudiante">Estudiante</option>
+          <option value="profesor">Profesor</option>
+        </select>
+
+        <button
+          class="btn-anterior"
+          id="btn-anteriorRegistro1"
+          type="button"
+          onclick="anterior(1)"
+        >
+          Anterior
+        </button>
+        <button
+          class="btn-continuar"
+          id="btn-continuarRegistro1"
+          type="button"
+          onclick="siguiente(1)"
+        >
+          Continuar
+        </button>
+      </form>
+    </div>
+
+    <div class="container2" id="containerRegistro2">
+      <form class="registro-form">
+        <h2>Registro de Usuario</h2>
+
+        <label for="pregunta-seguridad-1">Pregunta de seguridad 1:</label>
+        <select id="pregunta-seguridad-1" name="pregunta-seguridad-1">
+          <option value="" disabled selected>Seleccionar</option>
+        </select>
+
+        <label for="respuesta-pregunta-1">Respuesta 1:</label>
+        <input
+          type="text"
+          id="respuesta-pregunta-1"
+          name="respuesta-pregunta-1"
+        />
+
+        <label for="pregunta-seguridad-2">Pregunta de seguridad 2:</label>
+        <select id="pregunta-seguridad-2" name="pregunta-seguridad-2">
+          <option value="" disabled selected>Seleccionar</option>
+        </select>
+
+        <label for="respuesta-pregunta-2">Respuesta 2:</label>
+        <input
+          type="text"
+          id="respuesta-pregunta-2"
+          name="respuesta-pregunta-2"
+        />
+
+        <label for="pregunta-seguridad-3">Pregunta de seguridad 3:</label>
+        <select id="pregunta-seguridad-3" name="pregunta-seguridad-3">
+          <option value="" disabled selected>Seleccionar</option>
+        </select>
+
+        <label for="respuesta-pregunta-3">Respuesta 3:</label>
+        <input
+          type="text"
+          id="respuesta-pregunta-3"
+          name="respuesta-pregunta-3"
+        />
+        <button
+          class="btn-anterior"
+          id="btn-anteriorRegistro2"
+          type="button"
+          onclick="anterior(2)"
+        >
+          Anterior
+        </button>
+        <button class="btn-continuar" type="button" onclick="siguiente(2)">
+          Continuar
+        </button>
+      </form>
+    </div>
+
+    <div class="container3" id="containerRegistro3">
+      <form class="registro-form3">
+        <h2>Registro de Usuario</h2>
+
+        <label for="usuario">Usuario:</label>
+        <input type="text" id="usuario" name="usuario" />
+
+        <label for="contrasena">Contraseña:</label>
+        <input type="password" id="contrasena" name="contrasena" />
+
+        <button
+          class="btn-anterior"
+          id="btn-anteriorRegistro3"
+          type="button"
+          onclick="anterior(3)"
+        >
+          Anterior
+        </button>
+        <button class="btn-continuar" type="button" onclick="siguiente(3)">
+          Aceptar
+        </button>
+      </form>
+    </div>
+
+    <div id="olvideCredencial" class="olvideCredencial">
+      <div id="forgetPasswordForm" class="forget-password-form">
+        <div class="security-questions">
+          <h2>Recuperar Contraseña</h2>
+          <div class="form-group">
+            <label for="usuario">Ingrese su usuario:</label>
+            <input style="margin-top: 10px" id="usuarioForget" type="text" />
+          </div>
+          <div id="preguntasSeguridad" style="display: none">
+            <div class="form-group">
+              <label for="question1">Pregunta 1:</label>
+              <input id="question1" type="text" class="form-control" />
+            </div>
+            <div class="form-group">
+              <label for="question2">Pregunta 2:</label>
+              <input id="question2" type="text" class="form-control" />
+            </div>
+            <div class="form-group">
+              <label for="question3">Pregunta 3:</label>
+              <input id="question3" type="text" class="form-control" />
+            </div>
+          </div>
+        </div>
+        <div id="checkUser" class="button-container">
+          <button class="cancel-button" onclick="goBackToLoginForm()">
+            Cancelar
+          </button>
+          <button class="accept-button" onclick="checkSecurityAnswers()">
+            Aceptar
+          </button>
+        </div>
+        <div id="checkAnswers" style="display: none" class="button-container">
+          <button class="cancel-button" onclick="goBackToLoginForm()">
+            Cancelar
+          </button>
+          <button class="accept-button" onclick="checkSecurityAnswers()">
+            Aceptar
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div id="alertBox" class="alert-box">
+      <p id="message">Contraseña incorrecta</p>
+      <button id="closeAlert">Cerrar</button>
+    </div>
+
+    <div id="alertBoxCorrect" class="alert-boxCorrect">
+      <p id="messageCorrect">Contraseña Correcta</p>
+      <button id="closeAlertCorrect">Aceptar</button>
+    </div>
+
+    <script src="login.js"></script>
+
+    <!-- RELOJ: -->
+    <script>
+      function updateClock() {
+        var now = new Date();
+        var hours = now.getHours();
+        var minutes = now.getMinutes();
+        var seconds = now.getSeconds();
+        var meridiem = hours >= 12 ? "PM" : "AM";
+
+        // Convertir las horas al formato de 12 horas
+        hours = hours % 12 || 12;
+
+        // Agregar un cero delante de los números si son menores a 10
+        hours = hours < 10 ? "0" + hours : hours;
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+        seconds = seconds < 10 ? "0" + seconds : seconds;
+
+        // Actualizar el contenido de los elementos del reloj
+        document.getElementById("hours").textContent = hours;
+        document.getElementById("minutes").textContent = minutes;
+        document.getElementById("seconds").textContent = seconds;
+        document.getElementById("meridiem").textContent = meridiem;
+      }
+
+      // Actualizar el reloj cada segundo
+      setInterval(updateClock, 1000);
+    </script>
+  </body>
+</html>

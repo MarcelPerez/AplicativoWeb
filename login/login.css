@@ -1,0 +1,371 @@
+body {
+  background-color: #f1f1f1;
+  font-family: Arial, sans-serif;
+  background-image: url("../sistema/images/Nature.jpg");
+  background-size: cover;
+}
+
+/* RELOJ: */
+.clock {
+  font-size: 16px;
+  opacity: 0.5;
+  color: #009a00;
+}
+
+.login-container {
+  /* display: none; */
+  max-width: 400px;
+  margin: 0 auto;
+  background-color: #ffffff;
+  padding: 20px;
+  margin-top: 100px;
+  border-radius: 4px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.login-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  /* color: #03a9f3; */
+}
+
+.form-group input {
+  width: 95%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.botones {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.boton {
+  flex-basis: calc(
+    50% - 20px
+  ); /* Restamos 20px para considerar el espacio entre botones */
+  max-width: 300px;
+  margin: 10px;
+  padding: 10px;
+  text-align: center;
+  font-size: 16px;
+}
+
+@media (max-width: 768px) {
+  .boton {
+    flex-basis: calc(
+      100% - 20px
+    ); /* Restamos 20px para considerar el espacio entre botones */
+  }
+}
+
+#btnIniciarSesion,
+#btnRegistrarme {
+  margin: 10px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+#btnIniciarSesion:hover,
+#btnRegistrarme:hover {
+  background-color: #3f9042;
+}
+
+#btnOlvidePassword,
+#btnSalir {
+  margin: 10px;
+  background-color: #f44336;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#btnOlvidePassword:hover,
+#btnSalir:hover {
+  background-color: #d32f2f;
+}
+
+
+
+.security-questions {
+  margin-bottom: 20px;
+}
+
+.security-questions .form-group {
+  margin-bottom: 10px;
+}
+
+.alert-box {
+  width: 400px;
+  height: 200px;
+  background-color: white;
+  border: 2px solid red;
+  border-radius: 5px;
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#message {
+  color: red;
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.alert-boxCorrect {
+  width: 400px;
+  height: 200px;
+  background-color: white;
+  border: 2px solid rgb(0, 207, 79);
+  border-radius: 5px;
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#closeAlert {
+  padding: 10px 20px;
+  background-color: red;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#messageCorrect {
+  color: rgb(0, 207, 79);
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+#closeAlertCorrect {
+  padding: 10px 20px;
+  background-color: rgb(0, 207, 79);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+
+
+
+
+
+
+.container {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.registro-form {
+  max-width: 400px;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.registro-form label {
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+.registro-form input[type="text"],
+.registro-form select {
+  padding: 8px;
+  margin-bottom: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.registro-form select {
+  width: 100%;
+}
+
+.btn-anterior,
+.btn-continuar {
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 100%;
+  margin-bottom: 8px;
+}
+
+.btn-anterior {
+  background-color: #dc3545;
+  color: #fff;
+}
+
+.btn-continuar {
+  background-color: #28a745;
+  color: #fff;
+}
+
+.btn-continuar:hover,
+.btn-anterior:hover {
+  opacity: 0.8;
+}
+
+@media only screen and (max-width: 500px) {
+  .registro-form {
+    width: 100%;
+    margin: 0 20px;
+  }
+}
+
+
+
+
+.container2 {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.registro-form2 {
+  max-width: 400px;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.registro-form label2 {
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+@media only screen and (max-width: 500px) {
+  
+  .pregunta-container {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .pregunta-inputs {
+    width: 100%;
+  }
+}
+
+.container3 {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.registro-form3 {
+  max-width: 400px;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.registro-form3 label {
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+.registro-form3 input[type="text"],
+.registro-form3 input[type="password"] {
+  padding: 8px;
+  margin-bottom: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+
+
+.olvideCredencial {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.forget-password-form {
+  max-width: 400px;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.security-questions {
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 16px;
+}
+
+.form-group label {
+  font-weight: bold;
+}
+
+.form-group input[type="text"] {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.cancel-button,
+.accept-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 48%;
+  text-align: center;
+}
+
+.cancel-button {
+  background-color: #dc3545;
+  color: #fff;
+}
+
+.accept-button {
+  background-color: #28a745;
+  color: #fff;
+}
+
+.cancel-button:hover,
+.accept-button:hover {
+  opacity: 0.8;
+}

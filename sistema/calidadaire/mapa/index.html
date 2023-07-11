@@ -57,6 +57,18 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/ol@v7.2.2/ol.css"
     />
+    <link
+      rel="stylesheet"
+      href="https://openlayers.org/en/v6.5.0/css/ol.css"
+      type="text/css"
+    />
+    <script src="https://openlayers.org/en/v6.5.0/build/ol.js"></script>
+    <style>
+      #map {
+        width: 100%;
+        height: 500px;
+      }
+    </style>
   </head>
 
   <body>
@@ -244,34 +256,7 @@
         </div>
         <div class="top-right">
           <div class="header-menu">
-            <p style="margin-top: 15px; color: black">
-              Bienvenido MARCEL PEREZ FERNANDEZ
-            </p>
-            <div class="user-area dropdown float-right">
-              <a
-                href="#"
-                class="dropdown-toggle active"
-                data-toggle="dropdown"
-                aria-haspopup="true"
-                aria-expanded="false"
-              >
-                <img
-                  class="user-avatar rounded-circle"
-                  src="../../../img/User.png"
-                  alt="User Avatar"
-                />
-              </a>
-
-              <div class="user-menu dropdown-menu">
-                <a class="nav-link" href="#"
-                  ><i class="fa fa- user"></i>Mi Perfil</a
-                >
-
-                <a class="nav-link" href="../"
-                  ><i class="fa fa-power -off"></i>Salir</a
-                >
-              </div>
-            </div>
+            <p style="margin-top: 15px; color: black">MARCEL PEREZ FERNANDEZ</p>
           </div>
         </div>
       </header>
@@ -279,7 +264,32 @@
       <!-- Content -->
       <div class="content">
         <center><h3>ESTADO DEL AIRE EN PUCMM (SANTIAGO)</h3></center>
+        <br />
+        <label for="medicion">Químico mostrado mapa:</label>
+        <select style="width: 20%" id="medicion" onchange="seleccionarOpcion()">
+          <option value="humedad">Humedad</option>
+          <option value="temperatura">Temperatura</option>
+          <option value="co2">CO2</option>
+          <option value="co">CO</option>
+          <option value="no2">NO2</option>
+          <option value="voc">VOC</option>
+          <option value="etanol">Etanol</option>
+          <option value="polvo">Polvo</option></select
+        ><br /><br />
+        <div id="map"></div>
 
+        <script src="main.js"></script>
+        <script>
+          navigator.geolocation.getCurrentPosition(getLatLon);
+          function getLatLon(position) {
+            var latitude = position.coords.latitude;
+            var longitude = position.coords.longitude;
+            console.log("Latitude is " + latitude);
+            console.log("Longitude is " + longitude);
+            alert(latitude);
+          }
+        </script>
+        <!-- 
         <div class="grid-container">
           <div class="grid-1">
             <div id="js-map" class="map"></div>
@@ -289,7 +299,7 @@
         <div class="overlay-container">
           <span class="overly-text" id="feature-name"></span><br />
           <span class="overly-text" id="feature-masinfo"></span><br />
-        </div>
+        </div> -->
 
         <!-- .animated -->
       </div>

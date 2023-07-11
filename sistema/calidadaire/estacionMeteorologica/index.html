@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="no-js" lang="">
+<html>
   <head>
     <!-- Información meta sobre la pagina web: -->
     <meta charset="utf-8" />
@@ -17,6 +17,7 @@
     <link rel="apple-touch-icon" href="../../../img/Icon.png" />
     <link rel="icon" type="image/png" href="../../../img/Icon.png" />
 
+    <!-- CSS: -->
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.0/normalize.min.css"
@@ -65,7 +66,7 @@
               </a>
             </li>
             <li class="menu-title">Opciones</li>
-            <li class="menu-item-has-children dropdown">
+            <li class="menu-item-has-children active dropdown">
               <a
                 href="#"
                 class="dropdown-toggle"
@@ -78,19 +79,19 @@
               <ul class="sub-menu children dropdown-menu">
                 <li>
                   <i class="menu-icon fa fa-map-marker"></i
-                  ><a href="../../calidadaire/mapa/">Mapa</a>
+                  ><a href="../mapa/">Mapa</a>
                 </li>
                 <li>
                   <i class="menu-icon fa fa-bar-chart"></i
-                  ><a href="../../calidadaire/graficos/">Gráficos</a>
+                  ><a href="../graficos/">Gráficos</a>
                 </li>
                 <li>
                   <i class="menu-icon fa fa-book"></i
-                  ><a href="../../calidadaire/estadisticas/">Estadísticas</a>
+                  ><a href="">Estadísticas</a>
                 </li>
               </ul>
             </li>
-            <li class="menu-item-has-children active dropdown">
+            <li class="menu-item-has-children dropdown">
               <a
                 href="#"
                 class="dropdown-toggle"
@@ -103,15 +104,17 @@
               <ul class="sub-menu children dropdown-menu">
                 <li>
                   <i class="menu-icon fa fa-book"></i
-                  ><a href="">Agregar Estaciones</a>
+                  ><a href="../../estaciones/ingresar/">Agregar Estaciones</a>
                 </li>
                 <li>
                   <i class="menu-icon fa fa-eye"></i
-                  ><a href="../visualizar/">Ver Estaciones</a>
+                  ><a href="../../estaciones/visualizar/">Ver Estaciones</a>
                 </li>
                 <li>
                   <i class="menu-icon fa fa-cogs"></i
-                  ><a href="../modificar/">Modificar Estaciones</a>
+                  ><a href="../../estaciones/modificar/"
+                    >Modificar Estaciones</a
+                  >
                 </li>
               </ul>
             </li>
@@ -227,10 +230,10 @@
               ><i class="fa fa-bars"></i
             ></a>
 
-            <a class="navbar-brand" href="../"
+            <a class="navbar-brand" href="../../../"
               ><img src="../../../img/LogoNegro.png" alt="Logo"
             /></a>
-            <a class="navbar-brand hidden" href="./"
+            <a class="navbar-brand hidden" href="../../../"
               ><img src="../../../img/LogoNegro.png" alt="Logo"
             /></a>
           </div>
@@ -271,85 +274,8 @@
       <!-- /#header -->
       <!-- Content -->
       <div class="content">
-        <div class="card">
-          <div class="card-header">
-            <strong class="card-title">Ingreso de Estaciones</strong>
-          </div>
-          <div class="card-body">
-            <!-- Credit Card -->
-            <h3 class="text-center">Datos de la Estación</h3>
-
-            <form id="ingresarEstacionForm" class="ingresarForm">
-              <div class="form-group">
-                <label for="nombre">Nombre de Estación</label>
-                <input type="text" id="nombre" name="nombre" required />
-              </div>
-              <div class="row">
-                <div class="col-6">
-                  <label for="tipo">Tipo</label>
-                  <select id="tipo" name="tipo" required>
-                    <option value="">Seleccione una opción</option>
-                    <option value="Recepcion">Receptora</option>
-                    <option value="Transmision">Emisora</option>
-                    <option value="Portatil">Portatil</option>
-                  </select>
-                </div>
-                <div class="col-6">
-                  <div class="form-group">
-                    <label for="delay">Delay</label>
-                    <select id="delay" name="delay" required>
-                      <option value="">Seleccione una opción (segundos)</option>
-                      <option value="10">10</option>
-                      <option value="20">20</option>
-                      <option value="30">30</option>
-                      <option value="40">40</option>
-                      <option value="50">50</option>
-                      <option value="60">60</option>
-                    </select>
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-6">
-                  <div class="form-group">
-                    <label for="latitud">Latitud</label>
-                    <input type="text" id="latitud" name="latitud" required />
-                  </div>
-                </div>
-                <div class="col-6">
-                  <label for="longitud">Longitud</label>
-                  <input
-                    type="text"
-                    step="any"
-                    id="longitud"
-                    name="longitud"
-                    required
-                  />
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="descripcion">Descripción</label>
-                <textarea id="descripcion" name="descripcion"></textarea>
-              </div>
-              <div class="button-container">
-                <button class="button" type="submit" id="guardar">
-                  <i class="fa fa-save"></i>&nbsp;
-                  <span id="payment-button-amount">Guardar</span>
-                </button>
-
-                <button class="button" id="limpiar" type="reset">
-                  <i class="fa fa-eraser"></i>&nbsp;
-                  <span id="payment-button-amount">Limpiar</span>
-                </button>
-                <button class="button" id="cancelar" type="button">
-                  <i class="fa fa-close"></i>&nbsp;
-                  <span id="payment-button-amount">Cancelar</span>
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-        <!-- .card -->
+        <h4>ESTADISTICAS</h4>
+        <!-- .animated -->
       </div>
       <!-- /.content -->
       <div class="clearfix"></div>
@@ -379,84 +305,5 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
     <script src="../../assets/js/main.js"></script>
-
-    <script>
-      const cancelar = document.getElementById("cancelar");
-      cancelar.addEventListener("click", function () {
-        const confirmed = confirm("¿Estás seguro de que deseas cancelar?");
-        if (confirmed) {
-          // Aquí puedes realizar la acción de cancelación
-          alert("Se canceló, volviendo al inicio...")
-          window.location.href = "../../";
-        } else {
-          console.log("Cancelación cancelada");
-        }
-      });
-    </script>
-
-    <script>
-      // Get the input element
-      const longitud = document.getElementById("longitud");
-      const latitud = document.getElementById("latitud");
-
-      // Add an event listener for the "keypress" event
-      longitud.addEventListener("keypress", function (event) {
-        // Check if the pressed key is a number or a dot
-        if (event.key !== "." && isNaN(parseInt(event.key))) {
-          // If not a number or a dot, prevent the input
-          event.preventDefault();
-        }
-      });
-
-      latitud.addEventListener("keypress", function (event) {
-        // Check if the pressed key is a number or a dot
-        if (event.key !== "." && isNaN(parseInt(event.key))) {
-          // If not a number or a dot, prevent the input
-          event.preventDefault();
-        }
-      });
-    </script>
-
-    <script>
-      //LIMPIAR CAMPOS:
-      const limpiar = document.getElementById("limpiar");
-      limpiar.addEventListener("click", function () {
-        document.getElementById("ingresarEstacionForm").reset();
-      });
-
-      //GUARDAR
-      const form = document.querySelector(".ingresarForm");
-      form.addEventListener("submit", (event) => {
-        event.preventDefault();
-        const formData = new FormData(form);
-        const data = new URLSearchParams(formData);
-        const datos = {
-          nombreEstacion: document.getElementById("nombre").value,
-          tipoEstacion: document.getElementById("tipo").value,
-          latitud: document.getElementById("latitud").value,
-          longitud: document.getElementById("longitud").value,
-          descripcionEstacion: document.getElementById("descripcion").value,
-          estado: 1,
-          delayEstacion: parseFloat(document.getElementById("delay").value),
-          ultimaMedicion: "",
-        };
-        fetch("http://localhost:5024/api/Estacion", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(datos),
-        })
-          .then((response) => {
-            if (!response.ok) {
-              throw new Error("Hubo un problema al guardar la estación.");
-            } else {
-              alert("La estación se guardó correctamente.");
-              document.getElementById("ingresarEstacionForm").reset();
-            }
-          })
-          .catch((error) => alert(error.message));
-      });
-    </script>
   </body>
 </html>
