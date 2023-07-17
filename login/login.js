@@ -1,58 +1,7 @@
-function llenarPreguntasSeguridad() {
-  const selectPreguntaSeguridad = document.getElementById(
-    "pregunta-seguridad-1"
-  );
-  const selectPreguntaSeguridad2 = document.getElementById(
-    "pregunta-seguridad-2"
-  );
-  const selectPreguntaSeguridad3 = document.getElementById(
-    "pregunta-seguridad-3"
-  );
-  fetch("http://154.38.167.248:5024/api/PreguntaSeguridad") // Reemplaza 'URL_DE_TU_API' con la URL de tu API
-    .then((response) => response.json())
-    .then((data) => {
-      data.forEach((pregunta) => {
-        const option = document.createElement("option");
-        option.value = pregunta.id; // Reemplaza 'id' con el nombre de la propiedad que contiene el valor de la pregunta en tu objeto de datos
-        option.text = pregunta.pregunta; // Reemplaza 'texto' con el nombre de la propiedad que contiene el texto de la pregunta en tu objeto de datos
-        selectPreguntaSeguridad.appendChild(option);
-        selectPreguntaSeguridad2.appendChild(option.cloneNode(true));
-        selectPreguntaSeguridad3.appendChild(option.cloneNode(true));
-      });
-    })
-    .catch((error) => {
-      console.error("Error al obtener los datos:", error);
-    });
-}
-
-llenarPreguntasSeguridad();
-
-function loginIncorrecto() {
-  const alertBox = document.getElementById("alertBox");
-  const closeAlertButton = document.getElementById("closeAlert");
-
-  alertBox.style.display = "flex";
-
-  closeAlertButton.addEventListener("click", function () {
-    alertBox.style.display = "none";
-  });
-}
-
-function loginCorrecto() {
-  const alertBox = document.getElementById("alertBoxCorrect");
-  const closeAlertButton = document.getElementById("closeAlertCorrect");
-
-  alertBox.style.display = "flex";
-
-  closeAlertButton.addEventListener("click", function () {
-    alertBox.style.display = "none";
-  });
-}
-
 function login(response) {
   var username, password;
   username = document.getElementById("username").value;
-  password = document.getElementById("password").value;
+  password = encriptarConSHA256(document.getElementById("password").value);
 
   let aux = false;
   let i = 0;
@@ -64,7 +13,10 @@ function login(response) {
         response[i].nombre1 + " " + response[i].apellido1
       );
       localStorage.setItem("tipoUsuario", response[i].tipoUsuario);
-      loginCorrecto();
+      alertCorrect(
+        "Contraseña Correcta",
+        "Bienvenido al sistema " + localStorage.getItem("usuario")
+      );
       const acceptAlertButton = document.getElementById("closeAlertCorrect");
       acceptAlertButton.addEventListener("click", function () {
         window.location = "./../sistema/";
@@ -73,7 +25,7 @@ function login(response) {
     }
     i++;
     if (i == Object.keys(response).length && !aux) {
-      loginIncorrecto();
+      alertError("Contraseña incorrecta!", "");
     }
   }
 }
@@ -94,28 +46,12 @@ const ObtenerInfo = async (opcion) => {
 
 function initial() {
   ObtenerInfo("Usuario")
-    .then((response) => (Estacion = response))
+    // .then((response) => (Estacion = response))
     .then((response) => login(response));
 }
 
 function salir() {
   window.location = "../";
-}
-
-function showForgetPasswordForm() {
-  document.getElementById("login-container").style.display = "none";
-  document.getElementById("olvideCredencial").style.display = "flex";
-}
-
-function goBackToLoginForm() {
-  document.getElementById("login-container").style.display = "block";
-  document.getElementById("olvideCredencial").style.display = "none";
-}
-
-function checkSecurityAnswers() {
-  // Aquí puedes agregar la lógica para verificar las respuestas de seguridad
-  // Si las respuestas son correctas, redirige al formulario de cambio de contraseña
-  // Si las respuestas son incorrectas, muestra un mensaje de error o realiza alguna acción
 }
 
 function registrarme() {
@@ -163,19 +99,106 @@ function siguiente(opcion) {
   const formRegistrarme2 = document.getElementById("containerRegistro2");
   const formRegistrarme3 = document.getElementById("containerRegistro3");
 
+  const primerNombre = document.getElementById("primer-nombre").value;
+  const segundoNombre = document.getElementById("segundo-nombre").value;
+  const primerApellido = document.getElementById("primer-apellido").value;
+  const segundoApellido = document.getElementById("segundo-apellido").value;
+  const tipoUsuario = document.getElementById("tipo-usuario").value;
+  const preguntaSeguridad1 = document.getElementById("pregunta-seguridad-1")
+    .options[document.getElementById("pregunta-seguridad-1").selectedIndex]
+    .text;
+  const respuestaPreguntaSeguridad1 = document.getElementById(
+    "respuesta-pregunta-1"
+  ).value;
+  const preguntaSeguridad2 = document.getElementById("pregunta-seguridad-2")
+    .options[document.getElementById("pregunta-seguridad-2").selectedIndex]
+    .text;
+  const respuestaPreguntaSeguridad2 = document.getElementById(
+    "respuesta-pregunta-2"
+  ).value;
+  const preguntaSeguridad3 = document.getElementById("pregunta-seguridad-3")
+    .options[document.getElementById("pregunta-seguridad-3").selectedIndex]
+    .text;
+  const respuestaPreguntaSeguridad3 = document.getElementById(
+    "respuesta-pregunta-3"
+  ).value;
+  const username = document.getElementById("usuario").value;
+
+  const password = encriptarConSHA256(
+    document.getElementById("contrasena").value
+  );
+
+  var errores = [];
   //Registrar - P1:
   if (opcion == 1) {
-    formLogin.style.display = "none";
-    formRegistrarme.style.display = "none";
-    formRegistrarme2.style.display = "flex";
-    formRegistrarme3.style.display = "none";
+    if (primerNombre.length == 0) {
+      errores.push("Primer Nombre");
+    }
+    if (primerApellido.length == 0) {
+      errores.push("Primer Apellido");
+    }
+    if (segundoApellido.length == 0) {
+      errores.push("Segundo Apellido");
+    }
+    if (tipoUsuario.length == 0) {
+      errores.push("Tipo de Usuario");
+    }
 
+    if (errores.length == 0) {
+      formLogin.style.display = "none";
+      formRegistrarme.style.display = "none";
+      formRegistrarme2.style.display = "flex";
+      formRegistrarme3.style.display = "none";
+    } else {
+      let aux = "";
+      errores.map((error) => {
+        aux = aux + " " + error + ",";
+      });
+      alertError(
+        "Completa todos los campos necesarios (*)",
+        "<b>Restantes:</b> " + aux
+      );
+    }
   }
 
-  if(opcion==2){
-    formLogin.style.display = "none";
-    formRegistrarme.style.display = "none";
-    formRegistrarme2.style.display = "none";
-    formRegistrarme3.style.display = "flex";
+  if (opcion == 2) {
+    if (respuestaPreguntaSeguridad1.length == 0) {
+      errores.push("Primera Pregunta de Seguridad");
+    }
+    if (respuestaPreguntaSeguridad2.length == 0) {
+      errores.push("Segunda Pregunta de Seguridad");
+    }
+    if (respuestaPreguntaSeguridad3.length == 0) {
+      errores.push("Tercera Pregunta de Seguridad");
+    }
+
+    if (errores.length == 0) {
+      formLogin.style.display = "none";
+      formRegistrarme.style.display = "none";
+      formRegistrarme2.style.display = "none";
+      formRegistrarme3.style.display = "flex";
+    } else {
+      let aux = "";
+      errores.map((error) => {
+        aux = aux + " " + error + ",";
+      });
+      alertError(
+        "Completa todos los campos necesarios (*)",
+        "<b>Restantes:</b> " + aux
+      );
+    }
+  }
+}
+
+function togglePasswordVisibility() {
+  var passwordInput = document.getElementById("contrasena");
+  var toggleButton = document.getElementById("toggleButton");
+
+  if (passwordInput.type === "password") {
+    passwordInput.type = "text";
+    toggleButton.textContent = "Ocultar contraseña";
+  } else {
+    passwordInput.type = "password";
+    toggleButton.textContent = "Mostrar contraseña";
   }
 }

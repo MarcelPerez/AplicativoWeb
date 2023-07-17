@@ -61,19 +61,19 @@
       <form class="registro-form">
         <h2>Registro de Usuario</h2>
 
-        <label for="primer-nombre">Primer Nombre:</label>
+        <label for="primer-nombre">*Primer Nombre:</label>
         <input type="text" id="primer-nombre" name="primer-nombre" />
 
         <label for="segundo-nombre">Segundo Nombre:</label>
         <input type="text" id="segundo-nombre" name="segundo-nombre" />
 
-        <label for="primer-apellido">Primer Apellido:</label>
+        <label for="primer-apellido">*Primer Apellido:</label>
         <input type="text" id="primer-apellido" name="primer-apellido" />
 
-        <label for="segundo-apellido">Segundo Apellido:</label>
+        <label for="segundo-apellido">*Segundo Apellido:</label>
         <input type="text" id="segundo-apellido" name="segundo-apellido" />
 
-        <label for="tipo-usuario">Tipo de Usuario:</label>
+        <label for="tipo-usuario">*Tipo de Usuario:</label>
         <select id="tipo-usuario" name="tipo-usuario">
           <option value="" disabled selected>Seleccionar</option>
           <option value="estudiante">Estudiante</option>
@@ -103,40 +103,57 @@
       <form class="registro-form">
         <h2>Registro de Usuario</h2>
 
-        <label for="pregunta-seguridad-1">Pregunta de seguridad 1:</label>
-        <select id="pregunta-seguridad-1" name="pregunta-seguridad-1">
+        <label for="pregunta-seguridad-1">*Pregunta de seguridad 1:</label>
+        <select
+          id="pregunta-seguridad-1"
+          name="pregunta-seguridad-1"
+          onchange="changePreguntaSeguridad(2)"
+        >
           <option value="" disabled selected>Seleccionar</option>
         </select>
 
-        <label for="respuesta-pregunta-1">Respuesta 1:</label>
+        <label for="respuesta-pregunta-1">*Respuesta 1:</label>
         <input
           type="text"
           id="respuesta-pregunta-1"
           name="respuesta-pregunta-1"
+          disabled
         />
 
-        <label for="pregunta-seguridad-2">Pregunta de seguridad 2:</label>
-        <select id="pregunta-seguridad-2" name="pregunta-seguridad-2">
+        <label for="pregunta-seguridad-2">*Pregunta de seguridad 2:</label>
+        <select
+          id="pregunta-seguridad-2"
+          name="pregunta-seguridad-2"
+          disabled
+          onchange="changePreguntaSeguridad(3)"
+        >
           <option value="" disabled selected>Seleccionar</option>
         </select>
 
-        <label for="respuesta-pregunta-2">Respuesta 2:</label>
+        <label for="respuesta-pregunta-2">*Respuesta 2:</label>
         <input
           type="text"
           id="respuesta-pregunta-2"
           name="respuesta-pregunta-2"
+          disabled
         />
 
-        <label for="pregunta-seguridad-3">Pregunta de seguridad 3:</label>
-        <select id="pregunta-seguridad-3" name="pregunta-seguridad-3">
+        <label for="pregunta-seguridad-3">*Pregunta de seguridad 3:</label>
+        <select
+          id="pregunta-seguridad-3"
+          name="pregunta-seguridad-3"
+          disabled
+          onchange="changePreguntaSeguridad(4)"
+        >
           <option value="" disabled selected>Seleccionar</option>
         </select>
 
-        <label for="respuesta-pregunta-3">Respuesta 3:</label>
+        <label for="respuesta-pregunta-3">*Respuesta 3:</label>
         <input
           type="text"
           id="respuesta-pregunta-3"
           name="respuesta-pregunta-3"
+          disabled
         />
         <button
           class="btn-anterior"
@@ -156,10 +173,10 @@
       <form class="registro-form3">
         <h2>Registro de Usuario</h2>
 
-        <label for="usuario">Usuario:</label>
+        <label for="usuario">*Usuario:</label>
         <input type="text" id="usuario" name="usuario" />
 
-        <label for="contrasena">Contraseña:</label>
+        <label for="contrasena">*Contraseña:</label>
         <input type="password" id="contrasena" name="contrasena" />
 
         <button
@@ -170,34 +187,82 @@
         >
           Anterior
         </button>
-        <button class="btn-continuar" type="button" onclick="siguiente(3)">
+        <button
+          class="btn-continuar"
+          type="button"
+          onclick="registrarUsuario()"
+        >
           Aceptar
+        </button>
+        <button
+          type="button"
+          id="toggleButton"
+          onclick="togglePasswordVisibility()"
+        >
+          Mostrar contraseña
         </button>
       </form>
     </div>
 
     <div id="olvideCredencial" class="olvideCredencial">
       <div id="forgetPasswordForm" class="forget-password-form">
-        <div class="security-questions">
+        <div id="security-questions" class="security-questions">
           <h2>Recuperar Contraseña</h2>
           <div class="form-group">
             <label for="usuario">Ingrese su usuario:</label>
             <input style="margin-top: 10px" id="usuarioForget" type="text" />
           </div>
-          <div id="preguntasSeguridad" style="display: none">
+          <button class="comprobarUsuario" onclick="confirmarUsuario()">
+            Confirmar Usuario
+          </button>
+          <button class="nuevoUsuario" onclick="nuevoUsuario()">
+            Nuevo Usuario
+          </button>
+          <div id="preguntasSeguridad">
             <div class="form-group">
-              <label for="question1">Pregunta 1:</label>
-              <input id="question1" type="text" class="form-control" />
+              <label for="question1" id="lblQuestion1"></label>
+              <input id="question1" type="text" class="form-control" disabled />
             </div>
             <div class="form-group">
-              <label for="question2">Pregunta 2:</label>
-              <input id="question2" type="text" class="form-control" />
+              <label for="question2" id="lblQuestion2"></label>
+              <input id="question2" type="text" class="form-control" disabled />
             </div>
             <div class="form-group">
-              <label for="question3">Pregunta 3:</label>
-              <input id="question3" type="text" class="form-control" />
+              <label for="question3" id="lblQuestion3"></label>
+              <input id="question3" type="text" class="form-control" disabled />
             </div>
           </div>
+        </div>
+        <div id="nuevaPasswordGroup" class="nuevaPasswordGroup" style="display: none;">
+          <h2>Cambio de Contraseña</h2>
+          <label for="newPassword" id="lblNewPassword">Nueva Contraseña:</label>
+
+          <input
+            id="newPassword"
+            type="password"
+            class="newPassword"
+            name="newPassword"
+            placeholder="Nueva Contraseña"
+          />
+
+          <label for="newPassword2" id="lblNewPassword2"
+            >Confirmar Contraseña:</label
+          >
+
+          <input
+            id="newPassword2"
+            type="password"
+            class="newPassword"
+            name="newPassword2"
+            placeholder="Confirmar Contraseña"
+          />
+          
+        <button class="btnCancelarNuevaPassword" onclick="cancelarNuevaPassword()">
+          Cancelar
+        </button>
+        <button class="btnAceptarNuevaPassword" onclick="establecerNuevaPassword()">
+          Aceptar
+        </button>
         </div>
         <div id="checkUser" class="button-container">
           <button class="cancel-button" onclick="goBackToLoginForm()">
@@ -207,55 +272,68 @@
             Aceptar
           </button>
         </div>
-        <div id="checkAnswers" style="display: none" class="button-container">
-          <button class="cancel-button" onclick="goBackToLoginForm()">
-            Cancelar
-          </button>
-          <button class="accept-button" onclick="checkSecurityAnswers()">
-            Aceptar
-          </button>
-        </div>
+        
       </div>
     </div>
 
     <div id="alertBox" class="alert-box">
-      <p id="message">Contraseña incorrecta</p>
+      <center><p id="message"></p></center>
+      <p id="usuarioCorrect" style="padding: 10px"></p>
+
       <button id="closeAlert">Cerrar</button>
     </div>
 
     <div id="alertBoxCorrect" class="alert-boxCorrect">
-      <p id="messageCorrect">Contraseña Correcta</p>
+      <center><p id="messageCorrect"></p></center>
+      <p id="usuarioCorrecto"></p>
+
+      <br /><br /><br />
       <button id="closeAlertCorrect">Aceptar</button>
     </div>
 
     <script src="login.js"></script>
-
     <!-- RELOJ: -->
+    <script src="clock.js"></script>
+    <!-- ENCRIPTAR  -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+    <script src="encryp.js"></script>
+
+    <!-- Llenar las preguntas de seguridad -->
+    <script src="getPreguntasSeguridad.js"></script>
+
+    <!-- Registrar Usuario: -->
+    <script src="registrar.js"></script>
+
+    <!-- Alertas: -->
+    <script src="alert.js"></script>
+
+    <!-- Preguntas de Seguridad | Cambiar: -->
+    <script src="preguntasSeguridad.js"></script>
+
+    <!-- Forget Password: -->
+    <script src="forgetPassword.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/forge/0.8.2/forge.all.min.js"></script>
     <script>
-      function updateClock() {
-        var now = new Date();
-        var hours = now.getHours();
-        var minutes = now.getMinutes();
-        var seconds = now.getSeconds();
-        var meridiem = hours >= 12 ? "PM" : "AM";
+      function generateHash() {
+        const currentTimestamp = Math.floor(Date.now() / 1000);
+        const apiKey = "cc9ilwz6xvtg2yg1f8a0hk0ilvydgga4";
+        var plainText = "api-key" + apiKey + "t" + currentTimestamp;
+        var plainText2 = "?api-key=" + apiKey + "&t=" + currentTimestamp;
 
-        // Convertir las horas al formato de 12 horas
-        hours = hours % 12 || 12;
+        var secretKey = "rbni6y4u50qjafr135wv4ilzf6whxinv";
 
-        // Agregar un cero delante de los números si son menores a 10
-        hours = hours < 10 ? "0" + hours : hours;
-        minutes = minutes < 10 ? "0" + minutes : minutes;
-        seconds = seconds < 10 ? "0" + seconds : seconds;
+        var hmac = forge.hmac.create();
+        hmac.start("sha256", secretKey);
+        hmac.update(plainText);
+        var hashText = hmac.digest().toHex();
 
-        // Actualizar el contenido de los elementos del reloj
-        document.getElementById("hours").textContent = hours;
-        document.getElementById("minutes").textContent = minutes;
-        document.getElementById("seconds").textContent = seconds;
-        document.getElementById("meridiem").textContent = meridiem;
+        const urlApi = "https://api.weatherlink.com/v2/stations";
+
+        console.log(urlApi + plainText2 + "&api-signature=" + hashText);
       }
-
-      // Actualizar el reloj cada segundo
-      setInterval(updateClock, 1000);
+      // generateHash();
     </script>
   </body>
 </html>

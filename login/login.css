@@ -91,8 +91,6 @@ body {
   background-color: #d32f2f;
 }
 
-
-
 .security-questions {
   margin-bottom: 20px;
 }
@@ -103,7 +101,7 @@ body {
 
 .alert-box {
   width: 400px;
-  height: 200px;
+  height: 250px;
   background-color: white;
   border: 2px solid red;
   border-radius: 5px;
@@ -126,7 +124,7 @@ body {
 
 .alert-boxCorrect {
   width: 400px;
-  height: 200px;
+  height: 250px;
   background-color: white;
   border: 2px solid rgb(0, 207, 79);
   border-radius: 5px;
@@ -164,12 +162,6 @@ body {
   border-radius: 5px;
   cursor: pointer;
 }
-
-
-
-
-
-
 
 .container {
   display: none;
@@ -238,9 +230,6 @@ body {
   }
 }
 
-
-
-
 .container2 {
   display: none;
   justify-content: center;
@@ -261,12 +250,11 @@ body {
   font-weight: bold;
 }
 @media only screen and (max-width: 500px) {
-  
   .pregunta-container {
     display: flex;
     flex-wrap: wrap;
   }
-  
+
   .pregunta-inputs {
     width: 100%;
   }
@@ -301,8 +289,6 @@ body {
   width: 100%;
   box-sizing: border-box;
 }
-
-
 
 .olvideCredencial {
   display: none;
@@ -355,7 +341,59 @@ body {
   text-align: center;
 }
 
-.cancel-button {
+.comprobarUsuario,
+.btnAceptarNuevaPassword {
+  background-color: #16a316;
+  color: #fff;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 60%;
+  padding: 10px;
+  margin-left: 20%;
+  margin-bottom: 10px;
+}
+
+.nuevoUsuario {
+  background-color: #b2b2b2;
+  color: #fff;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 60%;
+  padding: 10px;
+  margin-left: 20%;
+  margin-bottom: 10px;
+}
+
+.btnAceptarNuevaPassword {
+  background-color: #16a316;
+  color: #fff;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 35%;
+  margin-bottom: 10px;
+}
+
+.btnCancelarNuevaPassword {
+  background-color: #d32f2f;
+  color: #fff;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 35%;
+  padding: 10px;
+  margin-bottom: 10px;
+  margin-left: 15px;
+}
+
+.cancel-button,
+.btnCancelarNuevaPassword {
   background-color: #dc3545;
   color: #fff;
 }
@@ -368,4 +406,18 @@ body {
 .cancel-button:hover,
 .accept-button:hover {
   opacity: 0.8;
+}
+
+.nuevaPasswordGroup {
+  display: block;
+  margin: 10px;
+}
+
+.newPassword {
+  padding: 8px;
+  margin-bottom: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 100%;
+  box-sizing: border-box;
 }
