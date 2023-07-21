@@ -62,7 +62,6 @@ function getPreguntasSeguridad(usuario) {
   );
 
   localStorage.setItem("IdUsuario", usuario.idUsuario);
-  alert(localStorage.getItem("IdUsuario"));
 
   document.getElementById("question1").removeAttribute("disabled");
   document.getElementById("question2").removeAttribute("disabled");
@@ -139,8 +138,6 @@ function establecerNuevaPassword2(usuario, pass) {
     preguntaSeguridad3: usuario.preguntaSeguridad3,
     respuestaPreguntaSeguridad3: usuario.respuestaPreguntaSeguridad3,
   };
-  console.log(datos);
-
 
   fetch("http://154.38.167.248:5024/api/Usuario", {
     method: "PUT",

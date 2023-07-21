@@ -17,7 +17,6 @@
     <link rel="apple-touch-icon" href="./../../images/Icon.png" />
     <link rel="icon" type="image/png" href="./../../images/Icon.png" />
 
-    <!-- CSS: -->
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.0/normalize.min.css"
@@ -52,6 +51,7 @@
       href="https://cdn.jsdelivr.net/npm/jqvmap@1.5.1/dist/jqvmap.min.css"
       rel="stylesheet"
     />
+
     <style>
       .nav-link:hover {
         background-color: #c7efff;
@@ -61,16 +61,6 @@
     <script>
       auth("../../../");
     </script>
-    <style>
-      th {
-        background-color: #f2f2f2;
-        color: #333;
-        font-weight: bold;
-        padding: 8px;
-        border: 2px solid #ccc;
-        text-align: left;
-      }
-    </style>
   </head>
 
   <body>
@@ -162,7 +152,7 @@
                 </li>
               </ul>
             </li>
-            <li class="menu-item-has-children dropdown active">
+            <li class="menu-item-has-children dropdown">
               <a
                 href="#"
                 class="dropdown-toggle"
@@ -262,7 +252,10 @@
                 </li>
               </ul>
             </li>
-            <li id="seguridadMenu" class="menu-item-has-children dropdown">
+            <li
+              id="seguridadMenu"
+              class="active menu-item-has-children dropdown"
+            >
               <a
                 href="#"
                 class="dropdown-toggle"
@@ -273,7 +266,7 @@
                 <i class="menu-icon fa fa-lock"></i>Seguridad</a
               >
               <ul class="sub-menu children dropdown-menu">
-                <li>
+                <li class="active">
                   <i class="menu-icon fa fa-user-plus"></i
                   ><a href="../../seguridad/insertarseguridad/"
                     >Insertar Pregunta Seguridad</a
@@ -293,6 +286,7 @@
       </nav>
     </aside>
     <!-- /#left-panel -->
+
     <!-- Right Panel -->
     <div id="right-panel" class="right-panel">
       <!-- Header-->
@@ -396,23 +390,63 @@
       <div class="content">
         <div class="card">
           <div class="card-header">
-            <strong class="card-title">Listado de Químicos</strong>
+            <strong class="card-title"
+              >Ingreso de Preguntas de Seguridad</strong
+            >
           </div>
           <div class="card-body">
-            <table id="tablaQuimicos" class="table table-bordered">
-              <thead>
-                <tr>
-                  <th>Nombre</th>
-                  <th>Descripción</th>
-                  <th>threasureHigh</th>
-                  <th>threasureLow</th>
-                </tr>
-              </thead>
-              <tbody></tbody>
-            </table>
+            <!-- Credit Card -->
+            <h3 class="text-center">Datos de la Pregunta de Seguridad</h3>
+
+            <form
+              style="margin-top: 20px"
+              id="ingresarPreguntaSeguridadForm"
+              class="ingresarForm"
+            >
+              <div class="form-group">
+                <label for="preguntaSeguridad"
+                  >Ingrese la pregunta de seguridad:</label
+                >
+                <input
+                  type="text"
+                  id="preguntaSeguridad"
+                  name="preguntaSeguridad"
+                  required
+                  style="width: 80%; margin-left: 10%"
+                />
+              </div>
+
+              <div class="button-container">
+                <button
+                  onclick="guardarPregunta()"
+                  class="button"
+                  type="submit"
+                  id="guardarPreguntaSeguridad"
+                >
+                  <i class="fa fa-save"></i>&nbsp;
+                  <span id="payment-button-amount">Guardar</span>
+                </button>
+
+                <button
+                  class="button"
+                  id="limpiarPreguntaSeguridad"
+                  type="reset"
+                >
+                  <i class="fa fa-eraser"></i>&nbsp;
+                  <span id="payment-button-amount">Limpiar</span>
+                </button>
+                <button
+                  class="button"
+                  id="cancelarPreguntaSeguridad"
+                  type="button"
+                >
+                  <i class="fa fa-close"></i>&nbsp;
+                  <span id="payment-button-amount">Cancelar</span>
+                </button>
+              </div>
+            </form>
           </div>
         </div>
-        <!-- .animated -->
       </div>
       <!-- /.content -->
       <div class="clearfix"></div>
@@ -436,41 +470,78 @@
     </div>
     <!-- /#right-panel -->
 
-    <script>
-      const tabla = document.getElementById("tablaQuimicos");
-      const tbody = tabla.getElementsByTagName("tbody")[0];
-
-      fetch("http://154.38.167.248:5024/api/Quimico")
-        .then((response) => response.json())
-        .then((quimico) => {
-          // Iterar sobre las estaciones y agregar una fila por cada una
-          quimico.forEach((quimico) => {
-            const fila = tbody.insertRow();
-
-            const nombre = fila.insertCell();
-            nombre.innerText = quimico.nombreQuimico;
-
-            const descripcion = fila.insertCell();
-            descripcion.innerText = quimico.descripcionQuimico;
-
-            const threasureHigh = fila.insertCell();
-            threasureHigh.innerText = quimico.threasureHigh;
-
-            const threasureLow = fila.insertCell();
-            threasureLow.innerText = quimico.threasureLow;
-          });
-        })
-        .catch((error) =>
-          console.error("Error al obtener las estaciones:", error)
-        );
-    </script>
     <!-- Scripts -->
-    <script src="../../ownJs/access.js"></script>
-
+    <script>
+      if (
+        localStorage.getItem("tipoUsuario") === "Estudiante" ||
+        localStorage.getItem("tipoUsuario") === "Profesor" || 
+        localStorage.getItem("tipoUsuario") === "Soporte"
+      ) {
+        window.location="../../";
+      }
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
     <script src="../../assets/js/main.js"></script>
+    <script src="../../ownJs/access.js"></script>
+
+    <script>
+      const cancelar = document.getElementById("cancelarPreguntaSeguridad");
+      cancelar.addEventListener("click", function () {
+        const confirmed = confirm("¿Estás seguro de que deseas cancelar?");
+        if (confirmed) {
+          // Aquí puedes realizar la acción de cancelación
+          alert("Se canceló, volviendo al inicio...");
+          window.location.href = "../../";
+        } else {
+          alert("Entendido!");
+        }
+      });
+    </script>
+
+    <script>
+      // Get the input element
+      const preguntaSeguridad = document.getElementById("preguntaSeguridad");
+    </script>
+
+    <script>
+      //LIMPIAR CAMPOS:
+      const limpiar = document.getElementById("limpiarPreguntaSeguridad");
+      limpiar.addEventListener("click", function () {
+        document.getElementById("ingresarPreguntaSeguridadForm").reset();
+      });
+
+      //GUARDAR
+      function guardarPregunta() {
+        const form = document.querySelector(".ingresarForm");
+        form.addEventListener("submit", (event) => {
+          event.preventDefault();
+          const formData = new FormData(form);
+          const data = new URLSearchParams(formData);
+          const datos = {
+            pregunta: document.getElementById("preguntaSeguridad").value,
+            cantidadUsos: 0,
+          };
+          fetch("http://154.38.167.248:5024/api/PreguntaSeguridad", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(datos),
+          })
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error("Hubo un problema al guardar la pregunta.");
+              } else {
+                alert("La pregunta se guardó correctamente.");
+                window.location.href = ".";
+              }
+            })
+            .catch((error) => alert(error.message));
+        });
+      }
+    </script>
   </body>
 </html>

@@ -23,6 +23,7 @@ function registrarUsuario() {
     "respuesta-pregunta-3"
   ).value;
   const username = document.getElementById("usuario").value;
+  alert(tipoUsuario);
 
   const password = document.getElementById("contrasena").value;
   if (username.length > 0 && checkpassword(password)) {
@@ -115,7 +116,6 @@ function ingresarUsuario() {
   const username = document.getElementById("usuario").value;
 
   const password = document.getElementById("contrasena").value;
-
   const datos = {
     nombre1: primerNombre,
     nombre2: segundoNombre,

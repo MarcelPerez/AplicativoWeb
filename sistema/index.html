@@ -58,6 +58,16 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/ol@v7.2.2/ol.css"
     />
+
+    <style>
+      .nav-link:hover {
+        background-color: #c7efff;
+      }
+    </style>
+    <script src="ownJs/auth.js"></script>
+    <script>
+      auth("../../../");
+    </script>
   </head>
   <body>
     <!-- Left Panel -->
@@ -65,11 +75,10 @@
       <nav class="navbar navbar-expand-sm navbar-default">
         <div id="main-menu" class="main-menu collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li class="active">
+            <li id="Tablero" class="active">
               <a href="./"><i class="menu-icon fa fa-laptop"></i>Tablero </a>
             </li>
 
-            <!-- <li class="menu-title">Menu</li> -->
             <li class="menu-item-has-children dropdown">
               <a
                 href="#"
@@ -84,6 +93,10 @@
                 <li>
                   <i class="menu-icon fa fa-map-marker"></i
                   ><a href="calidadaire/mapa/">Mapa</a>
+                </li>
+                <li>
+                  <i class="menu-icon fa fa-archive"></i
+                  ><a href="calidadaire/mediciones/">Mediciones</a>
                 </li>
                 <li>
                   <i class="menu-icon fa fa-bar-chart"></i
@@ -112,15 +125,16 @@
                 <i class="menu-icon fa fa-building"></i>Estación</a
               >
               <ul class="sub-menu children dropdown-menu">
-                <li>
+                <li id="estacionInsertar">
                   <i class="menu-icon fa fa-book"></i
                   ><a href="estaciones/ingresar/">Agregar Estación</a>
                 </li>
-                <li>
+                <script></script>
+                <li id="estacionVisualizar">
                   <i class="menu-icon fa fa-eye"></i
                   ><a href="estaciones/visualizar/">Ver Estaciones</a>
                 </li>
-                <li>
+                <li id="estacionModificar">
                   <i class="menu-icon fa fa-cogs"></i
                   ><a href="estaciones/modificar/">Modificar Estación</a>
                 </li>
@@ -139,16 +153,8 @@
               <ul class="sub-menu children dropdown-menu">
                 <li>
                   <i class="menu-icon fa fa-book"></i
-                  ><a href="alertas/ingresar/">Ver Alertas</a>
-                </li>
-                <!-- <li>
-                  <i class="menu-icon fa fa-eye"></i
                   ><a href="alertas/visualizar/">Ver Alertas</a>
                 </li>
-                <li>
-                  <i class="menu-icon fa fa-cogs"></i
-                  ><a href="alertas/modificar/">Modificar Alertas</a>
-                </li> -->
               </ul>
             </li>
             <li class="menu-item-has-children dropdown">
@@ -162,11 +168,15 @@
                 <i class="menu-icon fa fa-fire"></i>Químico</a
               >
               <ul class="sub-menu children dropdown-menu">
-                <li>
+                <li id="quimicosInsertar">
+                  <i class="menu-icon fa fa-eye"></i
+                  ><a href="quimicos/insertar/">Insertar Químicos</a>
+                </li>
+                <li id="quimicosVisualizar">
                   <i class="menu-icon fa fa-eye"></i
                   ><a href="quimicos/visualizar/">Ver Químicos</a>
                 </li>
-                <li>
+                <li id="quimicosModificar">
                   <i class="menu-icon fa fa-cogs"></i
                   ><a href="quimicos/modificar/">Modificar Químico</a>
                 </li>
@@ -183,17 +193,21 @@
                 <i class="menu-icon fa fa-fire-extinguisher"></i>Sensores</a
               >
               <ul class="sub-menu children dropdown-menu">
-                <li>
+                <li id="sensoresInsertar">
+                  <i class="menu-icon fa fa-eye"></i
+                  ><a href="sensores/insertar/">Insertar Sensores</a>
+                </li>
+                <li id="sensoresVisualizar">
                   <i class="menu-icon fa fa-eye"></i
                   ><a href="sensores/visualizar/">Ver Sensores</a>
                 </li>
-                <li>
+                <li id="sensoresModificar">
                   <i class="menu-icon fa fa-cogs"></i
                   ><a href="sensores/modificar/">Modificar Sensor</a>
                 </li>
               </ul>
             </li>
-            <li class="menu-item-has-children dropdown">
+            <li class="menu-item-has-children dropdown" id="usuarioMenu">
               <a
                 href="#"
                 class="dropdown-toggle"
@@ -204,25 +218,25 @@
                 <i class="menu-icon fa fa-users"></i>Usuarios</a
               >
               <ul class="sub-menu children dropdown-menu">
-                <li>
+                <li id="usuarioInsertar">
                   <i class="menu-icon fa fa-user-plus"></i
                   ><a href="usuarios/ingresar/">Agregar Usuario</a>
                 </li>
-                <li>
+                <li id="usuarioVisualizar">
                   <i class="menu-icon fa fa-user-circle"></i
                   ><a href="usuarios/visualizar/">Ver Usuario</a>
                 </li>
-                <li>
+                <li id="usuarioModificar">
                   <i class="menu-icon fa fa-user-o"></i
                   ><a href="usuarios/modificar/">Modificar Usuario</a>
                 </li>
-                <li>
+                <li id="usuarioEliminar">
                   <i class="menu-icon fa fa-user-times"></i
                   ><a href="usuarios/eliminar/">Eliminar Usuario</a>
                 </li>
               </ul>
             </li>
-            <li class="menu-item-has-children dropdown">
+            <li id="mantenimientoMenu" class="menu-item-has-children dropdown">
               <a
                 href="#"
                 class="dropdown-toggle"
@@ -239,13 +253,11 @@
                 </li>
                 <li>
                   <i class="menu-icon fa fa-user-plus"></i
-                  ><a href="mantenimiento/modificaralerta/"
-                    >Modificar Alertas</a
-                  >
+                  ><a href="alertas/modificar/">Modificar Alertas</a>
                 </li>
               </ul>
             </li>
-            <li class="menu-item-has-children dropdown">
+            <li id="seguridadMenu" class="menu-item-has-children dropdown">
               <a
                 href="#"
                 class="dropdown-toggle"
@@ -265,10 +277,6 @@
                 <li>
                   <i class="menu-icon fa fa-user-plus"></i
                   ><a href="seguridad/preguntas/">Ver Preguntas Seguridad</a>
-                </li>
-                <li>
-                  <i class="menu-icon fa fa-user-plus"></i
-                  ><a href="seguridad/usuarios/">Ver Usuarios</a>
                 </li>
               </ul>
             </li>
@@ -307,9 +315,11 @@
               <script>
                 document.write(localStorage.getItem("usuario"));
               </script>
-              (<script>
+              (
+              <script>
                 document.write(localStorage.getItem("tipoUsuario"));
-              </script>)
+              </script>
+              )
               <!-- MARCEL PEREZ FERNANDEZ (Administrador) -->
             </p>
             <div class="user-area dropdown float-right">
@@ -322,25 +332,54 @@
               >
                 <img
                   class="user-avatar rounded-circle"
-                  src="./images/Admin.png"
+                  src=""
+                  id="imagenTipoUsuario"
                   alt="User Avatar"
                 />
+                <script>
+                  function mostrarImagenTipoUsuario() {
+                    // Obtener el valor del tipo de usuario del localStorage
+                    var tipoUsuario = localStorage.getItem("tipoUsuario");
+
+                    // Obtener el elemento HTML donde se mostrará la imagen
+                    var imagenTipoUsuario =
+                      document.getElementById("imagenTipoUsuario");
+
+                    // Comprobar el tipo de usuario y asignar la imagen correspondiente
+                    if (tipoUsuario === "Administrador") {
+                      imagenTipoUsuario.src = "./images/Admin.png";
+                    } else if (tipoUsuario === "Soporte") {
+                      imagenTipoUsuario.src = "./images/soporte.png";
+                    } else if (tipoUsuario === "Estudiante") {
+                      imagenTipoUsuario.src = "./images/Estudiante.png";
+                    } else if (tipoUsuario === "Profesor") {
+                      imagenTipoUsuario.src = "./images/Profesor.png";
+                    }
+                  }
+                  mostrarImagenTipoUsuario();
+                </script>
               </a>
 
               <div class="user-menu dropdown-menu">
-                <a class="nav-link" href="#"
+                <a class="nav-link" href="./perfil/miperfil/"
                   ><i class="fa fa- user"></i>Mi Perfil</a
-                ><a class="nav-link" href="#"
+                ><a class="nav-link" href="./perfil/informacion/"
                   ><i class="fa fa- user"></i>Información</a
                 >
-                <a class="nav-link" href="#"
+                <a class="nav-link" href="./perfil/credenciales/"
                   ><i class="fa fa- user"></i>Credenciales</a
                 >
 
-                <a class="nav-link" href="./../login/"
+                <a onclick="salir();" class="nav-link" href="./../login/"
                   ><i class="fa fa-power -off"></i>Salir</a
                 >
               </div>
+
+              <script>
+                function salir(){
+                  localStorage.clear();
+                }
+              </script>
             </div>
           </div>
         </div>
@@ -522,8 +561,8 @@
     <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/ol@v7.2.2/dist/ol.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@turf/turf@6.5.0/turf.min.js"></script>
-    <script src="assets/js/init/chartjs-init.js"></script>
     <script src="assets/js/main.js"></script>
     <script src="./calidadaire/mapa/map.js"></script>
+    <script src="ownJs/access.js"></script>
   </body>
 </html>

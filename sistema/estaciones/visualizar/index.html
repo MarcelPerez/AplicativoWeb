@@ -14,8 +14,8 @@
 
     <title>Sistema Inspección Calidad del Aire</title>
 
-    <link rel="apple-touch-icon" href="../../../img/Icon.png" />
-    <link rel="icon" type="image/png" href="../../../img/Icon.png" />
+    <link rel="apple-touch-icon" href="./../../images/Icon.png" />
+    <link rel="icon" type="image/png" href="./../../images/Icon.png" />
 
     <!-- CSS: -->
     <link
@@ -53,6 +53,15 @@
       rel="stylesheet"
     />
     <style>
+      .nav-link:hover {
+        background-color: #c7efff;
+      }
+    </style>
+    <script src="../../ownJs/auth.js"></script>
+    <script>
+      auth("../../../");
+    </script>
+    <style>
       th {
         background-color: #f2f2f2;
         color: #333;
@@ -75,7 +84,6 @@
                 ><i class="menu-icon fa fa-laptop"></i>Tablero
               </a>
             </li>
-            <li class="menu-title">Opciones</li>
             <li class="menu-item-has-children dropdown">
               <a
                 href="#"
@@ -84,12 +92,16 @@
                 aria-haspopup="true"
                 aria-expanded="false"
               >
-                <i class="menu-icon fa fa-cloud"></i>Calidad Aire</a
+                <i class="menu-icon fa fa-cloud"></i>Estado del Aire</a
               >
               <ul class="sub-menu children dropdown-menu">
                 <li>
                   <i class="menu-icon fa fa-map-marker"></i
                   ><a href="../../calidadaire/mapa/">Mapa</a>
+                </li>
+                <li>
+                  <i class="menu-icon fa fa-archive"></i
+                  ><a href="../../calidadaire/mediciones/">Mediciones</a>
                 </li>
                 <li>
                   <i class="menu-icon fa fa-bar-chart"></i
@@ -99,9 +111,15 @@
                   <i class="menu-icon fa fa-book"></i
                   ><a href="../../calidadaire/estadisticas/">Estadísticas</a>
                 </li>
+                <li>
+                  <i class="menu-icon fa fa-clock-o"></i
+                  ><a href="../../calidadaire/estacionMeteorologica/"
+                    >Estación Meteorológica</a
+                  >
+                </li>
               </ul>
             </li>
-            <li class="menu-item-has-children active dropdown">
+            <li class="menu-item-has-children dropdown active">
               <a
                 href="#"
                 class="dropdown-toggle"
@@ -109,20 +127,21 @@
                 aria-haspopup="true"
                 aria-expanded="false"
               >
-                <i class="menu-icon fa fa-building"></i>Estaciones</a
+                <i class="menu-icon fa fa-building"></i>Estación</a
               >
               <ul class="sub-menu children dropdown-menu">
-                <li>
+                <li id="estacionInsertar">
                   <i class="menu-icon fa fa-book"></i
-                  ><a href="../ingresar/">Agregar Estaciones</a>
+                  ><a href="../../estaciones/ingresar/">Agregar Estación</a>
                 </li>
-                <li>
+                <script></script>
+                <li id="estacionVisualizar">
                   <i class="menu-icon fa fa-eye"></i
-                  ><a href="">Ver Estaciones</a>
+                  ><a href="../../estaciones/visualizar/">Ver Estaciones</a>
                 </li>
-                <li>
+                <li id="estacionModificar">
                   <i class="menu-icon fa fa-cogs"></i
-                  ><a href="../modificar/">Modificar Estaciones</a>
+                  ><a href="../../estaciones/modificar/">Modificar Estación</a>
                 </li>
               </ul>
             </li>
@@ -139,15 +158,7 @@
               <ul class="sub-menu children dropdown-menu">
                 <li>
                   <i class="menu-icon fa fa-book"></i
-                  ><a href="../../alertas/ingresar/">Agregar Alertas</a>
-                </li>
-                <li>
-                  <i class="menu-icon fa fa-eye"></i
                   ><a href="../../alertas/visualizar/">Ver Alertas</a>
-                </li>
-                <li>
-                  <i class="menu-icon fa fa-cogs"></i
-                  ><a href="../../alertas/modificar/">Modificar Alertas</a>
                 </li>
               </ul>
             </li>
@@ -159,16 +170,20 @@
                 aria-haspopup="true"
                 aria-expanded="false"
               >
-                <i class="menu-icon fa fa-fire"></i>Químicos</a
+                <i class="menu-icon fa fa-fire"></i>Químico</a
               >
               <ul class="sub-menu children dropdown-menu">
-                <li>
+                <li id="quimicosInsertar">
+                  <i class="menu-icon fa fa-eye"></i
+                  ><a href="../../quimicos/insertar/">Insertar Químicos</a>
+                </li>
+                <li id="quimicosVisualizar">
                   <i class="menu-icon fa fa-eye"></i
                   ><a href="../../quimicos/visualizar/">Ver Químicos</a>
                 </li>
-                <li>
+                <li id="quimicosModificar">
                   <i class="menu-icon fa fa-cogs"></i
-                  ><a href="../../quimicos/modificar/">Modificar Químicos</a>
+                  ><a href="../../quimicos/modificar/">Modificar Químico</a>
                 </li>
               </ul>
             </li>
@@ -183,17 +198,21 @@
                 <i class="menu-icon fa fa-fire-extinguisher"></i>Sensores</a
               >
               <ul class="sub-menu children dropdown-menu">
-                <li>
+                <li id="sensoresInsertar">
+                  <i class="menu-icon fa fa-eye"></i
+                  ><a href="../../sensores/insertar/">Insertar Sensores</a>
+                </li>
+                <li id="sensoresVisualizar">
                   <i class="menu-icon fa fa-eye"></i
                   ><a href="../../sensores/visualizar/">Ver Sensores</a>
                 </li>
-                <li>
+                <li id="sensoresModificar">
                   <i class="menu-icon fa fa-cogs"></i
                   ><a href="../../sensores/modificar/">Modificar Sensor</a>
                 </li>
               </ul>
             </li>
-            <li class="menu-item-has-children dropdown">
+            <li class="menu-item-has-children dropdown" id="usuarioMenu">
               <a
                 href="#"
                 class="dropdown-toggle"
@@ -204,21 +223,67 @@
                 <i class="menu-icon fa fa-users"></i>Usuarios</a
               >
               <ul class="sub-menu children dropdown-menu">
-                <li>
+                <li id="usuarioInsertar">
                   <i class="menu-icon fa fa-user-plus"></i
                   ><a href="../../usuarios/ingresar/">Agregar Usuario</a>
                 </li>
-                <li>
+                <li id="usuarioVisualizar">
                   <i class="menu-icon fa fa-user-circle"></i
                   ><a href="../../usuarios/visualizar/">Ver Usuario</a>
                 </li>
-                <li>
+                <li id="usuarioModificar">
                   <i class="menu-icon fa fa-user-o"></i
                   ><a href="../../usuarios/modificar/">Modificar Usuario</a>
                 </li>
-                <li>
+                <li id="usuarioEliminar">
                   <i class="menu-icon fa fa-user-times"></i
                   ><a href="../../usuarios/eliminar/">Eliminar Usuario</a>
+                </li>
+              </ul>
+            </li>
+            <li id="mantenimientoMenu" class="menu-item-has-children dropdown">
+              <a
+                href="#"
+                class="dropdown-toggle"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                <i class="menu-icon fa fa-cogs"></i>Mantenimiento</a
+              >
+              <ul class="sub-menu children dropdown-menu">
+                <li>
+                  <i class="menu-icon fa fa-user-plus"></i
+                  ><a href="../../mantenimiento/ingresardata/">Subir Data</a>
+                </li>
+                <li>
+                  <i class="menu-icon fa fa-user-plus"></i
+                  ><a href="../../alertas/modificar/">Modificar Alertas</a>
+                </li>
+              </ul>
+            </li>
+            <li id="seguridadMenu" class="menu-item-has-children dropdown">
+              <a
+                href="#"
+                class="dropdown-toggle"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                <i class="menu-icon fa fa-lock"></i>Seguridad</a
+              >
+              <ul class="sub-menu children dropdown-menu">
+                <li>
+                  <i class="menu-icon fa fa-user-plus"></i
+                  ><a href="../../seguridad/insertarseguridad/"
+                    >Insertar Pregunta Seguridad</a
+                  >
+                </li>
+                <li>
+                  <i class="menu-icon fa fa-user-plus"></i
+                  ><a href="../../seguridad/preguntas/"
+                    >Ver Preguntas Seguridad</a
+                  >
                 </li>
               </ul>
             </li>
@@ -238,18 +303,32 @@
               ><i class="fa fa-bars"></i
             ></a>
 
-            <a class="navbar-brand" href="../../../"
-              ><img src="../../../img/LogoNegro.png" alt="Logo"
+            <a class="navbar-brand" href="../../"
+              ><img src="../../images/LogoNegro.png" alt="Logo"
             /></a>
-            <a class="navbar-brand hidden" href="../../../"
-              ><img src="../../../img/LogoNegro.png" alt="Logo"
+            <a class="navbar-brand hidden" href="./../../"
+              ><img src="../../images/LogoNegro.png" alt="Logo"
             /></a>
           </div>
         </div>
         <div class="top-right">
           <div class="header-menu">
-            <p style="margin-top: 15px; color: black">
-              Bienvenido MARCEL PEREZ FERNANDEZ
+            <p
+              style="
+                margin-top: 15px;
+                font-family: sans-serif;
+                color: rgb(0, 0, 0);
+              "
+            >
+              <script>
+                document.write(localStorage.getItem("usuario"));
+              </script>
+              (
+              <script>
+                document.write(localStorage.getItem("tipoUsuario"));
+              </script>
+              )
+              <!-- MARCEL PEREZ FERNANDEZ (Administrador) -->
             </p>
             <div class="user-area dropdown float-right">
               <a
@@ -261,20 +340,53 @@
               >
                 <img
                   class="user-avatar rounded-circle"
-                  src="../../../img/User.png"
+                  src=""
+                  id="imagenTipoUsuario"
                   alt="User Avatar"
                 />
+                <script>
+                  function mostrarImagenTipoUsuario() {
+                    // Obtener el valor del tipo de usuario del localStorage
+                    var tipoUsuario = localStorage.getItem("tipoUsuario");
+
+                    // Obtener el elemento HTML donde se mostrará la imagen
+                    var imagenTipoUsuario =
+                      document.getElementById("imagenTipoUsuario");
+
+                    // Comprobar el tipo de usuario y asignar la imagen correspondiente
+                    if (tipoUsuario === "Administrador") {
+                      imagenTipoUsuario.src = "./../../images/Admin.png";
+                    } else if (tipoUsuario === "Soporte") {
+                      imagenTipoUsuario.src = "./../../images/soporte.png";
+                    } else if (tipoUsuario === "Estudiante") {
+                      imagenTipoUsuario.src = "./../../images/Estudiante.png";
+                    } else if (tipoUsuario === "Profesor") {
+                      imagenTipoUsuario.src = "./../../images/Profesor.png";
+                    }
+                  }
+                  mostrarImagenTipoUsuario();
+                </script>
               </a>
 
               <div class="user-menu dropdown-menu">
-                <a class="nav-link" href="#"
+                <a class="nav-link" href="./../../perfil/miperfil/"
                   ><i class="fa fa- user"></i>Mi Perfil</a
+                ><a class="nav-link" href="./../../perfil/informacion/"
+                  ><i class="fa fa- user"></i>Información</a
+                >
+                <a class="nav-link" href="./../../perfil/credenciales/"
+                  ><i class="fa fa- user"></i>Credenciales</a
                 >
 
-                <a class="nav-link" href="../"
+                <a onclick="salir();" class="nav-link" href="./../../../login/"
                   ><i class="fa fa-power -off"></i>Salir</a
                 >
               </div>
+              <script>
+                function salir() {
+                  localStorage.clear();
+                }
+              </script>
             </div>
           </div>
         </div>
@@ -310,14 +422,14 @@
       <footer class="site-footer">
         <div class="footer-inner bg-white">
           <div class="row">
-            <div class="col-sm-6">
+            <div
+              class="col-sm-10"
+              style="color: #000; font-family: sans-serif; padding-left: 35%"
+            >
               Sistema de inspección de calidad del aire -
               <script>
                 document.write(new Date().getFullYear());
               </script>
-            </div>
-            <div class="col-sm-6 text-right">
-              <a href="https://colorlib.com">Colorlib</a>
             </div>
           </div>
         </div>
@@ -353,10 +465,11 @@
             descripcion.innerText = estacion.descripcionEstacion;
 
             const delay = fila.insertCell();
-            delay.innerText = estacion.delay;
+            delay.innerText = estacion.delayEstacion;
 
             const estado = fila.insertCell();
-            estado.innerText = estacion.estado; });
+            estado.innerText = estacion.estado;
+          });
         })
         .catch((error) =>
           console.error("Error al obtener las estaciones:", error)
@@ -369,5 +482,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
     <script src="../../assets/js/main.js"></script>
+    <script src="../../ownJs/access.js"></script>
+
   </body>
 </html>

@@ -14,8 +14,8 @@
 
     <title>Sistema Inspección Calidad del Aire</title>
 
-    <link rel="apple-touch-icon" href="../../../img/Icon.png" />
-    <link rel="icon" type="image/png" href="../../../img/Icon.png" />
+    <link rel="apple-touch-icon" href="./../../images/Icon.png" />
+    <link rel="icon" type="image/png" href="./../../images/Icon.png" />
 
     <!-- CSS: -->
     <link
@@ -52,6 +52,15 @@
       href="https://cdn.jsdelivr.net/npm/jqvmap@1.5.1/dist/jqvmap.min.css"
       rel="stylesheet"
     />
+    <style>
+      .nav-link:hover {
+        background-color: #c7efff;
+      }
+    </style>
+    <script src="../../ownJs/auth.js"></script>
+    <script>
+      auth("../../../");
+    </script>
   </head>
 
   <body>
@@ -65,7 +74,6 @@
                 ><i class="menu-icon fa fa-laptop"></i>Tablero
               </a>
             </li>
-            <li class="menu-title">Opciones</li>
             <li class="menu-item-has-children dropdown">
               <a
                 href="#"
@@ -74,12 +82,16 @@
                 aria-haspopup="true"
                 aria-expanded="false"
               >
-                <i class="menu-icon fa fa-cloud"></i>Calidad Aire</a
+                <i class="menu-icon fa fa-cloud"></i>Estado del Aire</a
               >
               <ul class="sub-menu children dropdown-menu">
                 <li>
                   <i class="menu-icon fa fa-map-marker"></i
                   ><a href="../../calidadaire/mapa/">Mapa</a>
+                </li>
+                <li>
+                  <i class="menu-icon fa fa-archive"></i
+                  ><a href="../../calidadaire/mediciones/">Mediciones</a>
                 </li>
                 <li>
                   <i class="menu-icon fa fa-bar-chart"></i
@@ -88,6 +100,12 @@
                 <li>
                   <i class="menu-icon fa fa-book"></i
                   ><a href="../../calidadaire/estadisticas/">Estadísticas</a>
+                </li>
+                <li>
+                  <i class="menu-icon fa fa-clock-o"></i
+                  ><a href="../../calidadaire/estacionMeteorologica/"
+                    >Estación Meteorológica</a
+                  >
                 </li>
               </ul>
             </li>
@@ -99,22 +117,21 @@
                 aria-haspopup="true"
                 aria-expanded="false"
               >
-                <i class="menu-icon fa fa-building"></i>Estaciones</a
+                <i class="menu-icon fa fa-building"></i>Estación</a
               >
               <ul class="sub-menu children dropdown-menu">
-                <li>
+                <li id="estacionInsertar">
                   <i class="menu-icon fa fa-book"></i
-                  ><a href="../../estaciones/ingresar/">Agregar Estaciones</a>
+                  ><a href="../../estaciones/ingresar/">Agregar Estación</a>
                 </li>
-                <li>
+                <script></script>
+                <li id="estacionVisualizar">
                   <i class="menu-icon fa fa-eye"></i
                   ><a href="../../estaciones/visualizar/">Ver Estaciones</a>
                 </li>
-                <li>
+                <li id="estacionModificar">
                   <i class="menu-icon fa fa-cogs"></i
-                  ><a href="../../estaciones/modificar/"
-                    >Modificar Estaciones</a
-                  >
+                  ><a href="../../estaciones/modificar/">Modificar Estación</a>
                 </li>
               </ul>
             </li>
@@ -131,19 +148,11 @@
               <ul class="sub-menu children dropdown-menu">
                 <li>
                   <i class="menu-icon fa fa-book"></i
-                  ><a href="../../alertas/ingresar/">Agregar Alertas</a>
-                </li>
-                <li>
-                  <i class="menu-icon fa fa-eye"></i
                   ><a href="../../alertas/visualizar/">Ver Alertas</a>
-                </li>
-                <li>
-                  <i class="menu-icon fa fa-cogs"></i
-                  ><a href="../../alertas/modificar/">Modificar Alertas</a>
                 </li>
               </ul>
             </li>
-            <li class="menu-item-has-children active dropdown">
+            <li class="menu-item-has-children dropdown active">
               <a
                 href="#"
                 class="dropdown-toggle"
@@ -151,16 +160,20 @@
                 aria-haspopup="true"
                 aria-expanded="false"
               >
-                <i class="menu-icon fa fa-fire"></i>Químicos</a
+                <i class="menu-icon fa fa-fire"></i>Químico</a
               >
               <ul class="sub-menu children dropdown-menu">
-                <li>
+                <li id="quimicosInsertar">
                   <i class="menu-icon fa fa-eye"></i
-                  ><a href="../visualizar/">Ver Químicos</a>
+                  ><a href="../../quimicos/insertar/">Insertar Químicos</a>
                 </li>
-                <li>
+                <li id="quimicosVisualizar">
+                  <i class="menu-icon fa fa-eye"></i
+                  ><a href="../../quimicos/visualizar/">Ver Químicos</a>
+                </li>
+                <li id="quimicosModificar">
                   <i class="menu-icon fa fa-cogs"></i
-                  ><a href="">Modificar Químicos</a>
+                  ><a href="../../quimicos/modificar/">Modificar Químico</a>
                 </li>
               </ul>
             </li>
@@ -175,17 +188,21 @@
                 <i class="menu-icon fa fa-fire-extinguisher"></i>Sensores</a
               >
               <ul class="sub-menu children dropdown-menu">
-                <li>
+                <li id="sensoresInsertar">
+                  <i class="menu-icon fa fa-eye"></i
+                  ><a href="../../sensores/insertar/">Insertar Sensores</a>
+                </li>
+                <li id="sensoresVisualizar">
                   <i class="menu-icon fa fa-eye"></i
                   ><a href="../../sensores/visualizar/">Ver Sensores</a>
                 </li>
-                <li>
+                <li id="sensoresModificar">
                   <i class="menu-icon fa fa-cogs"></i
                   ><a href="../../sensores/modificar/">Modificar Sensor</a>
                 </li>
               </ul>
             </li>
-            <li class="menu-item-has-children dropdown">
+            <li class="menu-item-has-children dropdown" id="usuarioMenu">
               <a
                 href="#"
                 class="dropdown-toggle"
@@ -196,21 +213,67 @@
                 <i class="menu-icon fa fa-users"></i>Usuarios</a
               >
               <ul class="sub-menu children dropdown-menu">
-                <li>
+                <li id="usuarioInsertar">
                   <i class="menu-icon fa fa-user-plus"></i
                   ><a href="../../usuarios/ingresar/">Agregar Usuario</a>
                 </li>
-                <li>
+                <li id="usuarioVisualizar">
                   <i class="menu-icon fa fa-user-circle"></i
                   ><a href="../../usuarios/visualizar/">Ver Usuario</a>
                 </li>
-                <li>
+                <li id="usuarioModificar">
                   <i class="menu-icon fa fa-user-o"></i
                   ><a href="../../usuarios/modificar/">Modificar Usuario</a>
                 </li>
-                <li>
+                <li id="usuarioEliminar">
                   <i class="menu-icon fa fa-user-times"></i
                   ><a href="../../usuarios/eliminar/">Eliminar Usuario</a>
+                </li>
+              </ul>
+            </li>
+            <li id="mantenimientoMenu" class="menu-item-has-children dropdown">
+              <a
+                href="#"
+                class="dropdown-toggle"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                <i class="menu-icon fa fa-cogs"></i>Mantenimiento</a
+              >
+              <ul class="sub-menu children dropdown-menu">
+                <li>
+                  <i class="menu-icon fa fa-user-plus"></i
+                  ><a href="../../mantenimiento/ingresardata/">Subir Data</a>
+                </li>
+                <li>
+                  <i class="menu-icon fa fa-user-plus"></i
+                  ><a href="../../alertas/modificar/">Modificar Alertas</a>
+                </li>
+              </ul>
+            </li>
+            <li id="seguridadMenu" class="menu-item-has-children dropdown">
+              <a
+                href="#"
+                class="dropdown-toggle"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                <i class="menu-icon fa fa-lock"></i>Seguridad</a
+              >
+              <ul class="sub-menu children dropdown-menu">
+                <li>
+                  <i class="menu-icon fa fa-user-plus"></i
+                  ><a href="../../seguridad/insertarseguridad/"
+                    >Insertar Pregunta Seguridad</a
+                  >
+                </li>
+                <li>
+                  <i class="menu-icon fa fa-user-plus"></i
+                  ><a href="../../seguridad/preguntas/"
+                    >Ver Preguntas Seguridad</a
+                  >
                 </li>
               </ul>
             </li>
@@ -230,18 +293,32 @@
               ><i class="fa fa-bars"></i
             ></a>
 
-            <a class="navbar-brand" href="../../../"
-              ><img src="../../../img/LogoNegro.png" alt="Logo"
+            <a class="navbar-brand" href="../../"
+              ><img src="../../images/LogoNegro.png" alt="Logo"
             /></a>
-            <a class="navbar-brand hidden" href="../../../"
-              ><img src="../../../img/LogoNegro.png" alt="Logo"
+            <a class="navbar-brand hidden" href="./../../"
+              ><img src="../../images/LogoNegro.png" alt="Logo"
             /></a>
           </div>
         </div>
         <div class="top-right">
           <div class="header-menu">
-            <p style="margin-top: 15px; color: black">
-              Bienvenido MARCEL PEREZ FERNANDEZ
+            <p
+              style="
+                margin-top: 15px;
+                font-family: sans-serif;
+                color: rgb(0, 0, 0);
+              "
+            >
+              <script>
+                document.write(localStorage.getItem("usuario"));
+              </script>
+              (
+              <script>
+                document.write(localStorage.getItem("tipoUsuario"));
+              </script>
+              )
+              <!-- MARCEL PEREZ FERNANDEZ (Administrador) -->
             </p>
             <div class="user-area dropdown float-right">
               <a
@@ -253,20 +330,53 @@
               >
                 <img
                   class="user-avatar rounded-circle"
-                  src="../../../img/User.png"
+                  src=""
+                  id="imagenTipoUsuario"
                   alt="User Avatar"
                 />
+                <script>
+                  function mostrarImagenTipoUsuario() {
+                    // Obtener el valor del tipo de usuario del localStorage
+                    var tipoUsuario = localStorage.getItem("tipoUsuario");
+
+                    // Obtener el elemento HTML donde se mostrará la imagen
+                    var imagenTipoUsuario =
+                      document.getElementById("imagenTipoUsuario");
+
+                    // Comprobar el tipo de usuario y asignar la imagen correspondiente
+                    if (tipoUsuario === "Administrador") {
+                      imagenTipoUsuario.src = "./../../images/Admin.png";
+                    } else if (tipoUsuario === "Soporte") {
+                      imagenTipoUsuario.src = "./../../images/soporte.png";
+                    } else if (tipoUsuario === "Estudiante") {
+                      imagenTipoUsuario.src = "./../../images/Estudiante.png";
+                    } else if (tipoUsuario === "Profesor") {
+                      imagenTipoUsuario.src = "./../../images/Profesor.png";
+                    }
+                  }
+                  mostrarImagenTipoUsuario();
+                </script>
               </a>
 
               <div class="user-menu dropdown-menu">
-                <a class="nav-link" href="#"
+                <a class="nav-link" href="./../../perfil/miperfil/"
                   ><i class="fa fa- user"></i>Mi Perfil</a
+                ><a class="nav-link" href="./../../perfil/informacion/"
+                  ><i class="fa fa- user"></i>Información</a
+                >
+                <a class="nav-link" href="./../../perfil/credenciales/"
+                  ><i class="fa fa- user"></i>Credenciales</a
                 >
 
-                <a class="nav-link" href="../"
+                <a onclick="salir();" class="nav-link" href="./../../../login/"
                   ><i class="fa fa-power -off"></i>Salir</a
                 >
               </div>
+              <script>
+                function salir() {
+                  localStorage.clear();
+                }
+              </script>
             </div>
           </div>
         </div>
@@ -303,69 +413,75 @@
             <!-- Credit Card -->
             <h3 class="text-center">Químico</h3>
 
-            <form id="updateQuimicoForm" class="updateQuimicoForm">
+            <form id="updateQuimicoForm" class="updateForm">
               <div class="form-group">
-                <label for="nombre">Nombre del Quimico</label>
+                <label for="nombre">Nombre del químico:</label>
                 <input type="text" id="nombre" name="nombre" required />
               </div>
-
               <div class="form-group">
-                <label for="descripcion">Descripción</label>
-                <textarea
-                  id="descripcion"
-                  name="descripcion"
-                  required
-                ></textarea>
+                <label for="descripcion">Descripción del químico:</label>
+                <textarea id="descripcion" name="descripcion"></textarea>
               </div>
               <div class="row">
                 <div class="col-6">
-                  <label for="threasureHigh">Threasure High</label>
-                  <input
-                    type="text"
-                    id="threasureHigh"
-                    name="threasureHigh"
-                    required
-                  />
+                  <div class="form-group">
+                    <label for="threasureHigh">Threasure High:</label>
+                    <input
+                      type="text"
+                      id="threasureHigh"
+                      name="threasureHigh"
+                      required
+                    />
+                  </div>
                 </div>
                 <div class="col-6">
-                  <label for="threasureLow">Threasure Low</label>
+                  <label for="threasureLow">Threasure Low:</label>
                   <input
                     type="text"
+                    step="any"
                     id="threasureLow"
                     name="threasureLow"
                     required
                   />
                 </div>
               </div>
-              <div class="row" style="margin-top: 20px">
+              <div class="row" style="margin-bottom: 20px">
                 <div class="col-6">
-                  <label for="idSensor">Sensor</label>
-                  <select id="idSensor" name="idSensor" required></select>
+                  <label for="sensor">Sensor:</label>
+                  <select id="sensor" name="sensor" required>
+                    <option value="">Seleccione una opción</option>
+                  </select>
                 </div>
                 <div class="col-6">
-                  <label for="idSensor">Actual Sensor</label>
+                  <label for="sensorAnt">Sensor Anterior:</label>
                   <input
-                    style="opacity: 70%"
                     type="text"
-                    id="idSensorAnt"
-                    name="idSensorAnt"
+                    step="any"
+                    id="sensorAnt"
+                    name="sensorAnt"
                     disabled
                   />
                 </div>
               </div>
-              <div class="form-group" style="margin-top: 20px">
+              <div class="form-group">
                 <input
                   style="width: 10%; opacity: 30%"
                   type="text"
-                  id="IdQuimico"
-                  name="IdQuimico"
+                  id="idQuimico"
+                  name="idQuimico"
                   required
                 />
               </div>
+
               <div class="button-container">
                 <button class="button" type="submit" id="guardar">
                   <i class="fa fa-save"></i>&nbsp;
                   <span id="payment-button-amount">Actualizar</span>
+                </button>
+
+                <button class="button" id="limpiar" type="reset">
+                  <i class="fa fa-eraser"></i>&nbsp;
+                  <span id="payment-button-amount">Limpiar</span>
                 </button>
                 <button class="button" id="cancelar" type="button">
                   <i class="fa fa-close"></i>&nbsp;
@@ -383,14 +499,14 @@
       <footer class="site-footer">
         <div class="footer-inner bg-white">
           <div class="row">
-            <div class="col-sm-6">
+            <div
+              class="col-sm-10"
+              style="color: #000; font-family: sans-serif; padding-left: 35%"
+            >
               Sistema de inspección de calidad del aire -
               <script>
                 document.write(new Date().getFullYear());
               </script>
-            </div>
-            <div class="col-sm-6 text-right">
-              <a href="https://colorlib.com">Colorlib</a>
             </div>
           </div>
         </div>
@@ -400,21 +516,71 @@
     <!-- /#right-panel -->
 
     <!-- Scripts -->
+    <script>
+      if (
+        localStorage.getItem("tipoUsuario") === "Estudiante" ||
+        localStorage.getItem("tipoUsuario") === "Profesor"
+      ) {
+        window.location = "../../";
+      }
+    </script>
+    <script src="../../ownJs/access.js"></script>
+    <script>
+      const tabla = document.getElementById("tablaQuimicos");
+      const tbody = tabla.getElementsByTagName("tbody")[0];
+
+      fetch("http://154.38.167.248:5024/api/Quimico")
+        .then((response) => response.json())
+        .then((quimico) => {
+          // Iterar sobre las estaciones y agregar una fila por cada una
+          quimico.forEach((quimico) => {
+            const fila = tbody.insertRow();
+
+            const idQuimico = fila.insertCell();
+            idQuimico.innerText = quimico.idQuimico;
+            idQuimico.className = "idQuimico";
+
+            const nombre = fila.insertCell();
+            nombre.innerText = quimico.nombreQuimico;
+            nombre.className = "nombre";
+
+            const descripcion = fila.insertCell();
+            descripcion.innerText = quimico.descripcionQuimico;
+            descripcion.className = "descripcion";
+
+            const threasureHigh = fila.insertCell();
+            threasureHigh.innerText = quimico.threasureHigh;
+            threasureHigh.className = "threasureHigh";
+
+            const threasureLow = fila.insertCell();
+            threasureLow.innerText = quimico.threasureLow;
+            threasureLow.className = "threasureLow";
+
+            const sensor = fila.insertCell();
+            sensor.innerText = quimico.sensor;
+            sensor.className = "sensor";
+
+            const modificar = fila.insertCell();
+            modificar.innerHTML =
+              "<button class='btn-modificar' onclick='modificarFormulario()'>Modificar</button>";
+          });
+        })
+        .catch((error) =>
+          console.error("Error al obtener las estaciones:", error)
+        );
+    </script>
 
     <!-- SCRIPT LLENAR SELECT: -->
     <script>
-      const select = document.getElementById("idSensor");
-
+      const selectElement = document.getElementById("sensor");
       fetch("http://154.38.167.248:5024/api/Sensor")
-        .then((response) => response.json()) // Convertir respuesta a objeto JSON
+        .then((response) => response.json())
         .then((data) => {
-          // Procesar los datos y crear opciones para el elemento select
           data.forEach((sensor) => {
             const option = document.createElement("option");
             option.value = sensor.idSensor;
-            option.text = `${sensor.idSensor} - ${sensor.nombreSensor}`;
-            select.appendChild(option);
-            // console.log(`${sensor.idSensor} - ${sensor.nombreSensor}`)
+            option.text = sensor.nombreSensor;
+            selectElement.appendChild(option);
           });
         })
         .catch((error) => console.error(error));
@@ -433,7 +599,7 @@
           formulario.style.display = "none";
           window.location = "";
         } else {
-          console.log("Cancelación cancelada");
+          console.log("Cancelado!");
         }
       });
     </script>
@@ -446,81 +612,32 @@
         formulario.style.display = "block";
 
         const fila = event.target.closest("tr");
-        const IdQuimico = fila.querySelector(".IdQuimico").textContent;
+        const IdQuimico = fila.querySelector(".idQuimico").textContent;
         const nombre = fila.querySelector(".nombre").textContent;
         const descripcion = fila.querySelector(".descripcion").textContent;
         const threasureHigh = fila.querySelector(".threasureHigh").textContent;
         const threasureLow = fila.querySelector(".threasureLow").textContent;
-        const idSensor = fila.querySelector(".idSensor").textContent;
+        const idSensor = fila.querySelector(".sensor").textContent;
 
-        document.getElementById("IdQuimico").value = IdQuimico;
+        document.getElementById("idQuimico").value = IdQuimico;
         document.getElementById("nombre").value = nombre;
         document.getElementById("descripcion").value = descripcion;
         document.getElementById("threasureHigh").value = threasureHigh;
         document.getElementById("threasureLow").value = threasureLow;
-        document.getElementById("idSensorAnt").value = idSensor;
-        // console.log(idSensor);
+        document.getElementById("sensorAnt").value = idSensor;
 
         // document.getElementById("estado").value = estado;
       }
     </script>
 
     <script>
-      const tabla = document.getElementById("tablaQuimicos");
-      const tbody = tabla.getElementsByTagName("tbody")[0];
-
-      fetch("http://localhost:5024/api/Quimico")
-        .then((response) => response.json())
-        .then((quimicos) => {
-          // Iterar sobre las estaciones y agregar una fila por cada una
-          quimicos.forEach((quimico) => {
-            const fila = tbody.insertRow();
-
-            const id = fila.insertCell();
-            id.innerText = quimico.idQuimico;
-            // id.style.display = "none";
-            id.className = "IdQuimico";
-
-            const nombre = fila.insertCell();
-            nombre.innerText = quimico.nombreQuimico;
-            nombre.className = "nombre";
-
-            const descripcion = fila.insertCell();
-            descripcion.innerText = quimico.descripcionQuimico;
-            descripcion.className = "descripcion";
-
-            const threasureHigh = fila.insertCell();
-            threasureHigh.innerText = quimico.threasureHigh;
-            threasureHigh.className = "threasureHigh";
-
-            const threasureLow = fila.insertCell();
-            threasureLow.innerText = quimico.threasureLow;
-            threasureLow.className = "threasureLow";
-
-            const IdSensor = fila.insertCell();
-            IdSensor.innerText = quimico.sensor;
-            IdSensor.className = "idSensor";
-
-            const modificar = fila.insertCell();
-            modificar.innerHTML =
-              "<button class='btn-modificar' onclick='modificarFormulario()'>Modificar</button>";
-          });
-        })
-        .catch((error) =>
-          console.error("Error al obtener las estaciones:", error)
-        );
-    </script>
-
-    <script>
-      //LIMPIAR CAMPOS:
-
       //GUARDAR
-      const form = document.querySelector(".updateQuimicoForm");
+      const form = document.querySelector(".updateForm");
       form.addEventListener("submit", (event) => {
         event.preventDefault();
         const formData = new FormData(form);
         const data = new URLSearchParams(formData);
-        aux = document.getElementById("idSensor").value;
+        aux = document.getElementById("sensor").value;
         let i = 0;
         let aux2 = false;
         let num = "";
@@ -536,7 +653,7 @@
 
         sensor = parseInt(num);
         const datos = {
-          idQuimico: parseInt(document.getElementById("IdQuimico").value),
+          idQuimico: parseInt(document.getElementById("idQuimico").value),
           nombreQuimico: document.getElementById("nombre").value,
           descripcionQuimico: document.getElementById("descripcion").value,
           idSensor: sensor,
@@ -545,7 +662,7 @@
           sensor: "",
         };
         console.log(datos);
-        fetch("http://localhost:5024/api/Quimico", {
+        fetch("http://154.38.167.248:5024/api/Quimico", {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",

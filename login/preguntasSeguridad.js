@@ -23,4 +23,5 @@ function changePreguntaSeguridad(option) {
   if (option == 4) {
     respuestaPreguntaSeguridad3.removeAttribute("disabled");
   }
+
 }
