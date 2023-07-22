@@ -8,6 +8,7 @@ function login(response) {
   while (!aux && i < Object.keys(response).length) {
     if (username == response[i].username && password == response[i].password) {
       aux = true;
+      localStorage.setItem("idUsuario", response[i].idUsuario);
       localStorage.setItem(
         "usuario",
         response[i].nombre1 + " " + response[i].apellido1

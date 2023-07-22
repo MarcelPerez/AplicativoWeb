@@ -14,8 +14,8 @@
 
     <title>Sistema Inspección Calidad del Aire</title>
 
-    <link rel="apple-touch-icon" href="../../img/Icon.png" />
-    <link rel="icon" type="image/png" href="../../img/Icon.png" />
+    <link rel="apple-touch-icon" href="./../../images/Icon.png" />
+    <link rel="icon" type="image/png" href="./../../images/Icon.png" />
 
     <!-- CSS: -->
     <link
@@ -52,6 +52,15 @@
       href="https://cdn.jsdelivr.net/npm/jqvmap@1.5.1/dist/jqvmap.min.css"
       rel="stylesheet"
     />
+    <style>
+      .nav-link:hover {
+        background-color: #c7efff;
+      }
+    </style>
+    <script src="../../ownJs/auth.js"></script>
+    <script>
+      auth("../../../");
+    </script>
   </head>
 
   <body>
@@ -61,9 +70,10 @@
         <div id="main-menu" class="main-menu collapse navbar-collapse">
           <ul class="nav navbar-nav">
             <li>
-              <a href="../"><i class="menu-icon fa fa-laptop"></i>Tablero </a>
+              <a href="../../"
+                ><i class="menu-icon fa fa-laptop"></i>Tablero
+              </a>
             </li>
-            <li class="menu-title">Opciones</li>
             <li class="menu-item-has-children dropdown">
               <a
                 href="#"
@@ -72,24 +82,34 @@
                 aria-haspopup="true"
                 aria-expanded="false"
               >
-                <i class="menu-icon fa fa-cloud"></i>Calidad Aire</a
+                <i class="menu-icon fa fa-cloud"></i>Estado del Aire</a
               >
               <ul class="sub-menu children dropdown-menu">
                 <li>
                   <i class="menu-icon fa fa-map-marker"></i
-                  ><a href="../calidadaire/mapa/">Mapa</a>
+                  ><a href="../../calidadaire/mapa/">Mapa</a>
+                </li>
+                <li>
+                  <i class="menu-icon fa fa-archive"></i
+                  ><a href="../../calidadaire/mediciones/">Mediciones</a>
                 </li>
                 <li>
                   <i class="menu-icon fa fa-bar-chart"></i
-                  ><a href="../calidadaire/graficos/">Gráficos</a>
+                  ><a href="../../calidadaire/graficos/">Gráficos</a>
                 </li>
                 <li>
                   <i class="menu-icon fa fa-book"></i
-                  ><a href="../calidadaire/estadisticas/">Estadísticas</a>
+                  ><a href="../../calidadaire/estadisticas/">Estadísticas</a>
+                </li>
+                <li>
+                  <i class="menu-icon fa fa-clock-o"></i
+                  ><a href="../../calidadaire/estacionMeteorologica/"
+                    >Estación Meteorológica</a
+                  >
                 </li>
               </ul>
             </li>
-            <li class="menu-item-has-children active dropdown">
+            <li class="menu-item-has-children dropdown">
               <a
                 href="#"
                 class="dropdown-toggle"
@@ -97,20 +117,21 @@
                 aria-haspopup="true"
                 aria-expanded="false"
               >
-                <i class="menu-icon fa fa-building"></i>Estaciones</a
+                <i class="menu-icon fa fa-building"></i>Estación</a
               >
               <ul class="sub-menu children dropdown-menu">
-                <li>
+                <li id="estacionInsertar">
                   <i class="menu-icon fa fa-book"></i
-                  ><a href="../ingresar/">Agregar Estaciones</a>
+                  ><a href="../../estaciones/ingresar/">Agregar Estación</a>
                 </li>
-                <li>
+                <script></script>
+                <li id="estacionVisualizar">
                   <i class="menu-icon fa fa-eye"></i
-                  ><a href="../visualizar/">Ver Estaciones</a>
+                  ><a href="../../estaciones/visualizar/">Ver Estaciones</a>
                 </li>
-                <li>
+                <li id="estacionModificar">
                   <i class="menu-icon fa fa-cogs"></i
-                  ><a href="">Modificar Estaciones</a>
+                  ><a href="../../estaciones/modificar/">Modificar Estación</a>
                 </li>
               </ul>
             </li>
@@ -127,15 +148,7 @@
               <ul class="sub-menu children dropdown-menu">
                 <li>
                   <i class="menu-icon fa fa-book"></i
-                  ><a href="../alertas/ingresar/">Agregar Alertas</a>
-                </li>
-                <li>
-                  <i class="menu-icon fa fa-eye"></i
-                  ><a href="../alertas/visualizar/">Ver Alertas</a>
-                </li>
-                <li>
-                  <i class="menu-icon fa fa-cogs"></i
-                  ><a href="../alertas/modificar/">Modificar Alertas</a>
+                  ><a href="../../alertas/visualizar/">Ver Alertas</a>
                 </li>
               </ul>
             </li>
@@ -147,16 +160,20 @@
                 aria-haspopup="true"
                 aria-expanded="false"
               >
-                <i class="menu-icon fa fa-fire"></i>Químicos</a
+                <i class="menu-icon fa fa-fire"></i>Químico</a
               >
               <ul class="sub-menu children dropdown-menu">
-                <li>
+                <li id="quimicosInsertar">
                   <i class="menu-icon fa fa-eye"></i
-                  ><a href="../quimicos/visualizar/">Ver Químicos</a>
+                  ><a href="../../quimicos/insertar/">Insertar Químicos</a>
                 </li>
-                <li>
+                <li id="quimicosVisualizar">
+                  <i class="menu-icon fa fa-eye"></i
+                  ><a href="../../quimicos/visualizar/">Ver Químicos</a>
+                </li>
+                <li id="quimicosModificar">
                   <i class="menu-icon fa fa-cogs"></i
-                  ><a href="../quimicos/modificar/">Modificar Químicos</a>
+                  ><a href="../../quimicos/modificar/">Modificar Químico</a>
                 </li>
               </ul>
             </li>
@@ -171,17 +188,21 @@
                 <i class="menu-icon fa fa-fire-extinguisher"></i>Sensores</a
               >
               <ul class="sub-menu children dropdown-menu">
-                <li>
+                <li id="sensoresInsertar">
                   <i class="menu-icon fa fa-eye"></i
-                  ><a href="../sensores/visualizar/">Ver Sensores</a>
+                  ><a href="../../sensores/insertar/">Insertar Sensores</a>
                 </li>
-                <li>
+                <li id="sensoresVisualizar">
+                  <i class="menu-icon fa fa-eye"></i
+                  ><a href="../../sensores/visualizar/">Ver Sensores</a>
+                </li>
+                <li id="sensoresModificar">
                   <i class="menu-icon fa fa-cogs"></i
-                  ><a href="../sensores/modificar/">Modificar Sensor</a>
+                  ><a href="../../sensores/modificar/">Modificar Sensor</a>
                 </li>
               </ul>
             </li>
-            <li class="menu-item-has-children dropdown">
+            <li class="menu-item-has-children dropdown" id="usuarioMenu">
               <a
                 href="#"
                 class="dropdown-toggle"
@@ -192,21 +213,67 @@
                 <i class="menu-icon fa fa-users"></i>Usuarios</a
               >
               <ul class="sub-menu children dropdown-menu">
+                <li id="usuarioInsertar">
+                  <i class="menu-icon fa fa-user-plus"></i
+                  ><a href="../../usuarios/ingresar/">Agregar Usuario</a>
+                </li>
+                <li id="usuarioVisualizar">
+                  <i class="menu-icon fa fa-user-circle"></i
+                  ><a href="../../usuarios/visualizar/">Ver Usuario</a>
+                </li>
+                <li id="usuarioModificar">
+                  <i class="menu-icon fa fa-user-o"></i
+                  ><a href="../../usuarios/modificar/">Modificar Usuario</a>
+                </li>
+                <li id="usuarioEliminar">
+                  <i class="menu-icon fa fa-user-times"></i
+                  ><a href="../../usuarios/eliminar/">Eliminar Usuario</a>
+                </li>
+              </ul>
+            </li>
+            <li id="mantenimientoMenu" class="menu-item-has-children dropdown">
+              <a
+                href="#"
+                class="dropdown-toggle"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                <i class="menu-icon fa fa-cogs"></i>Mantenimiento</a
+              >
+              <ul class="sub-menu children dropdown-menu">
                 <li>
                   <i class="menu-icon fa fa-user-plus"></i
-                  ><a href="../usuarios/ingresar/">Agregar Usuario</a>
+                  ><a href="../../mantenimiento/ingresardata/">Subir Data</a>
                 </li>
                 <li>
-                  <i class="menu-icon fa fa-user-circle"></i
-                  ><a href="../usuarios/visualizar/">Ver Usuario</a>
+                  <i class="menu-icon fa fa-user-plus"></i
+                  ><a href="../../alertas/modificar/">Modificar Alertas</a>
+                </li>
+              </ul>
+            </li>
+            <li id="seguridadMenu" class="menu-item-has-children dropdown">
+              <a
+                href="#"
+                class="dropdown-toggle"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                <i class="menu-icon fa fa-lock"></i>Seguridad</a
+              >
+              <ul class="sub-menu children dropdown-menu">
+                <li>
+                  <i class="menu-icon fa fa-user-plus"></i
+                  ><a href="../../seguridad/insertarseguridad/"
+                    >Insertar Pregunta Seguridad</a
+                  >
                 </li>
                 <li>
-                  <i class="menu-icon fa fa-user-o"></i
-                  ><a href="../usuarios/modificar/">Modificar Usuario</a>
-                </li>
-                <li>
-                  <i class="menu-icon fa fa-user-times"></i
-                  ><a href="../usuarios/eliminar/">Eliminar Usuario</a>
+                  <i class="menu-icon fa fa-user-plus"></i
+                  ><a href="../../seguridad/preguntas/"
+                    >Ver Preguntas Seguridad</a
+                  >
                 </li>
               </ul>
             </li>
@@ -226,18 +293,31 @@
               ><i class="fa fa-bars"></i
             ></a>
 
-            <a class="navbar-brand" href="../../../"
-              ><img src="../../../img/LogoNegro.png" alt="Logo"
+            <a class="navbar-brand" href="../../"
+              ><img src="../../images/LogoNegro.png" alt="Logo"
             /></a>
-            <a class="navbar-brand hidden" href="../../../"
-              ><img src="../../../img/LogoNegro.png" alt="Logo"
+            <a class="navbar-brand hidden" href="./../../"
+              ><img src="../../images/LogoNegro.png" alt="Logo"
             /></a>
           </div>
         </div>
         <div class="top-right">
           <div class="header-menu">
-            <p style="margin-top: 15px; color: black">
-              Bienvenido MARCEL PEREZ FERNANDEZ
+            <p
+              style="
+                margin-top: 15px;
+                font-family: sans-serif;
+                color: rgb(0, 0, 0);
+              "
+            >
+              <script>
+                document.write(localStorage.getItem("usuario"));
+              </script>
+              (
+              <script>
+                document.write(localStorage.getItem("tipoUsuario"));
+              </script>
+              )
             </p>
             <div class="user-area dropdown float-right">
               <a
@@ -249,20 +329,53 @@
               >
                 <img
                   class="user-avatar rounded-circle"
-                  src="../../../img/User.png"
+                  src=""
+                  id="imagenTipoUsuario"
                   alt="User Avatar"
                 />
+                <script>
+                  function mostrarImagenTipoUsuario() {
+                    // Obtener el valor del tipo de usuario del localStorage
+                    var tipoUsuario = localStorage.getItem("tipoUsuario");
+
+                    // Obtener el elemento HTML donde se mostrará la imagen
+                    var imagenTipoUsuario =
+                      document.getElementById("imagenTipoUsuario");
+
+                    // Comprobar el tipo de usuario y asignar la imagen correspondiente
+                    if (tipoUsuario === "Administrador") {
+                      imagenTipoUsuario.src = "./../../images/Admin.png";
+                    } else if (tipoUsuario === "Soporte") {
+                      imagenTipoUsuario.src = "./../../images/soporte.png";
+                    } else if (tipoUsuario === "Estudiante") {
+                      imagenTipoUsuario.src = "./../../images/Estudiante.png";
+                    } else if (tipoUsuario === "Profesor") {
+                      imagenTipoUsuario.src = "./../../images/Profesor.png";
+                    }
+                  }
+                  mostrarImagenTipoUsuario();
+                </script>
               </a>
 
               <div class="user-menu dropdown-menu">
-                <a class="nav-link" href="#"
+                <a class="nav-link" href="./../../perfil/miperfil/"
                   ><i class="fa fa- user"></i>Mi Perfil</a
+                ><a class="nav-link" href="./../../perfil/informacion/"
+                  ><i class="fa fa- user"></i>Información</a
+                >
+                <a class="nav-link" href="./../../perfil/credenciales/"
+                  ><i class="fa fa- user"></i>Credenciales</a
                 >
 
-                <a class="nav-link" href="../"
+                <a onclick="salir();" class="nav-link" href="./../../../login/"
                   ><i class="fa fa-power -off"></i>Salir</a
                 >
               </div>
+              <script>
+                function salir() {
+                  localStorage.clear();
+                }
+              </script>
             </div>
           </div>
         </div>
@@ -272,14 +385,15 @@
       <div class="content">
         <div class="card" id="formulario">
           <div class="card-body">
-            <h3 class="text-center">Datos del Usuario</h3>
+            <!-- Credit Card -->
+            <h3 class="text-center">Modificación de tu Información Personal</h3>
 
-            <form class="usuarioDatos">
+            <form id="updateUsuarioForm" class="updateForm">
               <div class="row">
                 <div class="col-6">
                   <div class="form-group">
                     <label for="nombre1">Primer Nombre:</label>
-                    <input type="text" id="nombre1" name="nombre1" />
+                    <input type="text" id="nombre1" name="nombre1" required />
                   </div>
                 </div>
                 <div class="col-6">
@@ -296,28 +410,147 @@
                 <div class="col-6">
                   <div class="form-group">
                     <label for="apellido1">Primer Apellido:</label>
-                    <input type="text" id="apellido1" name="apellido1" />
+                    <input
+                      type="text"
+                      id="apellido1"
+                      name="apellido1"
+                      required
+                    />
                   </div>
                 </div>
                 <div class="col-6">
                   <div class="form-group">
                     <div class="form-group">
                       <label for="apellido2">Segundo Apellido:</label>
-                      <input type="text" id="apellido2" name="apellido2" />
+                      <input
+                        type="text"
+                        id="apellido2"
+                        name="apellido2"
+                        required
+                      />
                     </div>
                   </div>
                 </div>
               </div>
 
-              <div class="row" style="margin-bottom: 20px">
+              <h2
+                style="
+                  padding-top: 20px;
+                  font-weight: bold;
+                  text-decoration: underline;
+                "
+              >
+                Preguntas de Seguridad
+              </h2>
+              <div class="row">
                 <div class="col-6">
                   <div class="form-group">
-                    <div class="form-group">
-                      <label for="tipo">Tipo de usuario:</label>
-                      <input type="text" id="tipo" name="tipo" />
-                    </div>
+                    <label for="respuestaSeguridad1"
+                      >Pregunta de Seguridad 1:</label
+                    >
+                    <select
+                      id="slcPreguntaSeguridad1"
+                      name="slcPreguntaSeguridad1"
+                      required
+                    >
+                      <option value="" selected>Seleccionar</option>
+                    </select>
+                    <input
+                      type="text"
+                      id="respuestaSeguridad1"
+                      name="respuestaSeguridad1"
+                      required
+                      style="margin-top: 20px"
+                    /><input
+                      type="text"
+                      id="respuestaSeguridad1Ant"
+                      name="respuestaSeguridad1Ant"
+                      required
+                      style="margin-top: 20px"
+                      disabled
+                    />
                   </div>
                 </div>
+                <div class="col-6">
+                  <div class="form-group">
+                    <label for="respuestaSeguridad2"
+                      >Pregunta de Seguridad 2:</label
+                    >
+                    <select
+                      required
+                      id="slcPreguntaSeguridad2"
+                      name="slcPreguntaSeguridad2"
+                      required
+                    >
+                      <option value="" selected>Seleccionar</option>
+                    </select>
+                    <input
+                      type="text"
+                      id="respuestaSeguridad2"
+                      name="respuestaSeguridad2"
+                      required
+                      style="margin-top: 20px"
+                    /><input
+                      type="text"
+                      id="respuestaSeguridad2Ant"
+                      name="respuestaSeguridad2Ant"
+                      required
+                      style="margin-top: 20px"
+                      disabled
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div class="row" style="margin-bottom: 20px; margin-top: 20px">
+                <div class="col-6">
+                  <div class="form-group">
+                    <label for="respuestaSeguridad3"
+                      >Pregunta de Seguridad 3:</label
+                    >
+                    <select
+                      required
+                      id="slcPreguntaSeguridad3"
+                      name="slcPreguntaSeguridad3"
+                      required
+                    >
+                      <option value="" selected>Seleccionar</option>
+                    </select>
+                    <input
+                      type="text"
+                      id="respuestaSeguridad3"
+                      name="respuestaSeguridad3"
+                      required
+                      style="margin-top: 20px"
+                    /><input
+                      type="text"
+                      id="respuestaSeguridad3Ant"
+                      name="respuestaSeguridad3Ant"
+                      required
+                      style="margin-top: 20px"
+                      disabled
+                    />
+                    <input style="display: none" id="tipoUsuario" />
+                    <input style="display: none" id="username" />
+                    <input style="display: none" id="password" />
+                  </div>
+                </div>
+              </div>
+
+              <div class="button-container">
+                <button class="button" type="submit" id="actualizar">
+                  <i class="fa fa-save"></i>&nbsp;
+                  <span id="payment-button-amount">Actualizar</span>
+                </button>
+
+                <button class="button" id="limpiar" type="reset">
+                  <i class="fa fa-eraser"></i>&nbsp;
+                  <span id="payment-button-amount">Limpiar</span>
+                </button>
+                <button class="button" id="cancelar" type="button">
+                  <i class="fa fa-close"></i>&nbsp;
+                  <span id="payment-button-amount">Cancelar</span>
+                </button>
               </div>
             </form>
           </div>
@@ -329,36 +562,85 @@
       <footer class="site-footer">
         <div class="footer-inner bg-white">
           <div class="row">
-            <div class="col-sm-6">
+            <div
+              class="col-sm-10"
+              style="color: #000; font-family: sans-serif; padding-left: 35%"
+            >
               Sistema de inspección de calidad del aire -
               <script>
                 document.write(new Date().getFullYear());
               </script>
-            </div>
-            <div class="col-sm-6 text-right">
-              <a href="https://colorlib.com">Colorlib</a>
             </div>
           </div>
         </div>
       </footer>
     </div>
 
+    <!-- Scripts -->
+    <script src="../../ownJs/access.js"></script>
+    <script>
+      function llenarPreguntasSeguridad() {
+        const selectPreguntaSeguridad = document.getElementById(
+          "slcPreguntaSeguridad1"
+        );
+        const selectPreguntaSeguridad2 = document.getElementById(
+          "slcPreguntaSeguridad2"
+        );
+        const selectPreguntaSeguridad3 = document.getElementById(
+          "slcPreguntaSeguridad3"
+        );
+        fetch("http://154.38.167.248:5024/api/PreguntaSeguridad") // Reemplaza 'URL_DE_TU_API' con la URL de tu API
+          .then((response) => response.json())
+          .then((data) => {
+            data.forEach((pregunta) => {
+              const option = document.createElement("option");
+              option.value = pregunta.id; // Reemplaza 'id' con el nombre de la propiedad que contiene el valor de la pregunta en tu objeto de datos
+              option.text = pregunta.pregunta; // Reemplaza 'texto' con el nombre de la propiedad que contiene el texto de la pregunta en tu objeto de datos
+              selectPreguntaSeguridad.appendChild(option);
+              selectPreguntaSeguridad2.appendChild(option.cloneNode(true));
+              selectPreguntaSeguridad3.appendChild(option.cloneNode(true));
+            });
+          })
+          .catch((error) => {
+            console.error("Error al obtener los datos:", error);
+          });
+      }
+
+      llenarPreguntasSeguridad();
+    </script>
     <script>
       primerNombre = document.getElementById("nombre1");
-      primerNombre.disabled = true;
-
       segundoNombre = document.getElementById("nombre2");
-      segundoNombre.disabled = true;
-
       primerApellido = document.getElementById("apellido1");
-      primerApellido.disabled = true;
-
       segundoApellido = document.getElementById("apellido2");
-      segundoApellido.disabled = true;
-
-      tipoUsuario = document.getElementById("tipo");
-      tipoUsuario.disabled = true;
-      fetch("http://154.38.167.248:5024/api/Usuario/1")
+      respuestaSeguridad1 = document.getElementById("respuestaSeguridad1");
+      respuestaSeguridad2 = document.getElementById("respuestaSeguridad2");
+      respuestaSeguridad3 = document.getElementById("respuestaSeguridad3");
+      tipoUsuario = document.getElementById("tipoUsuario");
+      username = document.getElementById("username");
+      password = document.getElementById("password");
+      respuestaSeguridad1Ant = document.getElementById(
+        "respuestaSeguridad1Ant"
+      );
+      respuestaSeguridad2Ant = document.getElementById(
+        "respuestaSeguridad2Ant"
+      );
+      respuestaSeguridad3Ant = document.getElementById(
+        "respuestaSeguridad3Ant"
+      );
+      selectPreguntaSeguridad = document.getElementById(
+        "slcPreguntaSeguridad1"
+      );
+      selectPreguntaSeguridad2 = document.getElementById(
+        "slcPreguntaSeguridad2"
+      );
+      selectPreguntaSeguridad3 = document.getElementById(
+        "slcPreguntaSeguridad3"
+      );
+      fetch(
+        "http://154.38.167.248:5024/api/Usuario/" +
+          localStorage.getItem("idUsuario")
+      )
         .then((response) => response.json())
         .then((usuario) => {
           primerNombre.value = usuario.nombre1;
@@ -366,17 +648,101 @@
           primerApellido.value = usuario.apellido1;
           segundoApellido.value = usuario.apellido2;
           tipoUsuario.value = usuario.tipoUsuario;
+          username.value = usuario.username;
+          password.value = usuario.password;
+          respuestaSeguridad1Ant.value =
+            "Anterior: " + usuario.preguntaSeguridad1;
+          respuestaSeguridad2Ant.value =
+            "Anterior: " + usuario.preguntaSeguridad2;
+          respuestaSeguridad3Ant.value =
+            "Anterior: " + usuario.preguntaSeguridad3;
         })
-        .catch((error) =>
-          console.error("Error al obtener las estaciones:", error)
-        );
+        .catch((error) => console.error("Error al obtener el usuario:", error));
+    </script>
+    <script>
+      const cancelar = document.getElementById("cancelar");
+      cancelar.addEventListener("click", function () {
+        const confirmed = confirm("¿Estás seguro de que deseas cancelar?");
+        if (confirmed) {
+          // Aquí puedes realizar la acción de cancelación
+          alert("Se canceló, volviendo al inicio...");
+          window.location.href = "../../";
+        } else {
+          console.log("Cancelación cancelada");
+        }
+      });
     </script>
 
-    <!-- Scripts -->
+    <script>
+      const form = document.querySelector(".updateForm");
+      form.addEventListener("submit", (event) => {
+        const preguntaSeguridad1 = document.getElementById(
+          "slcPreguntaSeguridad1"
+        ).options[
+          document.getElementById("slcPreguntaSeguridad1").selectedIndex
+        ].text;
+        const respuestaPreguntaSeguridad1 = document.getElementById(
+          "respuestaSeguridad1"
+        ).value;
+        const preguntaSeguridad2 = document.getElementById(
+          "slcPreguntaSeguridad2"
+        ).options[
+          document.getElementById("slcPreguntaSeguridad2").selectedIndex
+        ].text;
+        const respuestaPreguntaSeguridad2 = document.getElementById(
+          "respuestaSeguridad2"
+        ).value;
+        const preguntaSeguridad3 = document.getElementById(
+          "slcPreguntaSeguridad3"
+        ).options[
+          document.getElementById("slcPreguntaSeguridad3").selectedIndex
+        ].text;
+        const respuestaPreguntaSeguridad3 = document.getElementById(
+          "respuestaSeguridad3"
+        ).value;
+        event.preventDefault();
+        const formData = new FormData(form);
+        const data = new URLSearchParams(formData);
+        const datos = {
+          idUsuario: localStorage.getItem("idUsuario"),
+          nombre1: document.getElementById("nombre1").value,
+          nombre2: document.getElementById("nombre2").value,
+          apellido1: document.getElementById("apellido1").value,
+          apellido2: document.getElementById("apellido2").value,
+          tipoUsuario: document.getElementById("tipoUsuario").value,
+          username: document.getElementById("username").value,
+          password: document.getElementById("password").value,
+          preguntaSeguridad1: preguntaSeguridad1,
+          respuestaPreguntaSeguridad1: respuestaPreguntaSeguridad1,
+          preguntaSeguridad2: preguntaSeguridad2,
+          respuestaPreguntaSeguridad2: respuestaPreguntaSeguridad2,
+          preguntaSeguridad3: preguntaSeguridad3,
+          respuestaPreguntaSeguridad3: respuestaPreguntaSeguridad3,
+        };
+        fetch("http://154.38.167.248:5024/api/Usuario", {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(datos),
+        })
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error("Hubo un problema al actualizar el usuario.");
+            } else {
+              alert("El usuario se actualizó correctamente.");
+              document.getElementById("updateUsuarioForm").reset();
+              window.location = "../miperfil/";
+            }
+          })
+          .catch((error) => alert(error.message));
+      });
+    </script>
+
     <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
-    <script src="../assets/js/main.js"></script>
+    <script src="../../assets/js/main.js"></script>
   </body>
 </html>
