@@ -626,7 +626,6 @@
         document.getElementById("threasureLow").value = threasureLow;
         document.getElementById("sensorAnt").value = idSensor;
 
-        // document.getElementById("estado").value = estado;
       }
     </script>
 
@@ -661,7 +660,6 @@
           threasureLow: document.getElementById("threasureLow").value,
           sensor: "",
         };
-        console.log(datos);
         fetch("http://154.38.167.248:5024/api/Quimico", {
           method: "PUT",
           headers: {
