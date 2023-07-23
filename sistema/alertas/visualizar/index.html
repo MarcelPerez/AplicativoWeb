@@ -14,8 +14,8 @@
 
     <title>Sistema Inspección Calidad del Aire</title>
 
-    <link rel="apple-touch-icon" href="../../../img/Icon.png" />
-    <link rel="icon" type="image/png" href="../../../img/Icon.png" />
+    <link rel="apple-touch-icon" href="./../../images/Icon.png" />
+    <link rel="icon" type="image/png" href="./../../images/Icon.png" />
 
     <!-- CSS: -->
     <link
@@ -52,6 +52,15 @@
       href="https://cdn.jsdelivr.net/npm/jqvmap@1.5.1/dist/jqvmap.min.css"
       rel="stylesheet"
     />
+    <style>
+      .nav-link:hover {
+        background-color: #c7efff;
+      }
+    </style>
+    <script src="../../ownJs/auth.js"></script>
+    <script>
+      auth("../../../");
+    </script>
   </head>
 
   <body>
@@ -65,7 +74,6 @@
                 ><i class="menu-icon fa fa-laptop"></i>Tablero
               </a>
             </li>
-            <li class="menu-title">Opciones</li>
             <li class="menu-item-has-children dropdown">
               <a
                 href="#"
@@ -74,12 +82,16 @@
                 aria-haspopup="true"
                 aria-expanded="false"
               >
-                <i class="menu-icon fa fa-cloud"></i>Calidad Aire</a
+                <i class="menu-icon fa fa-cloud"></i>Estado del Aire</a
               >
               <ul class="sub-menu children dropdown-menu">
                 <li>
                   <i class="menu-icon fa fa-map-marker"></i
                   ><a href="../../calidadaire/mapa/">Mapa</a>
+                </li>
+                <li>
+                  <i class="menu-icon fa fa-archive"></i
+                  ><a href="../../calidadaire/mediciones/">Mediciones</a>
                 </li>
                 <li>
                   <i class="menu-icon fa fa-bar-chart"></i
@@ -89,6 +101,12 @@
                   <i class="menu-icon fa fa-book"></i
                   ><a href="../../calidadaire/estadisticas/">Estadísticas</a>
                 </li>
+                <li>
+                  <i class="menu-icon fa fa-clock-o"></i
+                  ><a href="../../calidadaire/estacionMeteorologica/"
+                    >Estación Meteorológica</a
+                  >
+                </li>
               </ul>
             </li>
             <li class="menu-item-has-children dropdown">
@@ -99,26 +117,25 @@
                 aria-haspopup="true"
                 aria-expanded="false"
               >
-                <i class="menu-icon fa fa-building"></i>Estaciones</a
+                <i class="menu-icon fa fa-building"></i>Estación</a
               >
               <ul class="sub-menu children dropdown-menu">
-                <li>
+                <li id="estacionInsertar">
                   <i class="menu-icon fa fa-book"></i
-                  ><a href="../../estaciones/ingresar/">Agregar Estaciones</a>
+                  ><a href="../../estaciones/ingresar/">Agregar Estación</a>
                 </li>
-                <li>
+                <script></script>
+                <li id="estacionVisualizar">
                   <i class="menu-icon fa fa-eye"></i
                   ><a href="../../estaciones/visualizar/">Ver Estaciones</a>
                 </li>
-                <li>
+                <li id="estacionModificar">
                   <i class="menu-icon fa fa-cogs"></i
-                  ><a href="../../estaciones/modificar/"
-                    >Modificar Estaciones</a
-                  >
+                  ><a href="../../estaciones/modificar/">Modificar Estación</a>
                 </li>
               </ul>
             </li>
-            <li class="menu-item-has-children active dropdown">
+            <li class="menu-item-has-children dropdown active">
               <a
                 href="#"
                 class="dropdown-toggle"
@@ -131,15 +148,7 @@
               <ul class="sub-menu children dropdown-menu">
                 <li>
                   <i class="menu-icon fa fa-book"></i
-                  ><a href="../ingresar/">Agregar Alertas</a>
-                </li>
-                <li>
-                  <i class="menu-icon fa fa-eye"></i
-                  ><a href="">Ver Alertas</a>
-                </li>
-                <li>
-                  <i class="menu-icon fa fa-cogs"></i
-                  ><a href="../modificar/">Modificar Alertas</a>
+                  ><a href="../../alertas/visualizar/">Ver Alertas</a>
                 </li>
               </ul>
             </li>
@@ -151,16 +160,20 @@
                 aria-haspopup="true"
                 aria-expanded="false"
               >
-                <i class="menu-icon fa fa-fire"></i>Químicos</a
+                <i class="menu-icon fa fa-fire"></i>Químico</a
               >
               <ul class="sub-menu children dropdown-menu">
-                <li>
+                <li id="quimicosInsertar">
+                  <i class="menu-icon fa fa-eye"></i
+                  ><a href="../../quimicos/insertar/">Insertar Químicos</a>
+                </li>
+                <li id="quimicosVisualizar">
                   <i class="menu-icon fa fa-eye"></i
                   ><a href="../../quimicos/visualizar/">Ver Químicos</a>
                 </li>
-                <li>
+                <li id="quimicosModificar">
                   <i class="menu-icon fa fa-cogs"></i
-                  ><a href="../../quimicos/modificar/">Modificar Químicos</a>
+                  ><a href="../../quimicos/modificar/">Modificar Químico</a>
                 </li>
               </ul>
             </li>
@@ -175,17 +188,21 @@
                 <i class="menu-icon fa fa-fire-extinguisher"></i>Sensores</a
               >
               <ul class="sub-menu children dropdown-menu">
-                <li>
+                <li id="sensoresInsertar">
+                  <i class="menu-icon fa fa-eye"></i
+                  ><a href="../../sensores/insertar/">Insertar Sensores</a>
+                </li>
+                <li id="sensoresVisualizar">
                   <i class="menu-icon fa fa-eye"></i
                   ><a href="../../sensores/visualizar/">Ver Sensores</a>
                 </li>
-                <li>
+                <li id="sensoresModificar">
                   <i class="menu-icon fa fa-cogs"></i
                   ><a href="../../sensores/modificar/">Modificar Sensor</a>
                 </li>
               </ul>
             </li>
-            <li class="menu-item-has-children dropdown">
+            <li class="menu-item-has-children dropdown" id="usuarioMenu">
               <a
                 href="#"
                 class="dropdown-toggle"
@@ -196,21 +213,67 @@
                 <i class="menu-icon fa fa-users"></i>Usuarios</a
               >
               <ul class="sub-menu children dropdown-menu">
-                <li>
+                <li id="usuarioInsertar">
                   <i class="menu-icon fa fa-user-plus"></i
                   ><a href="../../usuarios/ingresar/">Agregar Usuario</a>
                 </li>
-                <li>
+                <li id="usuarioVisualizar">
                   <i class="menu-icon fa fa-user-circle"></i
                   ><a href="../../usuarios/visualizar/">Ver Usuario</a>
                 </li>
-                <li>
+                <li id="usuarioModificar">
                   <i class="menu-icon fa fa-user-o"></i
                   ><a href="../../usuarios/modificar/">Modificar Usuario</a>
                 </li>
-                <li>
+                <li id="usuarioEliminar">
                   <i class="menu-icon fa fa-user-times"></i
                   ><a href="../../usuarios/eliminar/">Eliminar Usuario</a>
+                </li>
+              </ul>
+            </li>
+            <li id="mantenimientoMenu" class="menu-item-has-children dropdown">
+              <a
+                href="#"
+                class="dropdown-toggle"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                <i class="menu-icon fa fa-cogs"></i>Mantenimiento</a
+              >
+              <ul class="sub-menu children dropdown-menu">
+                <li>
+                  <i class="menu-icon fa fa-user-plus"></i
+                  ><a href="../../mantenimiento/ingresardata/">Subir Data</a>
+                </li>
+                <li>
+                  <i class="menu-icon fa fa-user-plus"></i
+                  ><a href="../../alertas/modificar/">Modificar Alertas</a>
+                </li>
+              </ul>
+            </li>
+            <li id="seguridadMenu" class="menu-item-has-children dropdown">
+              <a
+                href="#"
+                class="dropdown-toggle"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                <i class="menu-icon fa fa-lock"></i>Seguridad</a
+              >
+              <ul class="sub-menu children dropdown-menu">
+                <li>
+                  <i class="menu-icon fa fa-user-plus"></i
+                  ><a href="../../seguridad/insertarseguridad/"
+                    >Insertar Pregunta Seguridad</a
+                  >
+                </li>
+                <li>
+                  <i class="menu-icon fa fa-user-plus"></i
+                  ><a href="../../seguridad/preguntas/"
+                    >Ver Preguntas Seguridad</a
+                  >
                 </li>
               </ul>
             </li>
@@ -230,18 +293,31 @@
               ><i class="fa fa-bars"></i
             ></a>
 
-            <a class="navbar-brand" href="../../../"
-              ><img src="../../../img/LogoNegro.png" alt="Logo"
+            <a class="navbar-brand" href="../../"
+              ><img src="../../images/LogoNegro.png" alt="Logo"
             /></a>
-            <a class="navbar-brand hidden" href="../../../"
-              ><img src="../../../img/LogoNegro.png" alt="Logo"
+            <a class="navbar-brand hidden" href="./../../"
+              ><img src="../../images/LogoNegro.png" alt="Logo"
             /></a>
           </div>
         </div>
         <div class="top-right">
           <div class="header-menu">
-            <p style="margin-top: 15px; color: black">
-              Bienvenido MARCEL PEREZ FERNANDEZ
+            <p
+              style="
+                margin-top: 15px;
+                font-family: sans-serif;
+                color: rgb(0, 0, 0);
+              "
+            >
+              <script>
+                document.write(localStorage.getItem("usuario"));
+              </script>
+              (
+              <script>
+                document.write(localStorage.getItem("tipoUsuario"));
+              </script>
+              )
             </p>
             <div class="user-area dropdown float-right">
               <a
@@ -253,20 +329,53 @@
               >
                 <img
                   class="user-avatar rounded-circle"
-                  src="../../../img/User.png"
+                  src=""
+                  id="imagenTipoUsuario"
                   alt="User Avatar"
                 />
+                <script>
+                  function mostrarImagenTipoUsuario() {
+                    // Obtener el valor del tipo de usuario del localStorage
+                    var tipoUsuario = localStorage.getItem("tipoUsuario");
+
+                    // Obtener el elemento HTML donde se mostrará la imagen
+                    var imagenTipoUsuario =
+                      document.getElementById("imagenTipoUsuario");
+
+                    // Comprobar el tipo de usuario y asignar la imagen correspondiente
+                    if (tipoUsuario === "Administrador") {
+                      imagenTipoUsuario.src = "./../../images/Admin.png";
+                    } else if (tipoUsuario === "Soporte") {
+                      imagenTipoUsuario.src = "./../../images/soporte.png";
+                    } else if (tipoUsuario === "Estudiante") {
+                      imagenTipoUsuario.src = "./../../images/Estudiante.png";
+                    } else if (tipoUsuario === "Profesor") {
+                      imagenTipoUsuario.src = "./../../images/Profesor.png";
+                    }
+                  }
+                  mostrarImagenTipoUsuario();
+                </script>
               </a>
 
               <div class="user-menu dropdown-menu">
-                <a class="nav-link" href="#"
+                <a class="nav-link" href="./../../perfil/miperfil/"
                   ><i class="fa fa- user"></i>Mi Perfil</a
+                ><a class="nav-link" href="./../../perfil/informacion/"
+                  ><i class="fa fa- user"></i>Información</a
+                >
+                <a class="nav-link" href="./../../perfil/credenciales/"
+                  ><i class="fa fa- user"></i>Credenciales</a
                 >
 
-                <a class="nav-link" href="../"
+                <a onclick="salir();" class="nav-link" href="./../../../login/"
                   ><i class="fa fa-power -off"></i>Salir</a
                 >
               </div>
+              <script>
+                function salir() {
+                  localStorage.clear();
+                }
+              </script>
             </div>
           </div>
         </div>
@@ -274,8 +383,181 @@
       <!-- /#header -->
       <!-- Content -->
       <div class="content">
-        <h4>VER ALERTAS</h4>
-        <!-- .animated -->
+        <div class="card">
+          <div class="card-body">
+            <h3 class="text-center"><b>Alertas</b></h3>
+            <div
+              id="alertSuccess"
+              style="display: none"
+              class="alert alert-success"
+              role="alert"
+            >
+              ¡Actualmente no hay alertas!
+            </div>
+            <div
+              id="alertWrong"
+              style="display: none"
+              class="alert alert-danger"
+              role="alert"
+            >
+              ¡Actualmente hay alertas!
+            </div>
+            <div class="row">
+              <div class="col-md-4">
+                <div class="card">
+                  <img
+                    class="card-img-top"
+                    src="../../images/EstacionAulasA4.png"
+                    alt="Card image cap"
+                  />
+                  <div class="card-body">
+                    <h4 class="card-title mb-3">
+                      <center id="A4" style="color: green">
+                        <b>SIN ALERTAS</b>
+                      </center>
+                    </h4>
+                    <p class="card-text">
+                      <center><b> Estación Aulas A4</b></center>
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="card">
+                  <img
+                    class="card-img-top"
+                    src="../../images/EstacionBiblioteca.png"
+                    alt="Card image cap"
+                  />
+                  <div class="card-body">
+                    <h4 class="card-title mb-3">
+                      <center id="Biblioteca" style="color: green">
+                        <b>SIN ALERTAS</b>
+                      </center>
+                    </h4>
+                    <p class="card-text">
+                      <center><b> Estación Biblioteca</b></center>
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="card">
+                  <img
+                    class="card-img-top"
+                    src="../../images/EstacionCapilla.png"
+                    alt="Card image cap"
+                  />
+                  <div class="card-body">
+                    <h4 class="card-title mb-3">
+                      <center id="Capilla" style="color: green">
+                        <b>SIN ALERTAS</b>
+                      </center>
+                    </h4>
+                    <p class="card-text">
+                      <center><b> Estación Capilla</b></center>
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="card">
+                  <img
+                    class="card-img-top"
+                    src="../../images/EstacionJuan23.png"
+                    alt="Card image cap"
+                  />
+                  <div class="card-body">
+                    <h4 class="card-title mb-3">
+                      <center id="Juan23" style="color: green">
+                        <b>SIN ALERTAS</b>
+                      </center>
+                    </h4>
+                    <p class="card-text">
+                      <center><b> Estación Juan 23</b></center>
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="card">
+                  <img
+                    class="card-img-top"
+                    src="../../images/EstacionKiosko.png"
+                    alt="Card image cap"
+                  />
+                  <div class="card-body">
+                    <h4 class="card-title mb-3">
+                      <center id="Kiosko" style="color: green">
+                        <b>SIN ALERTAS</b>
+                      </center>
+                    </h4>
+                    <p class="card-text">
+                      <center><b> Estación Kiosko</b></center>
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="card">
+                  <img
+                    class="card-img-top"
+                    src="../../images/EstacionLaboratorio.png"
+                    alt="Card image cap"
+                  />
+                  <div class="card-body">
+                    <h4 class="card-title mb-3">
+                      <center id="Laboratorio" style="color: green">
+                        <b>SIN ALERTAS</b>
+                      </center>
+                    </h4>
+                    <p class="card-text">
+                      <center><b> Estación Laboratorio</b></center>
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="card">
+                  <img
+                    class="card-img-top"
+                    src="../../images/EstacionPadreArroyo.png"
+                    alt="Card image cap"
+                  />
+                  <div class="card-body">
+                    <h4 class="card-title mb-3">
+                      <center id="PadreArroyo" style="color: green">
+                        <b>SIN ALERTAS</b>
+                      </center>
+                    </h4>
+                    <p class="card-text">
+                      <center><b> Estación Padre Arroyo</b></center>
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="card">
+                  <img
+                    class="card-img-top"
+                    src="../../images/EstacionParqueoGeneral.png"
+                    alt="Card image cap"
+                  />
+                  <div class="card-body">
+                    <h4 class="card-title mb-3">
+                      <center id="ParqueoGeneral" style="color: green">
+                        <b>SIN ALERTAS</b>
+                      </center>
+                    </h4>
+                    <p class="card-text">
+                      <center><b> Estación Parqueo General</b></center>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
       <!-- /.content -->
       <div class="clearfix"></div>
@@ -283,14 +565,14 @@
       <footer class="site-footer">
         <div class="footer-inner bg-white">
           <div class="row">
-            <div class="col-sm-6">
+            <div
+              class="col-sm-10"
+              style="color: #000; font-family: sans-serif; padding-left: 35%"
+            >
               Sistema de inspección de calidad del aire -
               <script>
                 document.write(new Date().getFullYear());
               </script>
-            </div>
-            <div class="col-sm-6 text-right">
-              <a href="https://colorlib.com">Colorlib</a>
             </div>
           </div>
         </div>
@@ -300,6 +582,312 @@
     <!-- /#right-panel -->
 
     <!-- Scripts -->
+    <script>
+      DetallesMedicion = [];
+      Quimicos = [];
+      AlertaCapilla = [];
+      AlertaBiblioteca = [];
+      AlertaLaboratorio = [];
+      AlertaKiosko = [];
+      AlertaPadreArroyo = [];
+      AlertaAulas4 = [];
+      AlertasParqueoGeneral = [];
+      AlertasJuan23 = [];
+      AlertaMovil = [];
+      fetch("http://154.38.167.248:5024/api/Estacion")
+        .then((response) => response.json())
+        .then((response) => setDataEstaciones(response));
+
+      function setDataEstaciones(Estacion) {
+        Estacion.forEach((estacion) => {
+          fetch(
+            "http://154.38.167.248:5024/api/Detalle_Medicion/LastMedicionEstacion/" +
+              estacion.idEstacion
+          )
+            .then((response) => response.json())
+            .then((response) => setDataMediciones(response));
+        });
+      }
+
+      function setDataMediciones(Medicion) {
+        DetallesMedicion.push(Medicion);
+        if (DetallesMedicion.length == 9) {
+          getQuimicos();
+        }
+      }
+
+      function getQuimicos() {
+        fetch("http://154.38.167.248:5024/api/Quimico")
+          .then((response) => response.json())
+          .then((quimicos) => {
+            quimicos.forEach((quimico) => {
+              Quimicos.push(quimico);
+            });
+
+            if (Quimicos.length == 8) {
+              compararValores();
+            }
+          });
+      }
+      function compararValores() {
+        DetallesMedicion.forEach((Detalle) => {
+          Detalle.forEach((medicion) => {
+            Quimicos.forEach((quimico) => {
+              if (medicion.idQuimico == quimico.idQuimico) {
+                switch (medicion.idEstacion) {
+                  case 1:
+                    //Capilla:
+                    if (
+                      medicion.valor < quimico.threasureLow ||
+                      medicion.valor > quimico.threasureHigh
+                    ) {
+                      AlertaCapilla.push([
+                        medicion.nombreEstacion,
+                        quimico.threasureLow,
+                        quimico.threasureHigh,
+                        medicion.valor,
+                        medicion.nombreQuimico,
+                      ]);
+                    }
+                    break;
+                  case 2:
+                    //Biblioteca:
+                    if (
+                      medicion.valor < quimico.threasureLow ||
+                      medicion.valor > quimico.threasureHigh
+                    ) {
+                      AlertaBiblioteca.push([
+                        medicion.nombreEstacion,
+                        quimico.threasureLow,
+                        quimico.threasureHigh,
+                        medicion.valor,
+                        medicion.nombreQuimico,
+                      ]);
+                    }
+                    break;
+                  case 3:
+                    //Laboratorio:
+                    if (
+                      medicion.valor < quimico.threasureLow ||
+                      medicion.valor > quimico.threasureHigh
+                    ) {
+                      AlertaLaboratorio.push([
+                        medicion.nombreEstacion,
+                        quimico.threasureLow,
+                        quimico.threasureHigh,
+                        medicion.valor,
+                        medicion.nombreQuimico,
+                      ]);
+                    }
+                    break;
+                  case 4:
+                    //Kiosko:
+                    if (
+                      medicion.valor < quimico.threasureLow ||
+                      medicion.valor > quimico.threasureHigh
+                    ) {
+                      AlertaKiosko.push([
+                        medicion.nombreEstacion,
+                        quimico.threasureLow,
+                        quimico.threasureHigh,
+                        medicion.valor,
+                        medicion.nombreQuimico,
+                      ]);
+                    }
+                    break;
+                  case 5:
+                    //Padre Arroyo::
+                    if (
+                      medicion.valor < quimico.threasureLow ||
+                      medicion.valor > quimico.threasureHigh
+                    ) {
+                      AlertaPadreArroyo.push([
+                        medicion.nombreEstacion,
+                        quimico.threasureLow,
+                        quimico.threasureHigh,
+                        medicion.valor,
+                        medicion.nombreQuimico,
+                      ]);
+                    }
+                    break;
+                  case 6:
+                    //Aulas A4:
+                    if (
+                      medicion.valor < quimico.threasureLow ||
+                      medicion.valor > quimico.threasureHigh
+                    ) {
+                      AlertaAulas4.push([
+                        medicion.nombreEstacion,
+                        quimico.threasureLow,
+                        quimico.threasureHigh,
+                        medicion.valor,
+                        medicion.nombreQuimico,
+                      ]);
+                    }
+                    break;
+                  case 7:
+                    //Parqueo General:
+                    if (
+                      medicion.valor < quimico.threasureLow ||
+                      medicion.valor > quimico.threasureHigh
+                    ) {
+                      AlertasParqueoGeneral.push([
+                        medicion.nombreEstacion,
+                        quimico.threasureLow,
+                        quimico.threasureHigh,
+                        medicion.valor,
+                        medicion.nombreQuimico,
+                      ]);
+                    }
+                    break;
+                  case 8:
+                    //Juan 23:
+                    if (
+                      medicion.valor < quimico.threasureLow ||
+                      medicion.valor > quimico.threasureHigh
+                    ) {
+                      AlertasJuan23.push([
+                        medicion.nombreEstacion,
+                        quimico.threasureLow,
+                        quimico.threasureHigh,
+                        medicion.valor,
+                        medicion.nombreQuimico,
+                      ]);
+                    }
+                    break;
+                  case 11:
+                    //Movil:
+                    if (
+                      medicion.valor < quimico.threasureLow ||
+                      medicion.valor > quimico.threasureHigh
+                    ) {
+                      AlertaMovil.push([
+                        medicion.nombreEstacion,
+                        quimico.threasureLow,
+                        quimico.threasureHigh,
+                        medicion.valor,
+                        medicion.nombreQuimico,
+                      ]);
+                    }
+                    break;
+                  default:
+                    break;
+                }
+              }
+            });
+          });
+        });
+        A4 = document.getElementById("A4");
+        Biblioteca = document.getElementById("Biblioteca");
+        Capilla = document.getElementById("Capilla");
+        Juan23 = document.getElementById("Juan23");
+        Kiosko = document.getElementById("Kiosko");
+        Laboratorio = document.getElementById("Laboratorio");
+        PadreArroyo = document.getElementById("PadreArroyo");
+        ParqueoGeneral = document.getElementById("ParqueoGeneral");
+        document.getElementById("alertWrong").style.display = "block";
+        document.getElementById("alertSuccess").style.display = "block;";
+
+        if (
+          AlertaCapilla.length == 0 &&
+          AlertaBiblioteca.length == 0 &&
+          AlertaLaboratorio.length == 0 &&
+          AlertaKiosko.length == 0 &&
+          AlertaPadreArroyo.length == 0 &&
+          AlertaAulas4.length == 0 &&
+          AlertasParqueoGeneral.length == 0 &&
+          AlertasJuan23.length == 0
+        ) {
+          document.getElementById("alertWrong").style.display = "none";
+          document.getElementById("alertSuccess").style.display = "block;";
+        } else {
+          document.getElementById("alertWrong").style.display = "block";
+          document.getElementById("alertSuccess").style.display = "none;";
+        }
+
+        if (AlertaAulas4.length > 0) {
+          A4.innerHTML =
+            "<b style='color: red;'>" +
+            AlertaAulas4.length +
+            " Alertas</b><br><p style='color: #000; font-weight: bold;'>Químicos con problemas:</p>";
+          AlertaAulas4.forEach((alerta) => {
+            A4.innerHTML += "<p style='color: #000;';>" + alerta[4] + "</p>";
+          });
+        }
+        if (AlertaCapilla.length > 0) {
+          Capilla.innerHTML =
+            "<b style='color: red;'>" +
+            AlertaCapilla.length +
+            " Alertas</b><br><p style='color: #000; font-weight: bold;'>Químicos con problemas:</p>";
+          AlertaCapilla.forEach((alerta) => {
+            Capilla.innerHTML +=
+              "<p style='color: #000;';>" + alerta[4] + "</p>";
+          });
+        }
+        if (AlertaBiblioteca.length > 0) {
+          Biblioteca.innerHTML =
+            "<b style='color: red;'>" +
+            AlertaBiblioteca.length +
+            " Alertas</b><br><p style='color: #000; font-weight: bold;'>Químicos con problemas:</p>";
+          AlertaBiblioteca.forEach((alerta) => {
+            Biblioteca.innerHTML +=
+              "<p style='color: #000;';>" + alerta[4] + "</p>";
+          });
+        }
+        if (AlertasJuan23.length > 0) {
+          Juan23.innerHTML =
+            "<b style='color: red;'>" +
+            AlertasJuan23.length +
+            " Alertas</b><br><p style='color: #000; font-weight: bold;'>Químicos con problemas:</p>";
+          AlertasJuan23.forEach((alerta) => {
+            Juan23.innerHTML +=
+              "<p style='color: #000;';>" + alerta[4] + "</p>";
+          });
+        }
+        if (AlertaKiosko.length > 0) {
+          Kiosko.innerHTML =
+            "<b style='color: red;'>" +
+            AlertaKiosko.length +
+            " Alertas</b><br><p style='color: #000; font-weight: bold;'>Químicos con problemas:</p>";
+          AlertaKiosko.forEach((alerta) => {
+            Kiosko.innerHTML +=
+              "<p style='color: #000;';>" + alerta[4] + "</p>";
+          });
+        }
+        if (AlertaLaboratorio.length > 0) {
+          Laboratorio.innerHTML =
+            "<b style='color: red;'>" +
+            AlertaLaboratorio.length +
+            " Alertas</b><br><p style='color: #000; font-weight: bold;'>Químicos con problemas:</p>";
+          AlertaLaboratorio.forEach((alerta) => {
+            Laboratorio.innerHTML +=
+              "<p style='color: #000;';>" + alerta[4] + "</p>";
+          });
+        }
+        if (AlertaPadreArroyo.length > 0) {
+          PadreArroyo.innerHTML =
+            "<b style='color: red;'>" +
+            AlertaPadreArroyo.length +
+            " Alertas</b><br><p style='color: #000; font-weight: bold;'>Químicos con problemas:</p>";
+          AlertaPadreArroyo.forEach((alerta) => {
+            PadreArroyo.innerHTML +=
+              "<p style='color: #000;';>" + alerta[4] + "</p>";
+          });
+        }
+        if (AlertasParqueoGeneral.length > 0) {
+          ParqueoGeneral.innerHTML =
+            "<b style='color: red;'>" +
+            AlertasParqueoGeneral.length +
+            " Alertas</b><br><p style='color: #000; font-weight: bold;'>Químicos con problemas:</p>";
+          AlertasParqueoGeneral.forEach((alerta) => {
+            ParqueoGeneral.innerHTML +=
+              "<p style='color: #000;';>" + alerta[4] + "</p>";
+          });
+        }
+      }
+    </script>
+    <script src="../../ownJs/access.js"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
