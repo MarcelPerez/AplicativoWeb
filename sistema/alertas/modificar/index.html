@@ -539,14 +539,12 @@
             const nombre = fila.insertCell();
             nombre.innerText = quimico.nombreQuimico;
             nombre.className = "nombre";
-
-            const threasureHigh = fila.insertCell();
-            threasureHigh.innerText = quimico.threasureHigh;
-            threasureHigh.className = "threasureHigh";
-
             const threasureLow = fila.insertCell();
             threasureLow.innerText = quimico.threasureLow;
             threasureLow.className = "threasureLow";
+            const threasureHigh = fila.insertCell();
+            threasureHigh.innerText = quimico.threasureHigh;
+            threasureHigh.className = "threasureHigh";
 
             const modificar = fila.insertCell();
             modificar.innerHTML =

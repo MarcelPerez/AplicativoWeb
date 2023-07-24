@@ -25,7 +25,7 @@ function fillTable(IdEstacion, tablaId) {
         hora.innerText = formatDate(medicion.time, 2);
 
         const valor = fila.insertCell();
-        valor.innerText = medicion.valor+" ppm";
+        valor.innerText = medicion.valor;
 
         const maximo = fila.insertCell();
         maximo.innerText = medicion.threasureHigh;
