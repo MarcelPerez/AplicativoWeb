@@ -2,90 +2,57 @@ function fillTable(IdEstacion, tablaId) {
   const tabla = document.getElementById(tablaId);
   const tbody = tabla.getElementsByTagName("tbody")[0];
 
-  fetch(
-    "http://154.38.167.248:5024/api/Detalle_Medicion/LastMedicionEstacion/" +
-      IdEstacion
-  )
+  fetch("http://154.38.167.248:5024/api/Estadistica/" + IdEstacion)
     .then((response) => response.json())
     .then((medicion) => {
-      // Iterar sobre las estaciones y agregar una fila por cada una
       medicion.forEach((medicion) => {
         const fila = tbody.insertRow();
-
-        const Estacion = fila.insertCell();
-        Estacion.innerText = medicion.nombreEstacion;
 
         const nombreQuimico = fila.insertCell();
         nombreQuimico.innerText = medicion.nombreQuimico;
 
-        const fecha = fila.insertCell();
-        fecha.innerText = formatDate(medicion.time, 1);
+        const cantidadMediciones = fila.insertCell();
+        cantidadMediciones.innerText = medicion.cantidadMediciones;
 
-        const hora = fila.insertCell();
-        hora.innerText = formatDate(medicion.time, 2);
+        const valorMinimo = fila.insertCell();
+        valorMinimo.innerText = medicion.valorMinimo+" " +obtenerUnidadesMedidas(medicion.nombreQuimico);
 
-        const valor = fila.insertCell();
-        valor.innerText =
-          medicion.valor + " " + obtenerUnidadesMedida(medicion.idQuimico);
+        const valorMaximo = fila.insertCell();
+        valorMaximo.innerText = medicion.valorMaximo+" " +obtenerUnidadesMedidas(medicion.nombreQuimico);
 
-        const maximo = fila.insertCell();
-        maximo.innerText =
-          medicion.threasureHigh +
-          " " +
-          obtenerUnidadesMedida(medicion.idQuimico);
+        const mediaAritmetica = fila.insertCell();
+        mediaAritmetica.innerText = medicion.mediaAritmetica+" " +obtenerUnidadesMedidas(medicion.nombreQuimico);
 
-        const minimo = fila.insertCell();
-        minimo.innerText =
-          medicion.threasureLow +
-          " " +
-          obtenerUnidadesMedida(medicion.idQuimico);
+        const rango = fila.insertCell();
+        rango.innerText = medicion.rango;
 
-        const estado = fila.insertCell();
-        if (
-          medicion.valor > medicion.threasureLow &&
-          medicion.valor < medicion.threasureHigh
-        ) {
-          estado.innerText = "Bien";
-        } else {
-          estado.innerText = "Mal";
-        }
+        const desviacionEstandar = fila.insertCell();
+        desviacionEstandar.innerText = medicion.desviacionEstandar;
+
+        const varianza = fila.insertCell();
+        varianza.innerText = medicion.varianza;
       });
     })
-    .catch((error) => console.error("Error al obtener las estaciones:", error));
-}
-function formatDate(inputDate, opcion) {
-  const date = new Date(inputDate);
-  const day = date.getDate().toString().padStart(2, "0");
-  const month = (date.getMonth() + 1).toString().padStart(2, "0");
-  const year = date.getFullYear();
-  const hours = date.getHours().toString().padStart(2, "0");
-  const minutes = date.getMinutes().toString().padStart(2, "0");
-  const seconds = date.getSeconds().toString().padStart(2, "0");
-  const ampm = hours >= 12 ? "PM" : "AM";
-  if (opcion == 1) {
-    return `${day}-${month}-${year}`;
-  } else {
-    return `${hours}:${minutes}:${seconds} ${ampm}`;
-  }
+    .catch((error) => console.error("Error al obtener las mediciones:", error));
 }
 
-fillTable(1, "tablaMedicionesEstacion1");
-fillTable(2, "tablaMedicionesEstacion2");
-fillTable(3, "tablaMedicionesEstacion3");
-fillTable(4, "tablaMedicionesEstacion4");
-fillTable(5, "tablaMedicionesEstacion5");
-fillTable(6, "tablaMedicionesEstacion6");
-fillTable(7, "tablaMedicionesEstacion7");
-fillTable(8, "tablaMedicionesEstacion8");
+fillTable(1, "tablaEstadisticaEstacion1");
+fillTable(2, "tablaEstadisticaEstacion2");
+fillTable(3, "tablaEstadisticaEstacion3");
+fillTable(4, "tablaEstadisticaEstacion4");
+fillTable(5, "tablaEstadisticaEstacion5");
+fillTable(6, "tablaEstadisticaEstacion6");
+fillTable(7, "tablaEstadisticaEstacion7");
+fillTable(8, "tablaEstadisticaEstacion8");
 
-tabla1 = document.getElementById("tablaMedicionesEstacion1");
-tabla2 = document.getElementById("tablaMedicionesEstacion2");
-tabla3 = document.getElementById("tablaMedicionesEstacion3");
-tabla4 = document.getElementById("tablaMedicionesEstacion4");
-tabla5 = document.getElementById("tablaMedicionesEstacion5");
-tabla6 = document.getElementById("tablaMedicionesEstacion6");
-tabla7 = document.getElementById("tablaMedicionesEstacion7");
-tabla8 = document.getElementById("tablaMedicionesEstacion8");
+tabla1 = document.getElementById("tablaEstadisticaEstacion1");
+tabla2 = document.getElementById("tablaEstadisticaEstacion2");
+tabla3 = document.getElementById("tablaEstadisticaEstacion3");
+tabla4 = document.getElementById("tablaEstadisticaEstacion4");
+tabla5 = document.getElementById("tablaEstadisticaEstacion5");
+tabla6 = document.getElementById("tablaEstadisticaEstacion6");
+tabla7 = document.getElementById("tablaEstadisticaEstacion7");
+tabla8 = document.getElementById("tablaEstadisticaEstacion8");
 
 tabla1.style.display = "none";
 tabla2.style.display = "none";
@@ -108,6 +75,11 @@ estacionAulasA4 = document.getElementById("estacion6");
 estacionParqueoGeneral = document.getElementById("estacion7");
 estacionJuan23 = document.getElementById("estacion8");
 
+detalle2 = document.getElementById("selectOption2");
+mediaMenu = document.getElementById("mediaMenu");
+desviacionMenu = document.getElementById("desviacionMenu");
+varianzaMenu = document.getElementById("varianzaMenu");
+
 botonAceptar.addEventListener("click", () => {
   tabla1.style.display = "none";
   tabla2.style.display = "none";
@@ -127,6 +99,10 @@ botonAceptar.addEventListener("click", () => {
   estacionJuan23.style.display = "inline";
   botonAceptar.style.display = "none";
   detalle.style.display = "block";
+  mediaMenu.style.display = "inline";
+  desviacionMenu.style.display = "inline";
+  varianzaMenu.style.display = "inline";
+  detalle2.style.display = "block";
 });
 
 estacionCapilla.addEventListener("click", () => {
@@ -148,6 +124,10 @@ estacionCapilla.addEventListener("click", () => {
   estacionJuan23.style.display = "none";
   botonAceptar.style.display = "block";
   detalle.style.display = "none";
+  mediaMenu.style.display = "none";
+  desviacionMenu.style.display = "none";
+  varianzaMenu.style.display = "none";
+  detalle2.style.display = "none";
 });
 
 estacionBiblioteca.addEventListener("click", () => {
@@ -169,6 +149,10 @@ estacionBiblioteca.addEventListener("click", () => {
   estacionJuan23.style.display = "none";
   botonAceptar.style.display = "block";
   detalle.style.display = "none";
+  mediaMenu.style.display = "none";
+  desviacionMenu.style.display = "none";
+  varianzaMenu.style.display = "none";
+  detalle2.style.display = "none";
 });
 
 estacionLaboratorio.addEventListener("click", () => {
@@ -190,6 +174,10 @@ estacionLaboratorio.addEventListener("click", () => {
   estacionJuan23.style.display = "none";
   botonAceptar.style.display = "block";
   detalle.style.display = "none";
+  mediaMenu.style.display = "none";
+  desviacionMenu.style.display = "none";
+  varianzaMenu.style.display = "none";
+  detalle2.style.display = "none";
 });
 
 estacionKiosko.addEventListener("click", () => {
@@ -211,6 +199,10 @@ estacionKiosko.addEventListener("click", () => {
   estacionJuan23.style.display = "none";
   botonAceptar.style.display = "block";
   detalle.style.display = "none";
+  mediaMenu.style.display = "none";
+  desviacionMenu.style.display = "none";
+  varianzaMenu.style.display = "none";
+  detalle2.style.display = "none";
 });
 
 estacionPadreArroyo.addEventListener("click", () => {
@@ -232,6 +224,10 @@ estacionPadreArroyo.addEventListener("click", () => {
   estacionJuan23.style.display = "none";
   botonAceptar.style.display = "block";
   detalle.style.display = "none";
+  mediaMenu.style.display = "none";
+  desviacionMenu.style.display = "none";
+  varianzaMenu.style.display = "none";
+  detalle2.style.display = "none";
 });
 
 estacionAulasA4.addEventListener("click", () => {
@@ -253,6 +249,10 @@ estacionAulasA4.addEventListener("click", () => {
   estacionJuan23.style.display = "none";
   botonAceptar.style.display = "block";
   detalle.style.display = "none";
+  mediaMenu.style.display = "none";
+  desviacionMenu.style.display = "none";
+  varianzaMenu.style.display = "none";
+  detalle2.style.display = "none";
 });
 
 estacionParqueoGeneral.addEventListener("click", () => {
@@ -274,6 +274,10 @@ estacionParqueoGeneral.addEventListener("click", () => {
   estacionJuan23.style.display = "none";
   botonAceptar.style.display = "block";
   detalle.style.display = "none";
+  mediaMenu.style.display = "none";
+  desviacionMenu.style.display = "none";
+  varianzaMenu.style.display = "none";
+  detalle2.style.display = "none";
 });
 
 estacionJuan23.addEventListener("click", () => {
@@ -295,4 +299,8 @@ estacionJuan23.addEventListener("click", () => {
   estacionJuan23.style.display = "none";
   botonAceptar.style.display = "block";
   detalle.style.display = "none";
+  mediaMenu.style.display = "none";
+  desviacionMenu.style.display = "none";
+  varianzaMenu.style.display = "none";
+  detalle2.style.display = "none";
 });

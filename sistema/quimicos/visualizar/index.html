@@ -404,8 +404,8 @@
                 <tr>
                   <th>Nombre</th>
                   <th>Descripción</th>
-                  <th>threasureHigh</th>
-                  <th>threasureLow</th>
+                  <th>Valor Máximo</th>
+                  <th>Valor Mínimo</th>
                 </tr>
               </thead>
               <tbody></tbody>
@@ -453,10 +453,14 @@
             descripcion.innerText = quimico.descripcionQuimico;
 
             const threasureHigh = fila.insertCell();
-            threasureHigh.innerText = quimico.threasureHigh;
+            threasureHigh.innerText = quimico.threasureHigh+
+              " " +
+              obtenerUnidadesMedida(quimico.idQuimico);;
 
             const threasureLow = fila.insertCell();
-            threasureLow.innerText = quimico.threasureLow;
+            threasureLow.innerText = quimico.threasureLow+
+              " " +
+              obtenerUnidadesMedida(quimico.idQuimico);;
           });
         })
         .catch((error) =>

@@ -395,8 +395,8 @@
                   <th>id</th>
                   <th>Nombre</th>
                   <th>Descripción</th>
-                  <th>threasureHigh</th>
-                  <th>threasureLow</th>
+                  <th>Valor Máximo</th>
+                  <th>Valor Mínimo</th>
                   <th>Sensor</th>
                   <th>Modificar</th>
                 </tr>
@@ -549,11 +549,17 @@
             descripcion.className = "descripcion";
 
             const threasureHigh = fila.insertCell();
-            threasureHigh.innerText = quimico.threasureHigh;
+            threasureHigh.innerText =
+              quimico.threasureHigh +
+              " " +
+              obtenerUnidadesMedida(quimico.idQuimico);
             threasureHigh.className = "threasureHigh";
 
             const threasureLow = fila.insertCell();
-            threasureLow.innerText = quimico.threasureLow;
+            threasureLow.innerText =
+              quimico.threasureLow +
+              " " +
+              obtenerUnidadesMedida(quimico.idQuimico);
             threasureLow.className = "threasureLow";
 
             const sensor = fila.insertCell();
@@ -625,7 +631,6 @@
         document.getElementById("threasureHigh").value = threasureHigh;
         document.getElementById("threasureLow").value = threasureLow;
         document.getElementById("sensorAnt").value = idSensor;
-
       }
     </script>
 

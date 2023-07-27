@@ -465,10 +465,14 @@
             descripcion.innerText = estacion.descripcionEstacion;
 
             const delay = fila.insertCell();
-            delay.innerText = estacion.delayEstacion;
+            delay.innerText = estacion.delayEstacion + " s";
 
             const estado = fila.insertCell();
-            estado.innerText = estacion.estado;
+            if (estacion.estado == 1) {
+              estado.innerText ="Activo";
+            } else {
+              estado.innerText ="Inactivo";
+            }
           });
         })
         .catch((error) =>
@@ -483,6 +487,5 @@
     <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
     <script src="../../assets/js/main.js"></script>
     <script src="../../ownJs/access.js"></script>
-
   </body>
 </html>

@@ -521,6 +521,7 @@
     </script>
     <script src="../../ownJs/access.js"></script>
 
+
     <script>
       const tabla = document.getElementById("tablaQuimicos");
       const tbody = tabla.getElementsByTagName("tbody")[0];
@@ -540,10 +541,16 @@
             nombre.innerText = quimico.nombreQuimico;
             nombre.className = "nombre";
             const threasureLow = fila.insertCell();
-            threasureLow.innerText = quimico.threasureLow;
+            threasureLow.innerText =
+              quimico.threasureLow +
+              " " +
+              obtenerUnidadesMedida(quimico.idQuimico);
             threasureLow.className = "threasureLow";
             const threasureHigh = fila.insertCell();
-            threasureHigh.innerText = quimico.threasureHigh;
+            threasureHigh.innerText =
+              quimico.threasureHigh +
+              " " +
+              obtenerUnidadesMedida(quimico.idQuimico);
             threasureHigh.className = "threasureHigh";
 
             const modificar = fila.insertCell();
