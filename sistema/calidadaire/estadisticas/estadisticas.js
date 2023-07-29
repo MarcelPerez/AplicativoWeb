@@ -15,22 +15,22 @@ function fillTable(IdEstacion, tablaId) {
         cantidadMediciones.innerText = medicion.cantidadMediciones;
 
         const valorMinimo = fila.insertCell();
-        valorMinimo.innerText = medicion.valorMinimo+" " +obtenerUnidadesMedidas(medicion.nombreQuimico);
+        valorMinimo.innerText = medicion.valorMinimo.toFixed(2)+" " +obtenerUnidadesMedidas(medicion.nombreQuimico);
 
         const valorMaximo = fila.insertCell();
-        valorMaximo.innerText = medicion.valorMaximo+" " +obtenerUnidadesMedidas(medicion.nombreQuimico);
+        valorMaximo.innerText = medicion.valorMaximo.toFixed(2)+" " +obtenerUnidadesMedidas(medicion.nombreQuimico);
 
         const mediaAritmetica = fila.insertCell();
-        mediaAritmetica.innerText = medicion.mediaAritmetica+" " +obtenerUnidadesMedidas(medicion.nombreQuimico);
+        mediaAritmetica.innerText = medicion.mediaAritmetica.toFixed(2)+" " +obtenerUnidadesMedidas(medicion.nombreQuimico);
 
         const rango = fila.insertCell();
-        rango.innerText = medicion.rango;
+        rango.innerText = medicion.rango.toFixed(2);
 
         const desviacionEstandar = fila.insertCell();
-        desviacionEstandar.innerText = medicion.desviacionEstandar;
+        desviacionEstandar.innerText = medicion.desviacionEstandar.toFixed(2);
 
         const varianza = fila.insertCell();
-        varianza.innerText = medicion.varianza;
+        varianza.innerText = medicion.varianza.toFixed(2);
       });
     })
     .catch((error) => console.error("Error al obtener las mediciones:", error));
@@ -75,10 +75,10 @@ estacionAulasA4 = document.getElementById("estacion6");
 estacionParqueoGeneral = document.getElementById("estacion7");
 estacionJuan23 = document.getElementById("estacion8");
 
-detalle2 = document.getElementById("selectOption2");
-mediaMenu = document.getElementById("mediaMenu");
-desviacionMenu = document.getElementById("desviacionMenu");
-varianzaMenu = document.getElementById("varianzaMenu");
+// detalle2 = document.getElementById("selectOption2");
+// mediaMenu = document.getElementById("mediaMenu");
+// desviacionMenu = document.getElementById("desviacionMenu");
+// varianzaMenu = document.getElementById("varianzaMenu");
 
 botonAceptar.addEventListener("click", () => {
   tabla1.style.display = "none";
@@ -99,10 +99,10 @@ botonAceptar.addEventListener("click", () => {
   estacionJuan23.style.display = "inline";
   botonAceptar.style.display = "none";
   detalle.style.display = "block";
-  mediaMenu.style.display = "inline";
-  desviacionMenu.style.display = "inline";
-  varianzaMenu.style.display = "inline";
-  detalle2.style.display = "block";
+  // mediaMenu.style.display = "inline";
+  // desviacionMenu.style.display = "inline";
+  // varianzaMenu.style.display = "inline";
+  // detalle2.style.display = "block";
 });
 
 estacionCapilla.addEventListener("click", () => {
@@ -124,10 +124,10 @@ estacionCapilla.addEventListener("click", () => {
   estacionJuan23.style.display = "none";
   botonAceptar.style.display = "block";
   detalle.style.display = "none";
-  mediaMenu.style.display = "none";
-  desviacionMenu.style.display = "none";
-  varianzaMenu.style.display = "none";
-  detalle2.style.display = "none";
+  // mediaMenu.style.display = "none";
+  // desviacionMenu.style.display = "none";
+  // varianzaMenu.style.display = "none";
+  // detalle2.style.display = "none";
 });
 
 estacionBiblioteca.addEventListener("click", () => {
@@ -149,10 +149,10 @@ estacionBiblioteca.addEventListener("click", () => {
   estacionJuan23.style.display = "none";
   botonAceptar.style.display = "block";
   detalle.style.display = "none";
-  mediaMenu.style.display = "none";
-  desviacionMenu.style.display = "none";
-  varianzaMenu.style.display = "none";
-  detalle2.style.display = "none";
+  // mediaMenu.style.display = "none";
+  // desviacionMenu.style.display = "none";
+  // varianzaMenu.style.display = "none";
+  // detalle2.style.display = "none";
 });
 
 estacionLaboratorio.addEventListener("click", () => {
@@ -174,10 +174,10 @@ estacionLaboratorio.addEventListener("click", () => {
   estacionJuan23.style.display = "none";
   botonAceptar.style.display = "block";
   detalle.style.display = "none";
-  mediaMenu.style.display = "none";
-  desviacionMenu.style.display = "none";
-  varianzaMenu.style.display = "none";
-  detalle2.style.display = "none";
+  // mediaMenu.style.display = "none";
+  // desviacionMenu.style.display = "none";
+  // varianzaMenu.style.display = "none";
+  // detalle2.style.display = "none";
 });
 
 estacionKiosko.addEventListener("click", () => {
@@ -199,10 +199,10 @@ estacionKiosko.addEventListener("click", () => {
   estacionJuan23.style.display = "none";
   botonAceptar.style.display = "block";
   detalle.style.display = "none";
-  mediaMenu.style.display = "none";
-  desviacionMenu.style.display = "none";
-  varianzaMenu.style.display = "none";
-  detalle2.style.display = "none";
+  // mediaMenu.style.display = "none";
+  // desviacionMenu.style.display = "none";
+  // varianzaMenu.style.display = "none";
+  // detalle2.style.display = "none";
 });
 
 estacionPadreArroyo.addEventListener("click", () => {
@@ -224,10 +224,10 @@ estacionPadreArroyo.addEventListener("click", () => {
   estacionJuan23.style.display = "none";
   botonAceptar.style.display = "block";
   detalle.style.display = "none";
-  mediaMenu.style.display = "none";
-  desviacionMenu.style.display = "none";
-  varianzaMenu.style.display = "none";
-  detalle2.style.display = "none";
+  // mediaMenu.style.display = "none";
+  // desviacionMenu.style.display = "none";
+  // varianzaMenu.style.display = "none";
+  // detalle2.style.display = "none";
 });
 
 estacionAulasA4.addEventListener("click", () => {
@@ -249,10 +249,10 @@ estacionAulasA4.addEventListener("click", () => {
   estacionJuan23.style.display = "none";
   botonAceptar.style.display = "block";
   detalle.style.display = "none";
-  mediaMenu.style.display = "none";
-  desviacionMenu.style.display = "none";
-  varianzaMenu.style.display = "none";
-  detalle2.style.display = "none";
+  // mediaMenu.style.display = "none";
+  // desviacionMenu.style.display = "none";
+  // varianzaMenu.style.display = "none";
+  // detalle2.style.display = "none";
 });
 
 estacionParqueoGeneral.addEventListener("click", () => {
@@ -274,10 +274,10 @@ estacionParqueoGeneral.addEventListener("click", () => {
   estacionJuan23.style.display = "none";
   botonAceptar.style.display = "block";
   detalle.style.display = "none";
-  mediaMenu.style.display = "none";
-  desviacionMenu.style.display = "none";
-  varianzaMenu.style.display = "none";
-  detalle2.style.display = "none";
+  // mediaMenu.style.display = "none";
+  // desviacionMenu.style.display = "none";
+  // varianzaMenu.style.display = "none";
+  // detalle2.style.display = "none";
 });
 
 estacionJuan23.addEventListener("click", () => {
@@ -299,8 +299,8 @@ estacionJuan23.addEventListener("click", () => {
   estacionJuan23.style.display = "none";
   botonAceptar.style.display = "block";
   detalle.style.display = "none";
-  mediaMenu.style.display = "none";
-  desviacionMenu.style.display = "none";
-  varianzaMenu.style.display = "none";
-  detalle2.style.display = "none";
+  // mediaMenu.style.display = "none";
+  // desviacionMenu.style.display = "none";
+  // varianzaMenu.style.display = "none";
+  // detalle2.style.display = "none";
 });

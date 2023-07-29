@@ -383,7 +383,205 @@
       <!-- /#header -->
       <!-- Content -->
       <div class="content">
-        <h4>GRAFICOS</h4>
+        <div class="card">
+          <div class="card-body">
+            <h3 class="text-center" style="text-decoration: underline">
+              <b>Gráficas</b>
+            </h3>
+            <h4 id="selectOption" style="margin: 10px; font-family: sans-serif">
+              Selecciona la estación de la cual desea visualizar sus gráficas.
+            </h4>
+            <button
+              style="margin: 10px; background-color: green"
+              class="button"
+              id="estacion1"
+            >
+              Capilla
+            </button>
+            <button
+              style="margin: 10px; background-color: green"
+              class="button"
+              id="estacion2"
+            >
+              Biblioteca
+            </button>
+            <button
+              style="margin: 10px; background-color: green"
+              class="button"
+              id="estacion3"
+            >
+              Laboratorio ITT
+            </button>
+            <button
+              style="margin: 10px; background-color: green"
+              class="button"
+              id="estacion4"
+            >
+              Kiosko PUCMM
+            </button>
+            <button
+              style="margin: 10px; background-color: green"
+              class="button"
+              id="estacion5"
+            >
+              Padre Arroyo
+            </button>
+            <button
+              style="margin: 10px; background-color: green"
+              class="button"
+              id="estacion6"
+            >
+              Aulas A4
+            </button>
+            <button
+              style="margin: 10px; background-color: green"
+              class="button"
+              id="estacion7"
+            >
+              Parqueo General
+            </button>
+            <button
+              style="margin: 10px; background-color: green"
+              class="button"
+              id="estacion8"
+            >
+              Juan 23
+            </button>
+
+            <!-- QUIMICOS -->
+            <div id="quimicosSelecion">
+              <h4
+                id="selectOptionQuimico"
+                style="display: none; margin: 10px; font-family: sans-serif"
+              >
+                Selecciona el quimico del cual desea visualizar su gráfica.
+              </h4>
+              <button
+                style="
+                  display: none;
+                  margin: 10px;
+                  background-color: rgb(0, 122, 178);
+                "
+                class="button"
+                id="quimico1"
+              >
+                Polvo
+              </button>
+              <button
+                style="
+                  display: none;
+                  margin: 10px;
+                  background-color: rgb(0, 122, 178);
+                "
+                class="button"
+                id="quimico2"
+              >
+                Monóxido de carbono (CO)
+              </button>
+              <button
+                style="
+                  display: none;
+                  margin: 10px;
+                  background-color: rgb(0, 122, 178);
+                "
+                class="button"
+                id="quimico3"
+              >
+                Dióxido de nitrógeno (NO2)
+              </button>
+              <button
+                style="
+                  display: none;
+                  margin: 10px;
+                  background-color: rgb(0, 122, 178);
+                "
+                class="button"
+                id="quimico4"
+              >
+                Compuestos Org. volátiles (VOC)
+              </button>
+              <button
+                style="
+                  display: none;
+                  margin: 10px;
+                  background-color: rgb(0, 122, 178);
+                "
+                class="button"
+                id="quimico5"
+              >
+                Etanol (C2H5CH)
+              </button>
+              <button
+                style="
+                  display: none;
+                  margin: 10px;
+                  background-color: rgb(0, 122, 178);
+                "
+                class="button"
+                id="quimico6"
+              >
+                Dióxido de carbono (CO2)
+              </button>
+              <button
+                style="
+                  display: none;
+                  margin: 10px;
+                  background-color: rgb(0, 122, 178);
+                "
+                class="button"
+                id="quimico7"
+              >
+                Temperatura
+              </button>
+              <button
+                style="
+                  display: none;
+                  margin: 10px;
+                  background-color: rgb(0, 122, 178);
+                "
+                class="button"
+                id="quimico8"
+              >
+                Humedad
+              </button>
+            </div>
+            <canvas
+            style="display: none"
+            id="myChart"
+            height="300"
+            width="300"
+          ></canvas>
+            <center>
+              <button
+                style="
+                  display: none;
+                  margin: 10px;
+                  background-color: rgb(124, 145, 1);
+                "
+                class="button"
+                id="back"
+              >
+                volver atrás
+              </button>
+            </center>
+
+            <center>
+              <button
+                style="
+                  margin: 10px;
+                  display: none;
+                  background-color: rgb(0, 106, 167);
+                "
+                class="button"
+                id="btnAceptar"
+              >
+                Aceptar
+              </button>
+            </center>
+          </div>
+        </div>
+
+
         <!-- .animated -->
       </div>
       <!-- /.content -->
@@ -407,6 +605,15 @@
     </div>
 
     <!-- Scripts -->
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.0.2/chart.min.js"
+      integrity="sha512-dnUg2JxjlVoXHVdSMWDYm2Y5xcIrJg1N+juOuRi0yLVkku/g26rwHwysJDAMwahaDfRpr1AxFz43ktuMPr/l1A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom"></script>
+
+    <script src="grafico.js"></script>
     <script src="../../ownJs/access.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>

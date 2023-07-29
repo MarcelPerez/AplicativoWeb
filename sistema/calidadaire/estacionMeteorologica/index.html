@@ -59,7 +59,6 @@
       /* Estilos generales */
 
       h2 {
-        border-bottom: 2px solid #333;
         padding-bottom: 5px;
         margin-bottom: 20px;
       }
@@ -71,7 +70,9 @@
       .forecast,
       .astro-info,
       .hourly-info {
+        margin: 10px;
         margin-bottom: 30px;
+        font-family: sans-serif;
       }
 
       /* Puedes seguir agregando estilos para personalizar tu página según tus preferencias */
@@ -402,106 +403,133 @@
       <!-- /#header -->
       <!-- Content -->
       <div class="content">
-        <div class="card">
-          <div class="weather-info">
-            <h2>Información de la Estación Meteorológica</h2>
-            <p>Nombre de la Estación Meteorológica: <span id="nombreEstacion"></span></p>
-            <p>Fecha de Medición: <span id="measurement-date"></span></p>
+        <div class="card" style="border-radius: 5px">
+          <div class="weather-info" style="margin: 10px">
+            <h2>
+              <center><b>Información de la Estación Meteorológica</b></center>
+            </h2>
+            <p style="color: #000">
+              <b>Nombre de la Estación Meteorológica:</b>
+              <span id="nombreEstacion"></span>
+            </p>
+            <p style="color: #000">
+              <b>Fecha de Medición:</b> <span id="measurement-date"></span>
+            </p>
           </div>
 
           <div class="current-info">
-            <h2>Información Actual</h2>
-            <p>Última Medición: <span id="last-measurement"></span></p>
-            <p>
-              Temperatura: <span id="temperature-c"></span>°C /
-              <span id="temperature-f"></span>°F
-            </p>
-            <p>Humedad: <span id="humidity"></span>%</p>
-            <p>Estado del Día: <span id="day-night"></span></p>
-            <p>Condición: <span id="condition"></span></p>
-            <p>
-              Velocidad del Viento: <span id="wind-speed-kph"></span> km/h /
-              <span id="wind-speed-mph"></span> mph
-            </p>
-            <p>
-              Grados de la Velocidad del Viento: <span id="wind-deg"></span>°
-            </p>
-            <p>
-              Dirección de la Velocidad del Viento: <span id="wind-dir"></span>
-            </p>
-            <p>Presión Atmosférica (mb): <span id="pressure-mb"></span></p>
-            <p>Presión Atmosférica (in): <span id="pressure-in"></span></p>
-            <p>
-              Precipitación: <span id="precipitation-mm"></span> mm /
-              <span id="precipitation-in"></span> in
-            </p>
-            <p>Porcentaje de Humedad: <span id="humidity-percent"></span>%</p>
-            <p>Porcentaje Nublado: <span id="clouds-percent"></span>%</p>
-            <p>Índice UV: <span id="uv-index"></span></p>
-            <p>
-              Ráfaga de Viento: <span id="wind-gust-mph"></span> mph /
-              <span id="wind-gust-kph"></span> km/h
-            </p>
-            <p>
-              Visibilidad: <span id="visibility-km"></span> km /
-              <span id="visibility-miles"></span> millas
-            </p>
-          </div>
-
-          <div class="air-quality">
-            <h2>Información de Calidad del Aire</h2>
-            <p>CO: <span id="co"></span></p>
-            <p>NO2: <span id="no2"></span></p>
-            <p>O3: <span id="o3"></span></p>
-            <p>SO2: <span id="so2"></span></p>
-            <p>PM2.5: <span id="pm25"></span></p>
-            <p>PM10: <span id="pm10"></span></p>
-            <!-- <p>Índice US EPA: <span id="us-epa-index"></span></p>
-            <p>Índice GB Defra: <span id="gb-defra-index"></span></p> -->
-          </div>
-
-          <div class="forecast">
-            <h2>Pronóstico</h2>
-            <form style="width: 50%" id="forecast-form">
-              <label for="days">Cantidad de días (hasta 14 días más):</label>
-              <input type="number" id="days" min="1" max="14" value="1" />
-              <button type="submit">Obtener Pronóstico</button>
-            </form>
-            <div id="forecast-info"></div>
-          </div>
-
-          <div class="astro-info">
-            <h2>Información Astronómica</h2>
-            <p>Amanecer: <span id="sunrise"></span></p>
-            <p>Atardecer: <span id="sunset"></span></p>
-            <p>Salida de la Luna: <span id="moonrise"></span></p>
-            <p>Puesta de la Luna: <span id="moonset"></span></p>
-            <p>Fase Lunar: <span id="moonphase"></span></p>
-            <p>Iluminación Lunar: <span id="moon-illumination"></span>%</p>
-            <p>Luna está fuera: <span id="moon-out"></span></p>
+            <h2>
+              <center>
+                <b style="text-decoration: underline">Información de Hoy</b>
+              </center>
+            </h2>
+            <table
+              style="margin-right: 20px"
+              class="table table-striped table-bordered"
+            >
+              <thead>
+                <tr>
+                  <th>Hora Medición</th>
+                  <th>Temperatura (°C)</th>
+                  <th>Humedad (%)</th>
+                  <th>Presión Atmosférica (mb)</th>
+                  <th>Precipitación (mm)</th>
+                  <th>Velocidad del Viento (km/h)</th>
+                  <th>Índice UV</th>
+                </tr>
+              </thead>
+              <tbody id="actual-data"></tbody>
+            </table>
+            <br />
+            <h2>
+              <center>
+                <b style="text-decoration: underline"
+                  >Información sobre la calidad del aire</b
+                >
+              </center>
+            </h2>
+            <table
+              style="margin-right: 20px"
+              class="table table-striped table-bordered"
+            >
+              <thead>
+                <tr>
+                  <th>Hora Medición</th>
+                  <th>Monóxido de carbono (CO)</th>
+                  <th>Dióxido de nitrógeno (NO2)</th>
+                  <th>Ozono (O3)</th>
+                  <th>Dióxido de azufre (SO2)</th>
+                  <th>PM2.5</th>
+                  <th>PM10</th>
+                </tr>
+              </thead>
+              <tbody id="airQuality-data"></tbody>
+            </table>
+            <br />
+            <h2>
+              <center>
+                <b style="text-decoration: underline"
+                  >Información Astronómica</b
+                >
+              </center>
+            </h2>
+            <table
+              style="margin-right: 20px"
+              class="table table-striped table-bordered"
+            >
+              <thead>
+                <tr>
+                  <th>Amanecer</th>
+                  <th>Atardecer</th>
+                  <th>Salida de la Luna</th>
+                  <th>Puesta de la Luna</th>
+                  <th>Iluminación Lunar</th>
+                  <th>Fase Lunar</th>
+                </tr>
+              </thead>
+              <tbody id="astronomous-data"></tbody>
+            </table>
           </div>
 
           <div class="hourly-info">
-            <h2>Información por Hora</h2>
+            <h2><b>Información por Hora</b></h2>
             <table
-              style="margin: 20px"
+              style="margin-right: 20px"
               class="table table-striped table-bordered"
             >
               <thead>
                 <tr>
                   <th>Hora</th>
-                  <th>Temperatura (°C / °F)</th>
-                  <th>Sensación Térmica (°C / °F)</th>
-                  <th>Estado del Día</th>
-                  <th>Condición</th>
-                  <th>Velocidad del Viento (km/h / mph)</th>
-                  <th>Grados de la Velocidad del Viento</th>
-                  <th>Dirección de la Velocidad del Viento</th>
-                  <th>Presión Atmosférica (mb / in)</th>
-                  <th>Precipitación (mm / in)</th>
+                  <th>Temperatura (°C)</th>
+                  <th>Sensación Térmica (°C)</th>
+                  <th>Humedad (%)</th>
+                  <th>Velocidad del Viento (km/h)</th>
+                  <th>Presión Atmosférica (mb)</th>
+                  <th>Precipitación (mm)</th>
                 </tr>
               </thead>
               <tbody id="hourly-data"></tbody>
+            </table>
+          </div>
+
+          <div class="hourly-info">
+            <h4><b>Información por Hora sobre calidad del aire:</b></h4>
+            <table
+              style="margin-right: 20px"
+              class="table table-striped table-bordered"
+            >
+              <thead>
+                <tr>
+                  <th>Hora Medición</th>
+                  <th>Monóxido de carbono (CO)</th>
+                  <th>Dióxido de nitrógeno (NO2)</th>
+                  <th>Ozono (O3)</th>
+                  <th>Dióxido de azufre (SO2)</th>
+                  <th>PM2.5</th>
+                  <th>PM10</th>
+                </tr>
+              </thead>
+              <tbody id="hourlyAirQuality-data"></tbody>
             </table>
           </div>
         </div>
