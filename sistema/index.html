@@ -376,7 +376,7 @@
               </div>
 
               <script>
-                function salir(){
+                function salir() {
                   localStorage.clear();
                 }
               </script>
@@ -392,19 +392,47 @@
           <!-- Widgets  -->
           <div class="content map-container">
             <center><h3>ESTADO DEL AIRE EN PUCMM (SANTIAGO)</h3></center>
+            <p
+              style="
+                color: #000;
+                font-family: sans-serif;
+                text-align: justify;
+                line-height: 2;
+              "
+            >
+              <br />
+              ¡Bienvenido al
+              <b>Sistema de Administración de la Calidad del Aire</b> en PUCMM
+              Campus Santiago! Es un placer presentar esta innovadora plataforma
+              que te permitirá vigilar la calidad del aire en nuestro campus.
 
-            <div class="grid-container">
-              <div class="grid-1">
-                <div id="js-map" class="map"></div>
-              </div>
-            </div>
+              <br /><br />
+            </p>
 
-            <div class="overlay-container">
-              <span class="overly-text" id="feature-name"></span><br />
-              <span class="overly-text" id="feature-masinfo"></span><br />
-            </div>
+            <center>
+              <img
+                style="width: 100px; margin-right: 30px"
+                src="./images/LogoPUCMM.png"
+                alt=""
+              />
+              <img style="width: 300px" src="./images/LogoNegro.png" alt="" />
+            </center>
 
-            <!-- .animated -->
+            <center>
+              <br><br>
+              <h2><b style="text-decoration: underline;">OPCIONES</b></h2>
+            </center>
+            <center>
+              <button id="myGPS" style="margin-top: 10px">
+                CONOCER ESTADO DEL AIRE DE MI UBICACION
+              </button>
+            </center>
+            <center>
+              <button id="old" style="margin-top: 50px">
+                VISUALIZAR EL SISTEMA SIMPLIFICADO
+              </button>
+            </center>
+            <br /><br />
           </div>
           <br />
           <br />

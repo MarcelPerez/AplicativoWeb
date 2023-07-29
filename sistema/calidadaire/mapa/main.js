@@ -68,9 +68,9 @@ const ObtenerInfo = async (opcion) => {
 function calculateWeight(option, quimico) {
   var weight = 0;
   if (option === "temperatura") {
-    if (quimico < 20) {
+    if (quimico < 16) {
       weight = 0.2; // Azul
-    } else if (quimico >= 20 && quimico <= 38) {
+    } else if (quimico >= 20 && quimico <= 30) {
       weight = 0.35; // Verde
     } else {
       weight = 0.8; // Naranja
@@ -80,7 +80,7 @@ function calculateWeight(option, quimico) {
   if (option === "humedad") {
     if (quimico < 30) {
       weight = 0.8; // Naranja
-    } else if (quimico >= 30 && quimico <= 70) {
+    } else if (quimico >= 30 && quimico <= 80) {
       weight = 0.25; // Verde
     } else {
       weight = 0.8; // Rojo
@@ -88,19 +88,15 @@ function calculateWeight(option, quimico) {
   }
 
   if (option === "polvo") {
-    if (quimico < 150) {
-      weight = 0.25;
-    } else if (quimico >= 150 && quimico <= 300) {
-      weight = 0.35;
-    } else if (quimico > 300 && quimico < 1050) {
-      weight = 0.55;
-    } else if (quimico > 1050) {
+    if (quimico < 1050) {
+      weight = 0.30;
+     } else {
       weight = 0.7;
     }
   }
 
   if (option === "CO") {
-    if (quimico < 900) {
+    if (quimico < 1000) {
       weight = 0.2;
     } else {
       weight = 0.9;
@@ -108,7 +104,7 @@ function calculateWeight(option, quimico) {
   }
 
   if (option === "VOC") {
-    if (quimico < 900) {
+    if (quimico <1000) {
       weight = 0.15;
     } else {
       weight = 0.9;
@@ -116,7 +112,7 @@ function calculateWeight(option, quimico) {
   }
 
   if (option === "CO2") {
-    if (quimico < 900) {
+    if (quimico < 1000) {
       weight = 0.2;
     } else {
       weight = 0.9;
@@ -124,7 +120,7 @@ function calculateWeight(option, quimico) {
   }
 
   if (option === "NO2") {
-    if (quimico < 900) {
+    if (quimico < 1000) {
       weight = 0.35;
     } else {
       weight = 0.9;
@@ -132,7 +128,7 @@ function calculateWeight(option, quimico) {
   }
 
   if (option === "C2H5CH") {
-    if (quimico < 900) {
+    if (quimico < 1000) {
       weight = 0.25;
     } else {
       weight = 0.9;
@@ -244,7 +240,6 @@ function calculateDistance(lon1, lat1, lon2, lat2) {
       Math.sin(lonDelta / 2);
   var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
   var earthRadius = 6371; // Radio de la Tierra en kilómetros
-  // console.log("DISTANCE: " + earthRadius * c);
   return earthRadius * c;
 }
 

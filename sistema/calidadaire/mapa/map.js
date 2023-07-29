@@ -26,17 +26,17 @@ function init() {
   map.addLayer(baseLayerGroup);
 
   const fillStyle = new ol.style.Fill({
-    color: [7, 119, 89, 0.15],
+    color: [127, 119, 89, 0.35],
   });
 
   const strokeStyle = new ol.style.Stroke({
     color: [46, 45, 45, 1],
-    width: 3,
+    width: 2,
   });
 
   const circleStyle = new ol.style.Circle({
     fill: new ol.style.Fill({
-      color: [245, 149, 5, 1],
+      color: [0, 245, 0, 1],
     }),
     radius: 7,
     stroke: strokeStyle,
@@ -74,40 +74,6 @@ function init() {
     });
     map.addLayer(AreaGeoJson2);
   }
-
-  // var cellSize = 10000; // Tamaño de las celdas de la cuadrícula
-  // var options = { gridType: "point", property: "value" }; // Opciones de la interpolación
-
-  // var interpolated = turf.interpolate(
-  //   vectorSource.getFeatures(),
-  //   cellSize,
-  //   options
-  // );
-
-  var points = turf.randomPoint(30, { bbox: [50, 30, 70, 50] });
-
-  // add a random property to each point
-  turf.featureEach(points, function (point) {
-    point.properties.solRad = Math.random() * 50;
-  });
-  var options = { gridType: "points", property: "solRad", units: "miles" };
-  var grid = turf.interpolate(points, 100, options);
-  var interpolatedSource = new ol.source.Vector({
-    features: new ol.format.GeoJSON().readFeatures(grid),
-  });
-  var interpolatedLayer = new ol.layer.Vector({
-    source: interpolatedSource,
-    style: function (feature) {
-      var value = feature.get("value");
-      var color = getColor(value); // Función que devuelve un color en función del valor
-      return new ol.style.Style({
-        fill: new ol.style.Fill({ color: color }),
-        stroke: new ol.style.Stroke({ color: "black", width: 1 }),
-      });
-    },
-  });
-
-  map.addLayer(interpolatedLayer);
 
   map.addLayer(AreaGeoJson);
 
@@ -296,39 +262,6 @@ function init() {
           color = "CDD400";
         }
         break;
-
-      // //NO2:
-      // case 3:
-      //   if (Valor > 0 && Valor <= 5.3) {
-      //     Estado = "Excelente";
-      //   } else if (Valor > 5.3 && Valor <= 10) {
-      //     Estado = "Regular";
-      //   } else {
-      //     Estado = "Malo";
-      //   }
-      //   break;
-
-      // //VOC:
-      // case 4:
-      //   if (Valor > 0 && Valor <= 0.5) {
-      //     Estado = "Excelente";
-      //   } else if (Valor > 0.5 && Valor <= 1) {
-      //     Estado = "Regular";
-      //   } else {
-      //     Estado = "Malo";
-      //   }
-      //   break;
-
-      // //C2H5CH:
-      // case 5:
-      //   if (Valor > 0 && Valor <= 10) {
-      //     Estado = "Excelente";
-      //   } else if (Valor > 10 && Valor <= 50) {
-      //     Estado = "Regular";
-      //   } else {
-      //     Estado = "Malo";
-      //   }
-      //   break;
 
       //CO2:
       case 6:

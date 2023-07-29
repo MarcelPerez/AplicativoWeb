@@ -399,45 +399,72 @@
       <!-- /#header -->
       <!-- Content -->
       <div class="content">
-        <center><h3>ESTADO DEL AIRE EN PUCMM (SANTIAGO)</h3></center>
-        <br />
-        <label for="medicion">Químico mostrado mapa:</label>
-        <select style="width: 20%" id="medicion" onchange="seleccionarOpcion()">
-          <option value="humedad">Humedad</option>
-          <option value="temperatura">Temperatura</option>
-          <option value="co2">CO2</option>
-          <option value="co">CO</option>
-          <option value="no2">NO2</option>
-          <option value="voc">VOC</option>
-          <option value="etanol">Etanol</option>
-          <option value="polvo">Polvo</option></select
-        ><br /><br />
-        <div id="map"></div>
+        <div class="card">
+          <br />
+          <center>
+            <h2>
+              <b style="text-decoration: underline"
+                >Mapa de Estado del aire por químico</b
+              >
+            </h2>
+          </center>
+          <center>
+            <label for="medicion">Químico mostrado mapa:</label>
+            <select
+              style="width: 20%"
+              id="medicion"
+              onchange="seleccionarOpcion()"
+            >
+              <option value="humedad">Humedad</option>
+              <option value="temperatura">Temperatura</option>
+              <option value="co2">CO2</option>
+              <option value="co">CO</option>
+              <option value="no2">NO2</option>
+              <option value="voc">VOC</option>
+              <option value="etanol">Etanol</option>
+              <option value="polvo">Polvo</option>
+            </select>
+          </center>
+          <br />
+          <div
+            id="map"
+            style="width: 95%; margin-left: 2.5%; margin-bottom: 10px"
+          ></div>
 
-        <script src="main.js"></script>
-        <script>
-          navigator.geolocation.getCurrentPosition(getLatLon);
-          function getLatLon(position) {
-            var latitude = position.coords.latitude;
-            var longitude = position.coords.longitude;
-            console.log("Latitude is " + latitude);
-            console.log("Longitude is " + longitude);
-            // alert(latitude);
-          }
-        </script>
-        <!-- 
-        <div class="grid-container">
-          <div class="grid-1">
-            <div id="js-map" class="map"></div>
+          <script src="main.js"></script>
+          <script>
+            navigator.geolocation.getCurrentPosition(getLatLon);
+            function getLatLon(position) {
+              var latitude = position.coords.latitude;
+              var longitude = position.coords.longitude;
+              console.log("Latitude is " + latitude);
+              console.log("Longitude is " + longitude);
+              // alert(latitude);
+            }
+          </script>
+          <br/>
+          <br/>
+          <center>
+            <h2>
+              <b style="text-decoration: underline"
+                >Ubicación y Estado de las Estaciones</b
+              >
+            </h2>
+          </center>
+          <div class="content map-container">
+            <div class="grid-container">
+              <div class="grid-1">
+                <div id="js-map" class="map"></div>
+              </div>
+            </div>
+
+            <div class="overlay-container">
+              <span class="overly-text" id="feature-name"></span><br />
+              <span class="overly-text" id="feature-masinfo"></span><br />
+            </div>
+
           </div>
         </div>
-
-        <div class="overlay-container">
-          <span class="overly-text" id="feature-name"></span><br />
-          <span class="overly-text" id="feature-masinfo"></span><br />
-        </div> -->
-
-        <!-- .animated -->
       </div>
       <!-- /.content -->
       <div class="clearfix"></div>
