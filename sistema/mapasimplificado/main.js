@@ -14,7 +14,7 @@ function init() {
 
   const satelital = new ol.layer.Tile({
     source: new ol.source.XYZ({
-      url: "https://{a-c}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png",
+      url: "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
     }),
     visible: true,
     title: "Satelital",
@@ -57,7 +57,7 @@ function init() {
     }),
   });
 
-  //PUNTOS DEL MAPA : Estaciones
+  //PUNTOS DEL MAPA
   function puntosMap(Estaciones) {
     const AreaGeoJson2 = new ol.layer.Vector({
       source: new ol.source.Vector({
@@ -74,28 +74,57 @@ function init() {
     });
     map.addLayer(AreaGeoJson2);
   }
-
-  // var cellSize = 10000; // Tamaño de las celdas de la cuadrícula
-  // var options = { gridType: "point", property: "value" }; // Opciones de la interpolación
-
-  // var interpolated = turf.interpolate(
-  //   vectorSource.getFeatures(),
-  //   cellSize,
-  //   options
-  // );
-
-
   map.addLayer(AreaGeoJson);
 
-  //Para cuando damos click:
-  const overlayFeatureName = document.getElementById("feature-name");
- 
-  //Para cuando damos el Hover:
+  //PARA EFECTO HOVER:
   const overLayContainerElement = document.querySelector(".overlay-container");
   const overlayLayer = new ol.Overlay({
     element: overLayContainerElement,
   });
   map.addOverlay(overlayLayer);
+
+  const overlayFeatureName = document.getElementById("feature-name");
+  map.on("click", function (e) {
+    map.forEachFeatureAtPixel(
+      e.pixel,
+      function (feature, layer) {
+        const InfoProyecto = document.querySelector(".sidebar_info");
+        InfoProyecto.style.display = "none";
+        const DetalleModulo = document.querySelector(".sidebar");
+        DetalleModulo.style.display = "block";
+        let IdEstacion = feature.get("idEstacion");
+        ObtenerInfo("Detalle_Medicion/LastMedicionEstacion/" + IdEstacion).then(
+          (response) => {
+            const card = document.querySelector(".DetalleMedicion");
+            card.style.display = "block";
+            card.innerHTML = "";
+            // console.log(response);
+            aux = response.map((resp) => {
+              card.innerHTML +=
+                "<b>" +
+                resp.nombreQuimico +
+                "</b>: " +
+                resp.valor.toFixed(2) +
+                " " +
+                obtenerUnidadesMedidas(resp.nombreQuimico) +
+                "<br>" +
+                "<b style='color:#" +
+                EstadoQuimicos(resp.idQuimico, resp.valor)[1] +
+                ";'>" +
+                EstadoQuimicos(resp.idQuimico, resp.valor)[0] +
+                "</b>" +
+                "<br>";
+            });
+          }
+        );
+      },
+      {
+        layerFilter: function (layerCandidate) {
+          return layerCandidate.get("title") === "PUCMM2";
+        },
+      }
+    );
+  });
 
   map.on("pointermove", function (e) {
     overlayLayer.setPosition(undefined);
@@ -111,12 +140,12 @@ function init() {
         // console.log(feature);
         overlayLayer.setPosition(clickedCoordinate);
         overlayFeatureName.innerHTML =
-          "<b style='color: #00f000;'>Estación:</b><br>" +
+          "<b>Estación:</b><br>" +
           nombreEstacion +
           "<br><br>" +
-          "<b style='color: #00f000;'>Tipo Estación:</b> " +
+          "<b>Tipo Estación:</b> " +
           tipoEstacion +
-          "<br><br><b style='color: #00f000;'>Última medición:</b><br>" +
+          "<br><br><b>última medición:</b><br>" +
           ultimaMedicion;
       },
       {
@@ -127,7 +156,6 @@ function init() {
     );
   });
 
-  //Funcion que obtiene la informacion de la BD por medio de la API:
   const ObtenerInfo = async (opcion) => {
     const urlAPI = "http://154.38.167.248:5024/api/";
     const consulta = `${urlAPI}${opcion}`;
@@ -152,8 +180,8 @@ function init() {
   // ObtenerInfo("Medicion").then((response) => (Estacion = response));
   // // .then(() => console.log(Estacion));
 
-  //Para establecer los puntos de las estaciones:
   function setDataEstaciones(Estaciones) {
+    // console.log(Estaciones);
     estacions = getEstaciones(Estaciones);
     const Estacioness = {
       type: "FeatureCollection",
@@ -163,7 +191,6 @@ function init() {
     puntosMap(Estacioness);
   }
 
-  //Obtener las informaciones de las estaciones:
   function getEstaciones(Estaciones) {
     let data = [];
     let i = 0;
@@ -175,7 +202,6 @@ function init() {
     return data;
   }
 
-  //Toda la informacion:
   function dataa(Estacion) {
     const info = {
       type: "Feature",
@@ -196,7 +222,6 @@ function init() {
     return info;
   }
 
-  //Funcion para saber el estado de un quimico:
   function EstadoQuimicos(IdQuimico, Valor) {
     let Estado = "";
     color = "";
@@ -204,15 +229,9 @@ function init() {
     switch (IdQuimico) {
       //POLVO:
       case 1:
-        if (Valor > 0 && Valor <= 300) {
+        if (Valor > 0 && Valor <= 1050) {
           Estado = "Excelente";
           color = "09C089";
-        } else if (Valor > 300 && Valor <= 1050) {
-          Estado = "Bueno";
-          color = "09C089";
-        } else if (Valor > 1050 && Valor <= 3000) {
-          Estado = "Malo";
-          color = "CDD400";
         } else {
           Estado = "Peligroso";
           color = "FF4646";
@@ -224,7 +243,8 @@ function init() {
       case 3:
       case 4:
       case 5:
-        if (Valor <= 900) {
+      case 6:
+        if (Valor <= 1000) {
           Estado = "Bien";
           color = "09C089";
         } else {
@@ -233,59 +253,12 @@ function init() {
         }
         break;
 
-      // //NO2:
-      // case 3:
-      //   if (Valor > 0 && Valor <= 5.3) {
-      //     Estado = "Excelente";
-      //   } else if (Valor > 5.3 && Valor <= 10) {
-      //     Estado = "Regular";
-      //   } else {
-      //     Estado = "Malo";
-      //   }
-      //   break;
-
-      // //VOC:
-      // case 4:
-      //   if (Valor > 0 && Valor <= 0.5) {
-      //     Estado = "Excelente";
-      //   } else if (Valor > 0.5 && Valor <= 1) {
-      //     Estado = "Regular";
-      //   } else {
-      //     Estado = "Malo";
-      //   }
-      //   break;
-
-      // //C2H5CH:
-      // case 5:
-      //   if (Valor > 0 && Valor <= 10) {
-      //     Estado = "Excelente";
-      //   } else if (Valor > 10 && Valor <= 50) {
-      //     Estado = "Regular";
-      //   } else {
-      //     Estado = "Malo";
-      //   }
-      //   break;
-
-      //CO2:
-      case 6:
-        if (Valor > 0 && Valor <= 1000) {
-          Estado = "Excelente";
-          color = "09C089";
-        } else if (Valor > 1000 && Valor <= 2000) {
-          Estado = "Regular";
-          color = "CDD400";
-        } else {
-          Estado = "Malo";
-          color = "FF4646";
-        }
-        break;
-
       //TEMP:
       case 7:
         if (Valor <= 16) {
           Estado = "Frio";
           color = "09C089";
-        } else if (Valor > 16 && Valor <= 30) {
+        } else if (Valor > 16 && Valor <= 32) {
           Estado = "Bien";
           color = "09C089";
         } else {
@@ -296,12 +269,15 @@ function init() {
 
       //HUMEDAD:
       case 8:
-        if (Valor <= 65) {
+        if (Valor <= 30) {
+          Estado = "Mal";
+          color = "CDD400";
+        } else if (Valor > 30 && Valor <= 80) {
           Estado = "Bien";
           color = "09C089";
         } else {
           Estado = "Mal";
-          color = "CDD400";
+          color = "FF4646";
         }
         break;
     }

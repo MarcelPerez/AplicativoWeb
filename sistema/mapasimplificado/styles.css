@@ -1,0 +1,112 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  margin-top: 0px;
+  padding: 0;
+}
+
+.titulo {
+  width: 100%;
+  background: rgb(21, 142, 238);
+  background: linear-gradient(
+    90deg,
+    rgba(21, 142, 238, 1) 0%,
+    rgba(255, 255, 255, 1) 51%,
+    rgba(21, 142, 238, 1) 100%
+  );
+  min-height: 80px;
+}
+
+.titulo h3 {
+  padding-top: 30px;
+}
+
+.grid-container {
+  margin-top: 10px;
+  display: grid;
+  grid-template-columns: 68vw 28vw;
+  grid-template-rows: 100vh;
+  border-style: solid;
+  margin-left: 10px;
+  margin-right: 1.6vw;
+}
+
+.map {
+  /* margin-left: 10px; */
+}
+
+.overlay-container {
+  background-color: #818181;
+  width: 150px;
+  color: #fff;
+  text-align: center;
+  border-radius: 3px;
+  padding: 2px 0;
+  margin-bottom: 10px;
+  position: absolute;
+  z-index: 1;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -80px;
+}
+.sidebar {
+  text-align: center;
+}
+.sidebar_title{
+  margin-top: 0;
+  min-height: 50px;
+  padding-top: 10px;
+  background: #6fbdfb;
+  border-bottom: solid;
+}
+.DetalleMedicion {
+  display: none;
+  line-height: 25px;
+  margin-bottom: 10px;
+}
+
+.sidebar_info {
+  text-align: center;
+}
+
+.sidebar_info_title {
+  margin-top: 0;
+  min-height: 50px;
+  padding-top: 10px;
+  background: #6fbdfb;
+  border-bottom: solid;
+}
+
+.grid-2 {
+  border-left: solid;
+}
+
+
+
+.myButton {
+	box-shadow:inset 0px 1px 0px 0px #97c4fe;
+	background:linear-gradient(to bottom, #3d94f6 5%, #1e62d0 100%);
+	background-color:#3d94f6;
+	border-radius:13px;
+	border:1px solid #337fed;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:15px;
+	font-weight:bold;
+	padding:10px 24px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #1570cd;
+}
+.myButton:hover {
+	background:linear-gradient(to bottom, #1e62d0 5%, #3d94f6 100%);
+	background-color:#1e62d0;
+}
+.myButton:active {
+	position:relative;
+	top:1px;
+}

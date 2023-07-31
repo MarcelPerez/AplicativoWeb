@@ -629,11 +629,12 @@ function seleccionarOpcion() {
 
 function miCalidad(points) {
   document.getElementById("miEstadoAire").addEventListener("click", () => {
+    console.log("Sistema Aire");
     navigator.geolocation.getCurrentPosition(getLatLon);
     function getLatLon(position) {
       var latitude = position.coords.latitude;
       var longitude = position.coords.longitude;
-      // console.log("(" + latitude + "," + longitude + ")");
+      console.log("(" + latitude + "," + longitude + ")");
       // console.log("(19.443342, -70.6841900)");
       //BOCEL: 19.445835690281413, -70.63945911689339
 
@@ -697,8 +698,9 @@ function miCalidad(points) {
           HUM.toFixed(2) +
           "%" +
           "<br/>";
-        document.getElementById("miEstadoButton").style.display = "block";
+        // document.getElementById("miEstadoButton").style.display = "block";
         document.getElementById("miEstadoMap").style.display = "block";
+        document.getElementById("miEstadoAire").style.display = "none";
         mapa(longitude, latitude);
 
         document
@@ -725,8 +727,8 @@ function convertToXYZ(lon, lat) {
 }
 
 function mapa(lon, lat) {
-  x = convertToXYZ(-70.68270536149075, 19.44319266271709).x;
-  y = convertToXYZ(-70.68270536149075, 19.44319266271709).y;
+  x = (convertToXYZ(lon, lat).x);
+  y = (convertToXYZ(lon, lat).y);
 
   const map = new ol.Map({
     view: new ol.View({

@@ -2857,16 +2857,16 @@ h3 {
 
 /* line 58, C:/Users/SPN Graphics/Desktop/CL September/210 Medical/HTML/scss/_tesmonial.scss */
 .testmonial_bg_2 {
-  background-image: url(../img/EstacionLabITT.jpeg);
+  background-image: url(../img/EstacionBiblioteca.png);
 }
 
-.testmonial_bg_3 {
-  background-image: url(../img/EstacionBiblioteca.jpeg);
+.testmonial_bg_1 {
+  background-image: url(../img/EstacionCapilla.png);
 }
 
 /* line 61, C:/Users/SPN Graphics/Desktop/CL September/210 Medical/HTML/scss/_tesmonial.scss */
-.testmonial_bg_1 {
-  background-image: url(../img/EstacionCapilla.jpeg);
+.testmonial_bg_3 {
+  background-image: url(../img/EstacionPadreArroyo.png);
 }
 
 /* line 1, C:/Users/SPN Graphics/Desktop/CL September/210 Medical/HTML/scss/_service.scss */

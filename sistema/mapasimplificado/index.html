@@ -1,0 +1,96 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calidad Aire PUCMM</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/ol@v7.2.2/ol.css"
+    />
+    <link rel="stylesheet" href="styles.css" />
+
+    <link rel="apple-touch-icon" href="./../images/Icon.png" />
+    <link rel="icon" type="image/png" href="./../images/Icon.png" />
+  </head>
+  <body>
+    <div class="titulo">
+      <center><h3>ESTADO DEL AIRE EN PUCMM (SANTIAGO)</h3></center>
+      <center>
+        <button>
+          <a
+            style="text-decoration: none; color: #000; font-family: sans-serif"
+            href="../"
+            >VOLVER...</a
+          >
+        </button>
+      </center>
+      <br />
+    </div>
+    <div class="grid-container">
+      <div class="grid-1">
+        <div id="js-map" class="map"></div>
+      </div>
+      <div class="grid-2">
+        <div class="sidebar" style="display: none">
+          <h3 class="sidebar_title">Detalle de Módulo</h3>
+          <div class="DetalleMedicion"></div>
+          <button onclick="resetDetails()" class="myButton">Aceptar</button>
+        </div>
+        <div class="sidebar_info">
+          <h3 class="sidebar_info_title">Información del proyecto</h3>
+          <div class="">
+            <b><p>Titulo del Proyecto:</p></b>
+            <p style="width: 80%; margin: auto; text-align: center">
+              Sistema de inspección de calidad del aire en campus universitarios
+              con red lora
+            </p>
+            <br />
+            <b><p>Descripción del proyecto:</p></b>
+            <p style="width: 80%; margin: auto; text-align: justify">
+              El proyecto consiste en una serie de módulos que están ubicados en
+              distintas ubicaciones del campus y están monitoreando de manera
+              constante la calidad del aire con distintos sensores. Estos
+              sensores se comunican por medio de una red LoRa que a su vez
+              envían la información de los distintos módulos a una base de datos
+              que se utiliza para mostrar los resultados.
+            </p>
+            <br />
+            <b><p>Responsables del proyecto:</p></b>
+            <p style="width: 80%; margin: auto; text-align: center">
+              Marcel Pérez<br />Orlando Moronta
+            </p>
+            <br />
+            <b><p>Asesor del proyecto:</p></b>
+            <p style="width: 80%; margin: auto; text-align: center">
+              Ing. Rafael Batista
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="overlay-container">
+      <span class="overly-text" id="feature-name"></span><br />
+      <span class="overly-text" id="feature-masinfo"></span><br />
+    </div>
+
+    <!-- <div id="popup" class="ol-popup">
+      <a href="#" id="popup-closer" class="ol-popup-closer"></a>
+      <div id="popup-content"></div>
+    </div> -->
+
+    <script>
+      function resetDetails() {
+        const InfoProyecto = document.querySelector(".sidebar_info");
+        InfoProyecto.style.display = "block";
+        const DetalleModulo = document.querySelector(".sidebar");
+        DetalleModulo.style.display = "none";
+      }
+    </script>
+
+    <script src="main.js"></script>
+    <script src="./../assets/js/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/ol@v7.2.2/dist/ol.js"></script>
+  </body>
+</html>
