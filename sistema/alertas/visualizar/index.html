@@ -555,6 +555,25 @@
                   </div>
                 </div>
               </div>
+              <div class="col-md-4">
+                <div class="card">
+                  <img
+                    class="card-img-top"
+                    src="../../images/EstacionMovil.jpg"
+                    alt="Card image cap"
+                  />
+                  <div class="card-body">
+                    <h4 class="card-title mb-3">
+                      <center id="EstacionMovil" style="color: green">
+                        <b>SIN ALERTAS</b>
+                      </center>
+                    </h4>
+                    <p class="card-text">
+                      <center><b> Estación Móvil</b></center>
+                    </p>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -785,6 +804,7 @@
         Laboratorio = document.getElementById("Laboratorio");
         PadreArroyo = document.getElementById("PadreArroyo");
         ParqueoGeneral = document.getElementById("ParqueoGeneral");
+        EstacionMovil = document.getElementById("EstacionMovil");
         document.getElementById("alertWrong").style.display = "block";
         document.getElementById("alertSuccess").style.display = "block;";
 
@@ -796,7 +816,8 @@
           AlertaPadreArroyo.length == 0 &&
           AlertaAulas4.length == 0 &&
           AlertasParqueoGeneral.length == 0 &&
-          AlertasJuan23.length == 0
+          AlertasJuan23.length == 0 &&
+          EstacionMovil == 0
         ) {
           document.getElementById("alertWrong").style.display = "none";
           document.getElementById("alertSuccess").style.display = "block;";
@@ -881,6 +902,16 @@
             " Alertas</b><br><p style='color: #000; font-weight: bold;'>Químicos con problemas:</p>";
           AlertasParqueoGeneral.forEach((alerta) => {
             ParqueoGeneral.innerHTML +=
+              "<p style='color: #000;';>" + alerta[4] + "</p>";
+          });
+        }
+        if (EstacionMovil.length > 0) {
+          EstacionMovil.innerHTML =
+            "<b style='color: red;'>" +
+            EstacionMovil.length +
+            " Alertas</b><br><p style='color: #000; font-weight: bold;'>Químicos con problemas:</p>";
+          EstacionMovil.forEach((alerta) => {
+            EstacionMovil.innerHTML +=
               "<p style='color: #000;';>" + alerta[4] + "</p>";
           });
         }

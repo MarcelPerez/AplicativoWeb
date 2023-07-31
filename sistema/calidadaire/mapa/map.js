@@ -80,7 +80,6 @@ function init() {
   //Para cuando damos click:
   const overlayFeatureName = document.getElementById("feature-name");
   map.on("click", function (e) {
-  
     map.forEachFeatureAtPixel(
       e.pixel,
       function (feature, layer) {

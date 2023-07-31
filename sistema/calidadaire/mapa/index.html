@@ -432,18 +432,44 @@
           ></div>
 
           <script src="main.js"></script>
-          <script>
-            navigator.geolocation.getCurrentPosition(getLatLon);
-            function getLatLon(position) {
-              var latitude = position.coords.latitude;
-              var longitude = position.coords.longitude;
-              console.log("Latitude is " + latitude);
-              console.log("Longitude is " + longitude);
-              // alert(latitude);
-            }
-          </script>
-          <br/>
-          <br/>
+          <br /><br />
+          <center>
+            <h2>
+              <b style="text-decoration: underline"
+                >Estado del aire en mi ubicación:</b
+              >
+            </h2>
+          </center>
+          <center>
+            <button id="miEstadoAire" style="margin-top: 10px">
+              CONOCER ESTADO DEL AIRE DE MI UBICACION
+            </button>
+            <center>
+              <p
+                id="miEstadoDetalle"
+                style="
+                  color: #000;
+                  font-family: sans-serif;
+                  line-height: 2;
+                  width: 50%;
+                  background-color: #c7efff;
+                "
+              ></p>
+              <center>
+                <div
+                  id="miEstadoMap"
+                  style="
+                    width: 70%;
+                    height: 300px;
+                    display: none;
+                    margin-bottom: 10px;
+                  "
+                ></div>
+              </center>
+              <button id="miEstadoButton" style="display: none">Aceptar</button>
+            </center>
+          </center>
+          <br />
           <center>
             <h2>
               <b style="text-decoration: underline"
@@ -462,7 +488,6 @@
               <span class="overly-text" id="feature-name"></span><br />
               <span class="overly-text" id="feature-masinfo"></span><br />
             </div>
-
           </div>
         </div>
       </div>

@@ -70,10 +70,10 @@ function calculateWeight(option, quimico) {
   if (option === "temperatura") {
     if (quimico < 16) {
       weight = 0.2; // Azul
-    } else if (quimico >= 20 && quimico <= 30) {
+    } else if (quimico >= 20 && quimico <= 32) {
       weight = 0.35; // Verde
     } else {
-      weight = 0.8; // Naranja
+      weight = 0.35; // Naranja
     }
   }
 
@@ -89,8 +89,8 @@ function calculateWeight(option, quimico) {
 
   if (option === "polvo") {
     if (quimico < 1050) {
-      weight = 0.30;
-     } else {
+      weight = 0.3;
+    } else {
       weight = 0.7;
     }
   }
@@ -104,7 +104,7 @@ function calculateWeight(option, quimico) {
   }
 
   if (option === "VOC") {
-    if (quimico <1000) {
+    if (quimico < 1000) {
       weight = 0.15;
     } else {
       weight = 0.9;
@@ -287,7 +287,7 @@ function establecerDatosMapa(EstacionesMediciones) {
     humidity: EstacionesMediciones[7].valor,
   });
   if (infoMedicionesEstaciones.length >= 9) {
-    console.log(infoMedicionesEstaciones);
+    // console.log(infoMedicionesEstaciones);
     agregarEstacionesInterpolacion(infoMedicionesEstaciones);
   }
 }
@@ -388,8 +388,8 @@ function agregarEstacionesInterpolacion(infoMedicionesEstaciones) {
       });
     }
   );
-
   pintarHeatMap(infoMedicionesEstaciones);
+  miCalidad(infoMedicionesEstaciones);
 }
 
 // Crear el heatmap layer
@@ -551,7 +551,7 @@ function pintarHeatMap(mediciones) {
 
 function seleccionarOpcion() {
   var seleccion = document.getElementById("medicion").value;
-  console.log("Opción seleccionada: " + seleccion);
+  // console.log("Opción seleccionada: " + seleccion);
   if (seleccion === "humedad") {
     heatmapLayerHumidity.setOpacity(0.7);
     heatmapLayerTemperature.setOpacity(0);
@@ -625,4 +625,176 @@ function seleccionarOpcion() {
     heatmapLayerC2H5CH.setOpacity(0);
     heatmapLayerVOC.setOpacity(0.7);
   }
+}
+
+function miCalidad(points) {
+  document.getElementById("miEstadoAire").addEventListener("click", () => {
+    navigator.geolocation.getCurrentPosition(getLatLon);
+    function getLatLon(position) {
+      var latitude = position.coords.latitude;
+      var longitude = position.coords.longitude;
+      // console.log("(" + latitude + "," + longitude + ")");
+      // console.log("(19.443342, -70.6841900)");
+      //BOCEL: 19.445835690281413, -70.63945911689339
+
+      distancia = calculateDistance(
+        longitude,
+        latitude,
+        -70.68419000787753,
+        19.44334255050675
+      );
+
+      // console.log(longitude, latitude);
+
+      if (distancia > 4) {
+        alert("Se encuentra fuera del rango de medición del aire.");
+      } else {
+        polvo = idwInterpolation(points, longitude, latitude, power, "polvo");
+        CO = idwInterpolation(points, longitude, latitude, power, "CO");
+        CO2 = idwInterpolation(points, longitude, latitude, power, "CO2");
+        NO2 = idwInterpolation(points, longitude, latitude, power, "NO2");
+        VOC = idwInterpolation(points, longitude, latitude, power, "VOC");
+        C2H5CH = idwInterpolation(points, longitude, latitude, power, "C2H5CH");
+        TEMP = idwInterpolation(
+          points,
+          longitude,
+          latitude,
+          power,
+          "temperature"
+        );
+        HUM = idwInterpolation(points, longitude, latitude, power, "humidity");
+        // console.log(polvo, CO, CO2, NO2, VOC, C2H5CH, TEMP, HUM);
+        document.getElementById("miEstadoDetalle").innerHTML =
+          "<b>Polvo: </b>" +
+          polvo.toFixed(2) +
+          " μg/m3" +
+          "<br/>" +
+          "<b>Monóxido de carbono (CO): </b>" +
+          CO.toFixed(2) +
+          " ppm" +
+          "<br/>" +
+          "<b>Dióxido de nitrógeno (NO2): </b>" +
+          NO2.toFixed(2) +
+          " ppm" +
+          "<br/>" +
+          "<b>Dióxido de carbono (CO2): </b>" +
+          CO2.toFixed(2) +
+          " ppm" +
+          "<br/>" +
+          "<b>Compuestos orgánicos volátiles (VOC): </b>" +
+          VOC.toFixed(2) +
+          " ppm" +
+          "<br/>" +
+          "<b>C2H5CH: </b>" +
+          C2H5CH.toFixed(2) +
+          " ppm" +
+          "<br/>" +
+          "<b>Temperatura: </b>" +
+          TEMP.toFixed(2) +
+          " °C" +
+          "<br/>" +
+          "<b>Humedad: </b>" +
+          HUM.toFixed(2) +
+          "%" +
+          "<br/>";
+        document.getElementById("miEstadoButton").style.display = "block";
+        document.getElementById("miEstadoMap").style.display = "block";
+        mapa(longitude, latitude);
+
+        document
+          .getElementById("miEstadoButton")
+          .addEventListener("click", () => {
+            document.getElementById("miEstadoDetalle").innerHTML = "";
+            document.getElementById("miEstadoButton").style.display = "none";
+            document.getElementById("miEstadoMap").style.display = "none";
+          });
+      }
+
+      // console.log("Distance: " + distancia + " km");
+    }
+  });
+}
+
+function convertToLonLat(x, y) {
+  const lonLat = ol.proj.transform([x, y], "EPSG:3857", "EPSG:4326");
+  return { lon: lonLat[0], lat: lonLat[1] };
+}
+function convertToXYZ(lon, lat) {
+  const xyz = ol.proj.transform([lon, lat], "EPSG:4326", "EPSG:3857");
+  return { x: xyz[0], y: xyz[1] };
+}
+
+function mapa(lon, lat) {
+  x = convertToXYZ(-70.68270536149075, 19.44319266271709).x;
+  y = convertToXYZ(-70.68270536149075, 19.44319266271709).y;
+
+  const map = new ol.Map({
+    view: new ol.View({
+      center: [x, y],
+      zoom: 16,
+      // maxZoom: 17,
+      // minZoom: 16,
+    }),
+    target: "miEstadoMap",
+  });
+
+  const satelital = new ol.layer.Tile({
+    source: new ol.source.XYZ({
+      url: "https://{a-c}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png",
+    }),
+    visible: true,
+    title: "Satelital",
+  });
+
+  const baseLayerGroup = new ol.layer.Group({
+    layers: [satelital],
+  });
+  map.addLayer(baseLayerGroup);
+
+  const fillStyle = new ol.style.Fill({
+    color: [127, 119, 89, 0.35],
+  });
+
+  const strokeStyle = new ol.style.Stroke({
+    color: [46, 45, 45, 1],
+    width: 2,
+  });
+
+  const circleStyle = new ol.style.Circle({
+    fill: new ol.style.Fill({
+      color: [0, 245, 0, 1],
+    }),
+    radius: 7,
+    stroke: strokeStyle,
+  });
+
+  const Estaciones = {
+    type: "FeatureCollection",
+    features: [
+      {
+        type: "Feature",
+        geometry: {
+          type: "Point",
+          coordinates: [lon, lat], // Coordenadas del punto que quieres agregar
+        },
+        properties: {
+          name: "Mi Punto",
+        },
+      },
+    ],
+  };
+  const AreaGeoJson2 = new ol.layer.Vector({
+    source: new ol.source.Vector({
+      url: "data:," + encodeURIComponent(JSON.stringify(Estaciones)),
+      format: new ol.format.GeoJSON(),
+    }),
+    visible: true,
+    title: "PUCMM2",
+    style: new ol.style.Style({
+      fill: fillStyle,
+      stroke: strokeStyle,
+      image: circleStyle,
+    }),
+  });
+  map.addLayer(AreaGeoJson2);
 }

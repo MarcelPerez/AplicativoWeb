@@ -12,6 +12,7 @@ estacionPadreArroyo = document.getElementById("estacion5");
 estacionAulasA4 = document.getElementById("estacion6");
 estacionParqueoGeneral = document.getElementById("estacion7");
 estacionJuan23 = document.getElementById("estacion8");
+estacionMovil = document.getElementById("estacion11");
 
 // Quimicos:
 detalle2 = document.getElementById("selectOptionQuimico");
@@ -56,6 +57,10 @@ estacionParqueoGeneral.addEventListener("click", () => {
 });
 estacionJuan23.addEventListener("click", () => {
   localStorage.setItem("EstacionGrafica", 8);
+  getQuimicos();
+});
+estacionMovil.addEventListener("click", () => {
+  localStorage.setItem("EstacionGrafica", 11);
   getQuimicos();
 });
 
@@ -114,6 +119,7 @@ function getQuimicos() {
   estacionAulasA4.style.display = "none";
   estacionParqueoGeneral.style.display = "none";
   estacionJuan23.style.display = "none";
+  estacionMovil.style.display = "none";
 
   // Quimicos:
   detalle2.style.display = "block";
@@ -140,6 +146,7 @@ function getEstaciones() {
   estacionAulasA4.style.display = "inline";
   estacionParqueoGeneral.style.display = "inline";
   estacionJuan23.style.display = "inline";
+  estacionMovil.style.display = "inline";
 
   // Quimicos:
   detalle2.style.display = "none";
@@ -255,6 +262,7 @@ function hideBotons() {
   estacionAulasA4.style.display = "none";
   estacionParqueoGeneral.style.display = "none";
   estacionJuan23.style.display = "none";
+  estacionMovil.style.display = "none";
 
   // Quimicos:
   detalle2.style.display = "none";
