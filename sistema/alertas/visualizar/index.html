@@ -653,6 +653,8 @@
           Detalle.forEach((medicion) => {
             Quimicos.forEach((quimico) => {
               if (medicion.idQuimico == quimico.idQuimico) {
+                
+                // console.log(quimico.threasureHigh);
                 switch (medicion.idEstacion) {
                   case 1:
                     //Capilla:
@@ -807,6 +809,7 @@
         EstacionMovil = document.getElementById("EstacionMovil");
         document.getElementById("alertWrong").style.display = "block";
         document.getElementById("alertSuccess").style.display = "block;";
+        console.log(AlertaMovil.length);
 
         if (
           AlertaCapilla.length == 0 &&
@@ -817,7 +820,7 @@
           AlertaAulas4.length == 0 &&
           AlertasParqueoGeneral.length == 0 &&
           AlertasJuan23.length == 0 &&
-          EstacionMovil == 0
+          AlertaMovil.length == 0
         ) {
           document.getElementById("alertWrong").style.display = "none";
           document.getElementById("alertSuccess").style.display = "block;";
@@ -905,12 +908,12 @@
               "<p style='color: #000;';>" + alerta[4] + "</p>";
           });
         }
-        if (EstacionMovil.length > 0) {
+        if (AlertaMovil.length > 0) {
           EstacionMovil.innerHTML =
             "<b style='color: red;'>" +
-            EstacionMovil.length +
+              AlertaMovil.length +
             " Alertas</b><br><p style='color: #000; font-weight: bold;'>Químicos con problemas:</p>";
-          EstacionMovil.forEach((alerta) => {
+            AlertaMovil.forEach((alerta) => {
             EstacionMovil.innerHTML +=
               "<p style='color: #000;';>" + alerta[4] + "</p>";
           });

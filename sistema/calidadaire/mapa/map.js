@@ -56,6 +56,51 @@ function init() {
       image: circleStyle,
     }),
   });
+  function compararFechas(fecha1, fecha2) {
+    // Convertir las cadenas de fecha a objetos Date
+    const fecha1Obj = new Date(fecha1);
+    const fecha2Obj = new Date(fecha2);
+    // console.log(fecha1Obj);
+    // console.log(fecha2Obj);
+
+    // Calcular la diferencia en milisegundos
+    const diferenciaMilisegundos = Math.abs(fecha2Obj - fecha1Obj);
+
+    // Convertir la diferencia a minutos
+    const diferenciaMinutos = diferenciaMilisegundos / (1000 * 60);
+    // console.log(diferenciaMinutos);
+
+    // Comparar si la diferencia es mayor a 10 minutos
+    if (diferenciaMinutos > 10) {
+      return "Inactivo";
+    } else {
+      return "Activo";
+    }
+  }
+
+  function convertToISO8601(dateString) {
+    const months = {
+      enero: "01",
+      febrero: "02",
+      marzo: "03",
+      abril: "04",
+      mayo: "05",
+      junio: "06",
+      julio: "07",
+      agosto: "08",
+      septiembre: "09",
+      octubre: "10",
+      noviembre: "11",
+      diciembre: "12",
+    };
+
+    const dateParts = dateString.split(" ")[0].split("/");
+    const timeParts = dateString.split(" - ")[1].split(":");
+    const month = months[dateParts[1].toLowerCase()];
+
+    const iso8601Date = `${dateParts[2]}-${month}-${dateParts[0]}T${timeParts[0]}:${timeParts[1]}:${timeParts[2]}`;
+    return iso8601Date;
+  }
 
   //PUNTOS DEL MAPA : Estaciones
   function puntosMap(Estaciones) {
@@ -66,11 +111,43 @@ function init() {
       }),
       visible: true,
       title: "PUCMM2",
-      style: new ol.style.Style({
-        fill: fillStyle,
-        stroke: strokeStyle,
-        image: circleStyle,
-      }),
+      // style: new ol.style.Style({
+      //   fill: fillStyle,
+      //   stroke: strokeStyle,
+      //   image: circleStyle,
+      // }),
+      style: function (feature) {
+        // console.log(feature.values_.ultimaMedicion);
+        const lastMeasurementDate = convertToISO8601(
+          feature.values_.ultimaMedicion
+        );
+        const currentDate = new Date();
+        fillStyleColor = [];
+
+        if (feature.values_.idEstacion == 11) {
+          if (compararFechas(lastMeasurementDate, currentDate) == "Inactivo") {
+            fillStyleColor = [212,229,56, 1];
+          } else {
+            fillStyleColor = [0, 255, 0, 1];
+          }
+        } else {
+          fillStyleColor = [0, 255, 0, 1];
+        }
+
+        const circleStyle2 = new ol.style.Circle({
+          fill: new ol.style.Fill({
+            color: fillStyleColor,
+          }),
+          radius: 7,
+          stroke: strokeStyle,
+        });
+
+        return new ol.style.Style({
+          fill: fillStyleColor,
+          stroke: strokeStyle,
+          image: circleStyle2,
+        });
+      },
     });
     map.addLayer(AreaGeoJson2);
   }
@@ -175,12 +252,6 @@ function init() {
     .then((response) => (Estacion = response))
     .then((response) => setDataEstaciones(response));
 
-  // ObtenerInfo("Quimico").then((response) => (Quimico = response));
-  // // .then(() => console.log(Quimico));
-
-  // ObtenerInfo("Medicion").then((response) => (Estacion = response));
-  // // .then(() => console.log(Estacion));
-
   //Para establecer los puntos de las estaciones:
   function setDataEstaciones(Estaciones) {
     estacions = getEstaciones(Estaciones);
@@ -200,7 +271,6 @@ function init() {
       data[i] = dataa(Estaciones[i]);
       i++;
     });
-    // console.log(data);
     return data;
   }
 

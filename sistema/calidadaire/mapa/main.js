@@ -69,45 +69,45 @@ function calculateWeight(option, quimico) {
   var weight = 0;
   if (option === "temperatura") {
     if (quimico < 16) {
-      weight = 0.2; // Azul
+      weight = 0.30; // Azul
     } else if (quimico >= 20 && quimico <= 32) {
-      weight = 0.35; // Verde
+      weight = 0.15; // Verde
     } else {
-      weight = 0.35; // Naranja
+      weight = 0.30; // Naranja
     }
   }
 
   if (option === "humedad") {
     if (quimico < 30) {
-      weight = 0.8; // Naranja
+      weight = 0.30; // Naranja
     } else if (quimico >= 30 && quimico <= 80) {
-      weight = 0.25; // Verde
+      weight = 0.15; // Verde
     } else {
-      weight = 0.8; // Rojo
+      weight = 0.30; // Rojo
     }
   }
 
   if (option === "polvo") {
     if (quimico < 1050) {
-      weight = 0.3;
+      weight = 0.15;
     } else {
-      weight = 0.7;
+      weight = 0.35;
     }
   }
 
   if (option === "CO") {
     if (quimico < 1000) {
-      weight = 0.2;
+      weight = 0.25;
     } else {
-      weight = 0.9;
+      weight = 0.30;
     }
   }
 
   if (option === "VOC") {
     if (quimico < 1000) {
-      weight = 0.15;
+      weight = 0.10;
     } else {
-      weight = 0.9;
+      weight = 0.35;
     }
   }
 
@@ -115,23 +115,23 @@ function calculateWeight(option, quimico) {
     if (quimico < 1000) {
       weight = 0.2;
     } else {
-      weight = 0.9;
+      weight = 0.4;
     }
   }
 
   if (option === "NO2") {
     if (quimico < 1000) {
-      weight = 0.35;
+      weight = 0.22;
     } else {
-      weight = 0.9;
+      weight = 0.40;
     }
   }
 
   if (option === "C2H5CH") {
     if (quimico < 1000) {
-      weight = 0.25;
+      weight = 0.15;
     } else {
-      weight = 0.9;
+    weight = 0.33;
     }
   }
 
@@ -629,12 +629,12 @@ function seleccionarOpcion() {
 
 function miCalidad(points) {
   document.getElementById("miEstadoAire").addEventListener("click", () => {
-    console.log("Sistema Aire");
-    navigator.geolocation.getCurrentPosition(getLatLon);
-    function getLatLon(position) {
+    // console.log("Sistema Aire");
+    navigator.geolocation.getCurrentPosition(success, error);
+    function success(position) {
       var latitude = position.coords.latitude;
       var longitude = position.coords.longitude;
-      console.log("(" + latitude + "," + longitude + ")");
+      // console.log("(" + latitude + "," + longitude + ")");
       // console.log("(19.443342, -70.6841900)");
       //BOCEL: 19.445835690281413, -70.63945911689339
 
@@ -645,9 +645,9 @@ function miCalidad(points) {
         19.44334255050675
       );
 
-      // console.log(longitude, latitude);
+      // console.log(distancia);
 
-      if (distancia > 4) {
+      if (distancia > 2) {
         alert("Se encuentra fuera del rango de medición del aire.");
       } else {
         polvo = idwInterpolation(points, longitude, latitude, power, "polvo");
@@ -714,6 +714,10 @@ function miCalidad(points) {
 
       // console.log("Distance: " + distancia + " km");
     }
+
+    function error(err) {
+      console.warn(`ERROR(${err.code}): ${err.message}`);
+    }
   });
 }
 
@@ -727,8 +731,8 @@ function convertToXYZ(lon, lat) {
 }
 
 function mapa(lon, lat) {
-  x = (convertToXYZ(lon, lat).x);
-  y = (convertToXYZ(lon, lat).y);
+  x = convertToXYZ(lon, lat).x;
+  y = convertToXYZ(lon, lat).y;
 
   const map = new ol.Map({
     view: new ol.View({
